@@ -9,11 +9,11 @@
 	</parent>
 
 	<groupId>com.lapsa.lapsa.commons</groupId>
-	<artifactId>parent</artifactId>
+	<artifactId>lapsa-commons-root</artifactId>
 	<version>2.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Lapsa : Lapsa commons : Parent</name>
+	<name>Lapsa : Lapsa commons : Root POM</name>
 
 	<modules>
 		<module>commons</module>
