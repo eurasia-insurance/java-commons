@@ -15,6 +15,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.lapsa.lapsa.commons</groupId>
+			<artifactId>lapsa-commons</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>compile</scope>

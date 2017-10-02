@@ -7,10 +7,15 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-public abstract class ElementsLocalizationTest<T extends Enum<?>> {
+import com.lapsa.commons.elements.Localized;
+import com.lapsa.commons.elements.LocalizedElement;
+
+public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
 
     public static final Locale LOCALE_RUSSIAN = Locale.forLanguageTag("ru");
     public static final Locale LOCALE_ENGLISH = Locale.forLanguageTag("en");
@@ -31,6 +36,14 @@ public abstract class ElementsLocalizationTest<T extends Enum<?>> {
 	assertThat(String.format("Resource bundle for '%1$s' is not present", locale), resourceBundle,
 		not(nullValue()));
 	return resourceBundle;
+    }
+
+    @Test
+    public void testDisplayNames() {
+	Stream.of(values) //
+		.flatMap(x -> Stream.of(Localized.DisplayNameVariant.values()) //
+			.map(y -> x.displayName(y, locale)))
+		.forEach(Assert::assertNotNull);
     }
 
     @Test
