@@ -13,4 +13,13 @@
 
 	<name>Lapsa : Lapsa commons : Commons</name>
 
+	<dependencies>
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 </project>
