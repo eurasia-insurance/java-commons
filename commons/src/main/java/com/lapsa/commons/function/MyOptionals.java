@@ -95,7 +95,7 @@ public final class MyOptionals {
 
     public static <T> Optional<T[]> of(final T[] optionalArray) {
 	return Optional.ofNullable(optionalArray) //
-		.filter(MyCollections::nonEmpty);
+		.filter(MyArrays::nonEmpty);
     }
 
     public static <T> Optional<T[]> ofEmpty(final T[] optionalArray) {
@@ -106,7 +106,7 @@ public final class MyOptionals {
 
     public static Optional<int[]> of(final int[] optionalArray) {
 	return Optional.ofNullable(optionalArray) //
-		.filter(MyCollections::nonEmpty);
+		.filter(MyArrays::nonEmpty);
     }
 
     public static Optional<int[]> ofEmpty(final int[] optionalArray) {
@@ -117,7 +117,7 @@ public final class MyOptionals {
 
     public static Optional<double[]> of(final double[] optionalArray) {
 	return Optional.ofNullable(optionalArray) //
-		.filter(MyCollections::nonEmpty);
+		.filter(MyArrays::nonEmpty);
     }
 
     public static Optional<double[]> ofEmpty(final double[] optionalArray) {
@@ -128,7 +128,7 @@ public final class MyOptionals {
 
     public static Optional<long[]> of(final long[] optionalArray) {
 	return Optional.ofNullable(optionalArray) //
-		.filter(MyCollections::nonEmpty);
+		.filter(MyArrays::nonEmpty);
     }
 
     public static Optional<long[]> ofEmpty(final long[] optionalArray) {

@@ -9,13 +9,42 @@ public final class MyMaps {
     private MyMaps() {
     }
 
-    public static boolean empty(final Map<?, ?> map) {
+    private static final String MAP_IS_EMPTY = "Map is empty";
+    private static final String MAP_IS_NOT_EMPTY = "Map is not empty";
+
+    // MAP
+
+    public static <K, V, M extends Map<K, V>> boolean empty(final M map) {
 	return MyObjects.isNull(map) || map.isEmpty();
     }
 
-    public static boolean nonEmpty(final Map<?, ?> map) {
+    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map) {
+	return requireEmpty(map, MAP_IS_NOT_EMPTY);
+    }
+
+    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map, final String message) {
+	if (empty(map)) //
+	    return map;
+	throw new IllegalArgumentException(message);
+    }
+
+    //
+
+    public static <K, V, M extends Map<K, V>> boolean nonEmpty(final M map) {
 	return !empty(map);
     }
+
+    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map) {
+	return requireNonEmpty(map, MAP_IS_EMPTY);
+    }
+
+    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map, final String message) {
+	if (nonEmpty(map)) //
+	    return map;
+	throw new IllegalArgumentException(message);
+    }
+
+    //
 
     public static <K, V> Map.Entry<K, V> entry(final K k, final V v) {
 	return new Map.Entry<K, V>() {
