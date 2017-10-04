@@ -2,7 +2,6 @@ package com.lapsa.commons.function;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 public final class MyMaps {
@@ -11,7 +10,7 @@ public final class MyMaps {
     }
 
     public static boolean empty(final Map<?, ?> map) {
-	return Objects.isNull(map) || map.isEmpty();
+	return MyObjects.isNull(map) || map.isEmpty();
     }
 
     public static boolean nonEmpty(final Map<?, ?> map) {

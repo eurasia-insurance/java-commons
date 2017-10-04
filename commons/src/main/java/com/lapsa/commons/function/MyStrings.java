@@ -3,7 +3,6 @@ package com.lapsa.commons.function;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-import java.util.Objects;
 
 public final class MyStrings {
 
@@ -39,7 +38,7 @@ public final class MyStrings {
     //
 
     public static boolean empty(final String string) {
-	return Objects.isNull(string) || string.trim().isEmpty();
+	return MyObjects.isNull(string) || string.trim().isEmpty();
     }
 
     public static String requireEmpty(final String string) {
@@ -74,7 +73,7 @@ public final class MyStrings {
     //
 
     public static String capitalizeFirstLetter(final String string, final Locale locale) {
-	if (Objects.isNull(string))
+	if (MyObjects.isNull(string))
 	    return null;
 	if (string.isEmpty())
 	    return string;
@@ -82,7 +81,7 @@ public final class MyStrings {
     }
 
     public static String capitalizeFirstLetter(final String string) {
-	if (Objects.isNull(string))
+	if (MyObjects.isNull(string))
 	    return null;
 	if (string.isEmpty())
 	    return string;
