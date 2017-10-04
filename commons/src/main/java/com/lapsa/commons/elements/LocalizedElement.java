@@ -6,12 +6,13 @@ import static com.lapsa.commons.function.MyMaps.*;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
+
+import com.lapsa.commons.function.MyObjects;
 
 public interface LocalizedElement extends Localized {
 
@@ -23,8 +24,8 @@ public interface LocalizedElement extends Localized {
 
     @Override
     default String displayName(final DisplayNameVariant variant, final Locale locale) {
-	Objects.requireNonNull(variant, "Display name variant must be provided");
-	Objects.requireNonNull(locale, "Locale must be provided");
+	MyObjects.requireNonNull(variant, "Display name variant must be provided");
+	MyObjects.requireNonNull(locale, "Locale must be provided");
 
 	Builder<DisplayNameVariant> builder = Stream.<DisplayNameVariant> builder() //
 		.add(variant);
@@ -38,7 +39,7 @@ public interface LocalizedElement extends Localized {
 
 	return builder.build() //
 		.map(x -> ResourceBundleUtil.getLocalized(this, x, locale)) //
-		.filter(Objects::nonNull) //
+		.filter(MyObjects::nonNull) //
 		.findFirst()
 		.orElseThrow(() -> new IllegalArgumentException("No ResourceBundle is supplied or key "
 			+ "is not mapped correctly"));
