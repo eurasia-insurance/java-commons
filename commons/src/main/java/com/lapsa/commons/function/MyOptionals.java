@@ -115,28 +115,6 @@ public final class MyOptionals {
 
     //
 
-    public static Optional<byte[]> of(final byte[] optionalArray) {
-	return Optional.ofNullable(optionalArray) //
-		.filter(MyCollections::nonEmpty);
-    }
-
-    public static Optional<byte[]> ofEmpty(final byte[] optionalArray) {
-	return Optional.ofNullable(optionalArray);
-    }
-
-    //
-
-    public static Optional<short[]> of(final short[] optionalArray) {
-	return Optional.ofNullable(optionalArray) //
-		.filter(MyCollections::nonEmpty);
-    }
-
-    public static Optional<short[]> ofEmpty(final short[] optionalArray) {
-	return Optional.ofNullable(optionalArray);
-    }
-
-    //
-
     public static Optional<double[]> of(final double[] optionalArray) {
 	return Optional.ofNullable(optionalArray) //
 		.filter(MyCollections::nonEmpty);
@@ -212,41 +190,11 @@ public final class MyOptionals {
 
     //
 
-    public static Optional<Float> of(final float optional) {
-	return of(Float.valueOf(optional));
-    }
-
-    public static Optional<Float> ofZero(final float optional) {
-	return ofZero(Float.valueOf(optional));
-    }
-
-    //
-
     public static Optional<Long> of(final long optional) {
 	return of(Long.valueOf(optional));
     }
 
     public static Optional<Long> ofZero(final long optional) {
 	return ofZero(Long.valueOf(optional));
-    }
-
-    //
-
-    public static Optional<Byte> of(final byte optional) {
-	return of(Byte.valueOf(optional));
-    }
-
-    public static Optional<Byte> ofZero(final byte optional) {
-	return ofZero(Byte.valueOf(optional));
-    }
-
-    //
-
-    public static Optional<Short> of(final short optional) {
-	return of(Short.valueOf(optional));
-    }
-
-    public static Optional<Short> ofZero(final short optional) {
-	return ofZero(Short.valueOf(optional));
     }
 }
