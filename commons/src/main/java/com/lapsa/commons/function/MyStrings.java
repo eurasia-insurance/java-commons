@@ -1,5 +1,7 @@
 package com.lapsa.commons.function;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -10,36 +12,63 @@ public final class MyStrings {
 
     //
 
+    public static boolean validURL(final String url) {
+	if (empty(url))
+	    return false;
+	try {
+	    new URL(url);
+	    return true;
+	} catch (MalformedURLException e) {
+	    return false;
+	}
+    }
+
+    public static String requireValidURL(final String url) {
+	return requireValidURL(url, "not valid url");
+    }
+
+    public static String requireValidURL(final String url, String message) {
+	try {
+	    new URL(requireNonEmpty(url));
+	} catch (MalformedURLException e) {
+	    throw new IllegalArgumentException(message, e);
+	}
+	return url;
+    }
+
+    //
+
     public static boolean empty(final String string) {
 	return Objects.isNull(string) || string.trim().isEmpty();
     }
+
+    public static String requireEmpty(final String string) {
+	return requireEmpty(string, "non-empty string");
+
+    }
+
+    public static String requireEmpty(final String string, String message) {
+	if (empty(string))
+	    return string;
+	throw new IllegalArgumentException(message);
+
+    }
+
+    //
 
     public static boolean nonEmpty(final String string) {
 	return !empty(string);
     }
 
     public static String requireNonEmpty(final String string) {
-	if (empty(string))
-	    throw new IllegalArgumentException("empty string");
-	return string;
+	return requireNonEmpty(string, "empty string");
+
     }
 
     public static String requireNonEmpty(final String string, String message) {
-	if (empty(string))
-	    throw new IllegalArgumentException(message);
-	return string;
-    }
-
-    public static String requireEmpty(final String string) {
 	if (nonEmpty(string))
-	    throw new IllegalArgumentException("non-empty string");
-	return string;
-    }
-
-    public static String requireEmpty(final String string, String message) {
-	if (nonEmpty(string))
-	    throw new IllegalArgumentException(message);
-	return string;
+	    return string;
+	throw new IllegalArgumentException(message);
     }
 
     //
@@ -63,4 +92,5 @@ public final class MyStrings {
     public static String nullOnEmpty(final String string) {
 	return empty(string) ? null : string;
     }
+
 }
