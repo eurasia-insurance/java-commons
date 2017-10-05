@@ -2,7 +2,7 @@ package test.function;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
-import static test.function.MyExceptionsTest.*;
+import static test.function.Exceptions.*;
 
 import java.util.Arrays;
 import java.util.List;

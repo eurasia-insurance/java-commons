@@ -1,7 +1,7 @@
 package test.function;
 
 import static org.junit.Assert.*;
-import static test.function.MyExceptionsTest.*;
+import static test.function.Exceptions.*;
 
 import java.util.Map;
 

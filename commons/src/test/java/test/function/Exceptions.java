@@ -2,12 +2,12 @@ package test.function;
 
 import static org.junit.Assert.*;
 
-public final class MyExceptionsTest {
+final class Exceptions {
 
-    private MyExceptionsTest() {
+    private Exceptions() {
     }
 
-    public static void expectException(Statement statement, Class<? extends Throwable> clazz) {
+    static void expectException(Statement statement, Class<? extends Throwable> clazz) {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
@@ -18,7 +18,7 @@ public final class MyExceptionsTest {
 	fail(clazz.getName() + " is expected");
     }
 
-    public static void expectException(Statement statement) {
+    static void expectException(Statement statement) {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
@@ -28,7 +28,7 @@ public final class MyExceptionsTest {
 	fail("Exception expected");
     }
 
-    public static void unexpectException(Statement statement) {
+    static void unexpectException(Statement statement) {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
@@ -37,7 +37,7 @@ public final class MyExceptionsTest {
     }
 
     @FunctionalInterface
-    public static interface Statement {
+    static interface Statement {
 	void call();
     }
 }
