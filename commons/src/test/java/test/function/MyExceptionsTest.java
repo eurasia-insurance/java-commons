@@ -2,9 +2,9 @@ package test.function;
 
 import static org.junit.Assert.*;
 
-public final class Expeptions {
+public final class MyExceptionsTest {
 
-    private Expeptions() {
+    private MyExceptionsTest() {
     }
 
     public static void expectException(Statement statement, Class<? extends Throwable> clazz) {
