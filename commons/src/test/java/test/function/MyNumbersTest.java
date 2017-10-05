@@ -18,16 +18,16 @@ public class MyNumbersTest {
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, ""));
+	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, ""));
+	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
 
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -41,21 +41,21 @@ public class MyNumbersTest {
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireZero(NULL));
-	unexpectException(() -> MyNumbers.requireZero(NULL, ""));
+	unexpectException(() -> MyNumbers.requireZero(NULL, "par"));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, ""));
+	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, ""));
+	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
 
 	assertFalse(MyNumbers.nonZero(NULL));
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
 	expectException(() -> MyNumbers.requireNonZero(NULL), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -67,16 +67,16 @@ public class MyNumbersTest {
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, ""));
+	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, ""));
+	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
 
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -90,21 +90,21 @@ public class MyNumbersTest {
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireZero(NULL));
-	unexpectException(() -> MyNumbers.requireZero(NULL, ""));
+	unexpectException(() -> MyNumbers.requireZero(NULL, "par"));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, ""));
+	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, ""));
+	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
 
 	assertFalse(MyNumbers.nonZero(NULL));
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
 	expectException(() -> MyNumbers.requireNonZero(NULL), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -116,16 +116,16 @@ public class MyNumbersTest {
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, ""));
+	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, ""));
+	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
 
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -139,21 +139,21 @@ public class MyNumbersTest {
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireZero(NULL));
-	unexpectException(() -> MyNumbers.requireZero(NULL, ""));
+	unexpectException(() -> MyNumbers.requireZero(NULL, "par"));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, ""));
+	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, ""));
+	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
 
 	assertFalse(MyNumbers.nonZero(NULL));
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
 	expectException(() -> MyNumbers.requireNonZero(NULL), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, ""), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
     }
 
 }

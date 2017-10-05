@@ -22,20 +22,20 @@ public class MyMapsTest {
 	assertTrue(MyMaps.empty(EMPTY));
 	assertTrue(MyMaps.nonEmpty(NON_EMPTY));
 	unexpectException(() -> MyMaps.requireEmpty(NULL));
-	unexpectException(() -> MyMaps.requireEmpty(NULL, ""));
+	unexpectException(() -> MyMaps.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyMaps.requireEmpty(EMPTY));
-	unexpectException(() -> MyMaps.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyMaps.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyMaps.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyMaps.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyMaps.requireNonEmpty(NON_EMPTY, "par"));
 
 	assertFalse(MyMaps.nonEmpty(NULL));
 	assertFalse(MyMaps.nonEmpty(EMPTY));
 	assertFalse(MyMaps.empty(NON_EMPTY));
 	expectException(() -> MyMaps.requireNonEmpty(NULL), IllegalArgumentException.class);
-	expectException(() -> MyMaps.requireNonEmpty(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyMaps.requireNonEmpty(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyMaps.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyMaps.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyMaps.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyMaps.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyMaps.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyMaps.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
     }
 }

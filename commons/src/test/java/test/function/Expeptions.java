@@ -11,6 +11,7 @@ public final class Expeptions {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
+	    System.out.println(e.getMessage());
 	    if (clazz.isAssignableFrom(e.getClass()))
 		return;
 	}
@@ -21,6 +22,7 @@ public final class Expeptions {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
+	    System.out.println(e.getMessage());
 	    return;
 	}
 	fail("Exception expected");

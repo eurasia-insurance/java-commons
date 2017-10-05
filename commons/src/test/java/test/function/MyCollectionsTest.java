@@ -100,15 +100,15 @@ public class MyCollectionsTest {
 	assertTrue(MyCollections.nullElements(NULL_ELEMENTS));
 	assertTrue(MyCollections.nonNullElements(NON_NULL_ELEMENTS));
 	unexpectException(() -> MyCollections.requireEmpty(NULL));
-	unexpectException(() -> MyCollections.requireEmpty(NULL, ""));
+	unexpectException(() -> MyCollections.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyCollections.requireEmpty(EMPTY));
-	unexpectException(() -> MyCollections.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyCollections.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyCollections.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyCollections.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyCollections.requireNonEmpty(NON_EMPTY, "par"));
 	unexpectException(() -> MyCollections.requireNullElements(NULL_ELEMENTS));
-	unexpectException(() -> MyCollections.requireNullElements(NULL_ELEMENTS, ""));
+	unexpectException(() -> MyCollections.requireNullElements(NULL_ELEMENTS, "par"));
 	unexpectException(() -> MyCollections.requireNonNullElements(NON_NULL_ELEMENTS));
-	unexpectException(() -> MyCollections.requireNonNullElements(NON_NULL_ELEMENTS, ""));
+	unexpectException(() -> MyCollections.requireNonNullElements(NON_NULL_ELEMENTS, "par"));
 
 	assertFalse(MyCollections.nonEmpty(NULL));
 	assertFalse(MyCollections.nonEmpty(EMPTY));
@@ -116,14 +116,14 @@ public class MyCollectionsTest {
 	assertFalse(MyCollections.nullElements(NON_NULL_ELEMENTS));
 	assertFalse(MyCollections.nonNullElements(NULL_ELEMENTS));
 	expectException(() -> MyCollections.requireNonEmpty(NULL), IllegalArgumentException.class);
-	expectException(() -> MyCollections.requireNonEmpty(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyCollections.requireNonEmpty(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyCollections.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyCollections.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyCollections.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyCollections.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyCollections.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyCollections.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyCollections.requireNonNullElements(NULL_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyCollections.requireNonNullElements(NULL_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyCollections.requireNonNullElements(NULL_ELEMENTS, "par"), IllegalArgumentException.class);
 	expectException(() -> MyCollections.requireNullElements(NON_NULL_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyCollections.requireNullElements(NON_NULL_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyCollections.requireNullElements(NON_NULL_ELEMENTS, "par"), IllegalArgumentException.class);
     }
 }

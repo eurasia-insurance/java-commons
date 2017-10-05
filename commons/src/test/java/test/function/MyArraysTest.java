@@ -25,15 +25,15 @@ public class MyArraysTest {
 	assertTrue(MyArrays.nullElements(NULL_ELEMENTS));
 	assertTrue(MyArrays.nonNullElements(NON_NULL_ELEMENTS));
 	unexpectException(() -> MyArrays.requireEmpty(NULL));
-	unexpectException(() -> MyArrays.requireEmpty(NULL, ""));
+	unexpectException(() -> MyArrays.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyArrays.requireEmpty(EMPTY));
-	unexpectException(() -> MyArrays.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyArrays.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireNullElements(NULL_ELEMENTS));
-	unexpectException(() -> MyArrays.requireNullElements(NULL_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireNullElements(NULL_ELEMENTS, "par"));
 	unexpectException(() -> MyArrays.requireNonNullElements(NON_NULL_ELEMENTS));
-	unexpectException(() -> MyArrays.requireNonNullElements(NON_NULL_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireNonNullElements(NON_NULL_ELEMENTS, "par"));
 
 	assertFalse(MyArrays.nonEmpty(NULL));
 	assertFalse(MyArrays.nonEmpty(EMPTY));
@@ -41,15 +41,15 @@ public class MyArraysTest {
 	assertFalse(MyArrays.nullElements(NON_NULL_ELEMENTS));
 	assertFalse(MyArrays.nonNullElements(NULL_ELEMENTS));
 	expectException(() -> MyArrays.requireNonEmpty(NULL), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonNullElements(NULL_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonNullElements(NULL_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonNullElements(NULL_ELEMENTS, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNullElements(NON_NULL_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNullElements(NON_NULL_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNullElements(NON_NULL_ELEMENTS, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -68,15 +68,15 @@ public class MyArraysTest {
 	assertTrue(MyArrays.zeroElements(ZERO_ELEMENTS));
 	assertTrue(MyArrays.nonZeroElements(NON_ZERO_ELEMENTS));
 	unexpectException(() -> MyArrays.requireEmpty(NULL));
-	unexpectException(() -> MyArrays.requireEmpty(NULL, ""));
+	unexpectException(() -> MyArrays.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyArrays.requireEmpty(EMPTY));
-	unexpectException(() -> MyArrays.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyArrays.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS));
-	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS, "par"));
 	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS));
-	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS, "par"));
 
 	assertFalse(MyArrays.nonEmpty(NULL));
 	assertFalse(MyArrays.nonEmpty(EMPTY));
@@ -84,15 +84,15 @@ public class MyArraysTest {
 	assertFalse(MyArrays.zeroElements(NON_ZERO_ELEMENTS));
 	assertFalse(MyArrays.nonZeroElements(ZERO_ELEMENTS));
 	expectException(() -> MyArrays.requireNonEmpty(NULL), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -111,15 +111,15 @@ public class MyArraysTest {
 	assertTrue(MyArrays.zeroElements(ZERO_ELEMENTS));
 	assertTrue(MyArrays.nonZeroElements(NON_ZERO_ELEMENTS));
 	unexpectException(() -> MyArrays.requireEmpty(NULL));
-	unexpectException(() -> MyArrays.requireEmpty(NULL, ""));
+	unexpectException(() -> MyArrays.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyArrays.requireEmpty(EMPTY));
-	unexpectException(() -> MyArrays.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyArrays.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS));
-	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS, "par"));
 	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS));
-	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS, "par"));
 
 	assertFalse(MyArrays.nonEmpty(NULL));
 	assertFalse(MyArrays.nonEmpty(EMPTY));
@@ -127,13 +127,13 @@ public class MyArraysTest {
 	assertFalse(MyArrays.zeroElements(NON_ZERO_ELEMENTS));
 	assertFalse(MyArrays.nonZeroElements(ZERO_ELEMENTS));
 	expectException(() -> MyArrays.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -152,15 +152,15 @@ public class MyArraysTest {
 	assertTrue(MyArrays.zeroElements(ZERO_ELEMENTS));
 	assertTrue(MyArrays.nonZeroElements(NON_ZERO_ELEMENTS));
 	unexpectException(() -> MyArrays.requireEmpty(NULL));
-	unexpectException(() -> MyArrays.requireEmpty(NULL, ""));
+	unexpectException(() -> MyArrays.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyArrays.requireEmpty(EMPTY));
-	unexpectException(() -> MyArrays.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyArrays.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyArrays.requireNonEmpty(NON_EMPTY, "par"));
 	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS));
-	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireZeroElements(ZERO_ELEMENTS, "par"));
 	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS));
-	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS, ""));
+	unexpectException(() -> MyArrays.requireNonZeroElements(NON_ZERO_ELEMENTS, "par"));
 
 	assertFalse(MyArrays.nonEmpty(NULL));
 	assertFalse(MyArrays.nonEmpty(EMPTY));
@@ -168,14 +168,14 @@ public class MyArraysTest {
 	assertFalse(MyArrays.zeroElements(NON_ZERO_ELEMENTS));
 	assertFalse(MyArrays.nonZeroElements(ZERO_ELEMENTS));
 	expectException(() -> MyArrays.requireNonEmpty(NULL), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireNonZeroElements(ZERO_ELEMENTS, "par"), IllegalArgumentException.class);
 	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS), IllegalArgumentException.class);
-	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS, ""), IllegalArgumentException.class);
+	expectException(() -> MyArrays.requireZeroElements(NON_ZERO_ELEMENTS, "par"), IllegalArgumentException.class);
     }
 }

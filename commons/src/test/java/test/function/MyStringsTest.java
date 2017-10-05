@@ -20,34 +20,34 @@ public class MyStringsTest {
 	assertTrue(MyStrings.empty(EMPTY));
 	assertTrue(MyStrings.nonEmpty(NON_EMPTY));
 	unexpectException(() -> MyStrings.requireEmpty(NULL));
-	unexpectException(() -> MyStrings.requireEmpty(NULL, ""));
+	unexpectException(() -> MyStrings.requireEmpty(NULL, "par"));
 	unexpectException(() -> MyStrings.requireEmpty(EMPTY));
-	unexpectException(() -> MyStrings.requireEmpty(EMPTY, ""));
+	unexpectException(() -> MyStrings.requireEmpty(EMPTY, "par"));
 	unexpectException(() -> MyStrings.requireNonEmpty(NON_EMPTY));
-	unexpectException(() -> MyStrings.requireNonEmpty(NON_EMPTY, ""));
+	unexpectException(() -> MyStrings.requireNonEmpty(NON_EMPTY, "par"));
 
 	assertFalse(MyStrings.nonEmpty(NULL));
 	assertFalse(MyStrings.nonEmpty(EMPTY));
 	assertFalse(MyStrings.empty(NON_EMPTY));
 	expectException(() -> MyStrings.requireNonEmpty(NULL), IllegalArgumentException.class);
-	expectException(() -> MyStrings.requireNonEmpty(NULL, ""), IllegalArgumentException.class);
+	expectException(() -> MyStrings.requireNonEmpty(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyStrings.requireNonEmpty(EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyStrings.requireNonEmpty(EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyStrings.requireNonEmpty(EMPTY, "par"), IllegalArgumentException.class);
 	expectException(() -> MyStrings.requireEmpty(NON_EMPTY), IllegalArgumentException.class);
-	expectException(() -> MyStrings.requireEmpty(NON_EMPTY, ""), IllegalArgumentException.class);
+	expectException(() -> MyStrings.requireEmpty(NON_EMPTY, "par"), IllegalArgumentException.class);
     }
 
     @Test
     public void test_validURL() {
 
 	final String VALID_URL = "https://stackoverflow.com/";
-	final String NON_VALID_URL1 = "TypeSafeMatcher";
+	final String NON_VALID_URL1 = "httpASDs://stackoverflow.com/";
 	final String NON_VALID_URL2 = null;
-	final String NON_VALID_URL3 = "";
+	final String NON_VALID_URL3 = "par";
 
 	assertTrue(MyStrings.validURL(VALID_URL));
 	unexpectException(() -> MyStrings.requireValidURL(VALID_URL));
-	unexpectException(() -> MyStrings.requireValidURL(VALID_URL, ""));
+	unexpectException(() -> MyStrings.requireValidURL(VALID_URL, "par"));
 
 	assertFalse(MyStrings.validURL(NON_VALID_URL1));
 	assertFalse(MyStrings.validURL(NON_VALID_URL2));
@@ -55,8 +55,8 @@ public class MyStringsTest {
 	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL1), IllegalArgumentException.class);
 	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL2), IllegalArgumentException.class);
 	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL3), IllegalArgumentException.class);
-	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL1, ""), IllegalArgumentException.class);
-	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL2, ""), IllegalArgumentException.class);
-	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL3, ""), IllegalArgumentException.class);
+	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL1, "par"), IllegalArgumentException.class);
+	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL2, "par"), IllegalArgumentException.class);
+	expectException(() -> MyStrings.requireValidURL(NON_VALID_URL3, "par"), IllegalArgumentException.class);
     }
 }
