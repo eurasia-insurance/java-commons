@@ -2,12 +2,12 @@ package com.lapsa.commons.function;
 
 import java.util.StringJoiner;
 
-final class MyExceptions {
+public final class MyExceptions {
 
     private MyExceptions() {
     }
 
-    static IllegalArgumentException illegalArgumentException(final String message, final String par,
+    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
 	    final String value) {
 	StringJoiner sj = new StringJoiner(" ");
 	sj.add(message);
@@ -18,7 +18,7 @@ final class MyExceptions {
 	return new IllegalArgumentException(sj.toString());
     }
 
-    static IllegalArgumentException illegalArgumentException(String message, String par, final String value,
+    public static IllegalArgumentException illegalArgumentException(String message, String par, final String value,
 	    Throwable cause) {
 	StringJoiner sj = new StringJoiner(" ");
 	sj.add(message);
@@ -29,7 +29,7 @@ final class MyExceptions {
 	return new IllegalArgumentException(sj.toString(), cause);
     }
 
-    static IllegalArgumentException illegalArgumentException(final String message, final String par) {
+    public static IllegalArgumentException illegalArgumentException(final String message, final String par) {
 	StringJoiner sj = new StringJoiner(" ");
 	sj.add(message);
 	if (MyStrings.nonEmpty(par))
@@ -37,7 +37,7 @@ final class MyExceptions {
 	return new IllegalArgumentException(sj.toString());
     }
 
-    static IllegalArgumentException illegalArgumentException(String message, String par,
+    public static IllegalArgumentException illegalArgumentException(String message, String par,
 	    Throwable cause) {
 	StringJoiner sj = new StringJoiner(" ");
 	sj.add(message);
