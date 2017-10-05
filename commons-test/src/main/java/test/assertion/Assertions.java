@@ -22,7 +22,6 @@ public final class Assertions {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
-	    System.out.println(e.getMessage());
 	    return;
 	}
 	fail("Exception expected");
