@@ -7,37 +7,35 @@ final class Exceptions {
     private Exceptions() {
     }
 
-    static void expectException(Statement statement, Class<? extends Throwable> clazz) {
+    public static void expectException(Statement statement, Class<? extends Throwable> exceptionClazz) {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
-	    System.out.println(e.getMessage());
-	    if (clazz.isAssignableFrom(e.getClass()))
-		return;
+	    if (exceptionClazz.isAssignableFrom(e.getClass()))
+		return; // OK
 	}
-	fail(clazz.getName() + " is expected");
+	fail(exceptionClazz.getName() + " exception is expected");
     }
 
-    static void expectException(Statement statement) {
+    public static void expectException(Statement statement) {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
-	    System.out.println(e.getMessage());
-	    return;
+	    return; // OK
 	}
-	fail("Exception expected");
+	fail("Any exception expected");
     }
 
-    static void unexpectException(Statement statement) {
+    public static void unexpectException(Statement statement) {
 	try {
 	    statement.call();
 	} catch (Throwable e) {
-	    fail("Unexpected exception " + e.getMessage());
+	    fail("Unexpected exception thrown " + e.getClass().getName() + ": " + e.getMessage());
 	}
     }
 
     @FunctionalInterface
-    static interface Statement {
+    public static interface Statement {
 	void call();
     }
 }
