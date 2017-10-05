@@ -4,6 +4,9 @@ import java.util.function.Function;
 
 public final class MyObjects {
 
+    private static final String IS_A_NON_NULL_OBJECT = "Is not null";
+    private static final String IS_A_NULL_OBJECT = "Is null";
+
     private MyObjects() {
     }
 
@@ -14,13 +17,13 @@ public final class MyObjects {
     }
 
     public static <T> T requireNonNull(T obj) {
-	return requireNonNull(obj, "is a null object");
+	return requireNonNull(obj, null);
     }
 
-    public static <T> T requireNonNull(T obj, String message) {
+    public static <T> T requireNonNull(T obj, String par) {
 	if (nonNull(obj))
 	    return obj;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
     }
 
     //
@@ -30,48 +33,48 @@ public final class MyObjects {
     }
 
     public static <T> T requireNull(T obj) {
-	return requireNull(obj, "is a non-null object");
+	return requireNull(obj, null);
     }
 
-    public static <T> T requireNull(T obj, String message) {
+    public static <T> T requireNull(T obj, String par) {
 	if (isNull(obj))
 	    return obj;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
     }
 
     //
 
-    public static final boolean isA(Object x, Class<?> clazz) {
-	requireNonNull(clazz);
-	return x != null && clazz.isAssignableFrom(x.getClass());
+    public static final boolean isA(Object obj, Class<?> clazz) {
+	requireNonNull(clazz, "clazz");
+	return obj != null && clazz.isAssignableFrom(obj.getClass());
     }
 
-    public static final <T> T requireA(T x, Class<?> clazz) {
-	requireNonNull(clazz);
-	return requireA(x, clazz, "is not a " + clazz.getName());
+    public static final <T> T requireA(T obj, Class<?> clazz) {
+	requireNonNull(clazz, "clazz");
+	return requireA(obj, clazz, null);
     }
 
-    public static final <T> T requireA(T x, Class<?> clazz, String message) {
-	if (isA(x, clazz))
-	    return x;
-	throw new IllegalArgumentException(message);
+    public static final <T> T requireA(T obj, Class<?> clazz, String par) {
+	if (isA(obj, clazz))
+	    return obj;
+	throw Exceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
     //
 
-    public static final boolean isNotA(Object x, Class<?> clazz) {
-	return !isA(x, clazz);
+    public static final boolean isNotA(Object obj, Class<?> clazz) {
+	return !isA(obj, clazz);
     }
 
-    public static final <T> T requireNotA(T x, Class<?> clazz) {
+    public static final <T> T requireNotA(T obj, Class<?> clazz) {
 	requireNonNull(clazz);
-	return requireNotA(x, clazz, "is a " + clazz.getName());
+	return requireNotA(obj, clazz, null);
     }
 
-    public static final <T> T requireNotA(T x, Class<?> clazz, String message) {
-	if (isNotA(x, clazz))
-	    return x;
-	throw new IllegalArgumentException(message);
+    public static final <T> T requireNotA(T obj, Class<?> clazz, String par) {
+	if (isNotA(obj, clazz))
+	    return obj;
+	throw Exceptions.illegalArgumentException("Is a " + clazz.getName(), par);
     }
 
     //

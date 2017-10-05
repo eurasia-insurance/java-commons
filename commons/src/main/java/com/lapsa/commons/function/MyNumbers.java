@@ -2,8 +2,8 @@ package com.lapsa.commons.function;
 
 public final class MyNumbers {
 
-    private static final String DEFAULT_EXCEPTION_NON_ZERO_NUMBER = "non-zero number";
-    private static final String DEFAULT_EXCEPTION_ZERO_NUMBER = "zero number";
+    private static final String NON_ZERO_NUMBER = "Is not zero";
+    private static final String ZERO_NUMBER = "Is zero";
 
     private MyNumbers() {
     }
@@ -23,27 +23,23 @@ public final class MyNumbers {
     }
 
     public static <T extends Number> T requireNonZero(final T number) {
-	if (nonZero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_ZERO_NUMBER);
+	return requireNonZero(number, null);
     }
 
-    public static <T extends Number> T requireNonZero(final T number, String message) {
+    public static <T extends Number> T requireNonZero(final T number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static <T extends Number> T requireZero(final T number) {
-	if (zero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_NON_ZERO_NUMBER);
+	return requireZero(number, null);
     }
 
-    public static <T extends Number> T requireZero(final T number, String message) {
+    public static <T extends Number> T requireZero(final T number, String par) {
 	if (zero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     // long
@@ -57,27 +53,23 @@ public final class MyNumbers {
     }
 
     public static long requireNonZero(final long number) {
-	if (nonZero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_ZERO_NUMBER);
+	return requireNonZero(number, null);
     }
 
-    public static long requireNonZero(final long number, String message) {
+    public static long requireNonZero(final long number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static long requireZero(final long number) {
-	if (zero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_NON_ZERO_NUMBER);
+	return requireZero(number, null);
     }
 
-    public static long requireZero(final long number, String message) {
+    public static long requireZero(final long number, String par) {
 	if (zero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     // double
@@ -91,28 +83,23 @@ public final class MyNumbers {
     }
 
     public static double requireNonZero(final double number) {
-	if (nonZero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_ZERO_NUMBER);
-
+	return requireNonZero(number, null);
     }
 
-    public static double requireNonZero(final double number, String message) {
+    public static double requireNonZero(final double number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static double requireZero(final double number) {
-	if (zero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_NON_ZERO_NUMBER);
+	return requireZero(number, null);
     }
 
-    public static double requireZero(final double number, String message) {
+    public static double requireZero(final double number, String par) {
 	if (zero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     // int
@@ -126,27 +113,23 @@ public final class MyNumbers {
     }
 
     public static int requireNonZero(final int number) {
-	if (nonZero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_ZERO_NUMBER);
+	return requireNonZero(number, null);
     }
 
-    public static int requireNonZero(final int number, String message) {
+    public static int requireNonZero(final int number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static int requireZero(final int number) {
-	if (zero(number))
-	    return number;
-	throw new IllegalArgumentException(DEFAULT_EXCEPTION_NON_ZERO_NUMBER);
+	return requireZero(number, null);
     }
 
-    public static int requireZero(final int number, String message) {
+    public static int requireZero(final int number, String par) {
 	if (zero(number))
 	    return number;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
 }

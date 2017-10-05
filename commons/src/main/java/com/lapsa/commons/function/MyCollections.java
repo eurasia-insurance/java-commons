@@ -7,11 +7,11 @@ public final class MyCollections {
     private MyCollections() {
     }
 
-    private static final String SOME_ELEMENTS_ARE_NULL = "Some elements are null";
-    private static final String SOME_ELEMENTS_ARE_NOT_NULL = "Some elements are not null";
+    private static final String SOME_ELEMENTS_ARE_NULL = "Has some null elements";
+    private static final String SOME_ELEMENTS_ARE_NOT_NULL = "Has some non-null elements";
 
-    private static final String COLLECTION_IS_EMPTY = "Collection is empty";
-    private static final String COLLECTION_IS_NOT_EMPTY = "Colletion is not empty";
+    private static final String COLLECTION_IS_EMPTY = "Is empty";
+    private static final String COLLECTION_IS_NOT_EMPTY = "Is not empty";
 
     // COLLECTION
 
@@ -20,13 +20,13 @@ public final class MyCollections {
     }
 
     public static <T, C extends Collection<T>> C requireEmpty(final C collection) {
-	return requireEmpty(collection, COLLECTION_IS_NOT_EMPTY);
+	return requireEmpty(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireEmpty(final C collection, final String message) {
+    public static <T, C extends Collection<T>> C requireEmpty(final C collection, final String par) {
 	if (empty(collection)) //
 	    return collection;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(COLLECTION_IS_NOT_EMPTY, par);
     }
 
     //
@@ -36,13 +36,13 @@ public final class MyCollections {
     }
 
     public static <T, C extends Collection<T>> C requireNonEmpty(final C collection) {
-	return requireNonEmpty(collection, COLLECTION_IS_EMPTY);
+	return requireNonEmpty(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireNonEmpty(final C collection, final String message) {
+    public static <T, C extends Collection<T>> C requireNonEmpty(final C collection, final String par) {
 	if (nonEmpty(collection)) //
 	    return collection;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(COLLECTION_IS_EMPTY, par);
     }
 
     //
@@ -54,13 +54,13 @@ public final class MyCollections {
     }
 
     public static <T, C extends Collection<T>> C requireNonNullElements(final C collection) {
-	return requireNonNullElements(collection, SOME_ELEMENTS_ARE_NULL);
+	return requireNonNullElements(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireNonNullElements(final C collection, final String message) {
+    public static <T, C extends Collection<T>> C requireNonNullElements(final C collection, final String par) {
 	if (nonNullElements(collection)) //
 	    return collection;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, par);
     }
 
     //
@@ -72,13 +72,13 @@ public final class MyCollections {
     }
 
     public static <T, C extends Collection<T>> C requireNullElements(final C collection) {
-	return requireNullElements(collection, SOME_ELEMENTS_ARE_NOT_NULL);
+	return requireNullElements(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireNullElements(final C collection, final String message) {
+    public static <T, C extends Collection<T>> C requireNullElements(final C collection, final String par) {
 	if (nullElements(collection)) //
 	    return collection;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);
     }
 
 }

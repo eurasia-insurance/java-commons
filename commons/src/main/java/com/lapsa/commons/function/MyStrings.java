@@ -6,6 +6,11 @@ import java.util.Locale;
 
 public final class MyStrings {
 
+    private static final String NOT_VALID_URL = "Is not valid url";
+
+    private static final String EMPTY_STRING = "Is empty";
+    private static final String NON_EMPTY_STRING = "Is not empty";
+
     private MyStrings() {
     }
 
@@ -23,14 +28,14 @@ public final class MyStrings {
     }
 
     public static String requireValidURL(final String url) {
-	return requireValidURL(url, "not valid url");
+	return requireValidURL(url, null);
     }
 
-    public static String requireValidURL(final String url, String message) {
+    public static String requireValidURL(final String url, final String par) {
 	try {
 	    new URL(requireNonEmpty(url));
-	} catch (MalformedURLException e) {
-	    throw new IllegalArgumentException(message, e);
+	} catch (MalformedURLException | IllegalArgumentException e) {
+	    throw Exceptions.illegalArgumentException(NOT_VALID_URL, par, String.valueOf(url), e);
 	}
 	return url;
     }
@@ -42,15 +47,14 @@ public final class MyStrings {
     }
 
     public static String requireEmpty(final String string) {
-	return requireEmpty(string, "non-empty string");
+	return requireEmpty(string, null);
 
     }
 
-    public static String requireEmpty(final String string, String message) {
+    public static String requireEmpty(final String string, String par) {
 	if (empty(string))
 	    return string;
-	throw new IllegalArgumentException(message);
-
+	throw Exceptions.illegalArgumentException(NON_EMPTY_STRING, par, String.valueOf(string));
     }
 
     //
@@ -60,14 +64,14 @@ public final class MyStrings {
     }
 
     public static String requireNonEmpty(final String string) {
-	return requireNonEmpty(string, "empty string");
+	return requireNonEmpty(string, null);
 
     }
 
-    public static String requireNonEmpty(final String string, String message) {
+    public static String requireNonEmpty(final String string, String par) {
 	if (nonEmpty(string))
 	    return string;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(EMPTY_STRING, par, String.valueOf(string));
     }
 
     //

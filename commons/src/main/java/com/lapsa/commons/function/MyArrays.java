@@ -10,14 +10,14 @@ public final class MyArrays {
     private MyArrays() {
     }
 
-    private static final String ARRAY_IS_EMPTY = "Array is empty";
-    private static final String ARRAY_IS_NOT_EMPTY = "Array is not empty";
+    private static final String ARRAY_IS_EMPTY = "Is empty";
+    private static final String ARRAY_IS_NOT_EMPTY = "Is not empty";
 
-    private static final String SOME_ELEMENTS_ARE_ZEROED = "Some elements are zeroed";
-    private static final String SOME_ELEMENTS_ARE_NOT_ZEROED = "Some elements are not zero";
+    private static final String SOME_ELEMENTS_ARE_ZEROED = "Has some zero elements";
+    private static final String SOME_ELEMENTS_ARE_NOT_ZEROED = "Has some non-zero element";
 
-    private static final String SOME_ELEMENTS_ARE_NULL = "Some elements are null";
-    private static final String SOME_ELEMENTS_ARE_NOT_NULL = "Some elements are not null";
+    private static final String SOME_ELEMENTS_ARE_NULL = "Has some null elements";
+    private static final String SOME_ELEMENTS_ARE_NOT_NULL = "Has some non-null element";
 
     // LONG
 
@@ -26,13 +26,13 @@ public final class MyArrays {
     }
 
     public static long[] requireEmpty(final long[] array) {
-	return requireEmpty(array, ARRAY_IS_NOT_EMPTY);
+	return requireEmpty(array, null);
     }
 
-    public static long[] requireEmpty(final long[] array, final String message) {
+    public static long[] requireEmpty(final long[] array, final String parameter) {
 	if (empty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_NOT_EMPTY, parameter);
     }
 
     //
@@ -42,13 +42,13 @@ public final class MyArrays {
     }
 
     public static long[] requireNonEmpty(final long[] array) {
-	return requireNonEmpty(array, ARRAY_IS_EMPTY);
+	return requireNonEmpty(array, null);
     }
 
-    public static long[] requireNonEmpty(final long[] array, final String message) {
+    public static long[] requireNonEmpty(final long[] array, final String parameter) {
 	if (nonEmpty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_EMPTY, parameter);
     }
 
     //
@@ -59,13 +59,13 @@ public final class MyArrays {
     }
 
     public static long[] requireNonZeroElements(final long[] array) {
-	return requireNonZeroElements(array, SOME_ELEMENTS_ARE_ZEROED);
+	return requireNonZeroElements(array, null);
     }
 
-    public static long[] requireNonZeroElements(final long[] array, final String message) {
+    public static long[] requireNonZeroElements(final long[] array, final String parameter) {
 	if (nonZeroElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_ZEROED, parameter);
     }
 
     //
@@ -76,13 +76,13 @@ public final class MyArrays {
     }
 
     public static long[] requireZeroElements(final long[] array) {
-	return requireZeroElements(array, SOME_ELEMENTS_ARE_NOT_ZEROED);
+	return requireZeroElements(array, null);
     }
 
-    public static long[] requireZeroElements(final long[] array, final String message) {
+    public static long[] requireZeroElements(final long[] array, final String parameter) {
 	if (zeroElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_ZEROED, parameter);
     }
 
     // INT
@@ -92,13 +92,13 @@ public final class MyArrays {
     }
 
     public static int[] requireEmpty(final int[] array) {
-	return requireEmpty(array, ARRAY_IS_NOT_EMPTY);
+	return requireEmpty(array, null);
     }
 
-    public static int[] requireEmpty(final int[] array, final String message) {
+    public static int[] requireEmpty(final int[] array, final String parameter) {
 	if (empty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_NOT_EMPTY, parameter);
     }
 
     //
@@ -108,13 +108,13 @@ public final class MyArrays {
     }
 
     public static int[] requireNonEmpty(final int[] array) {
-	return requireNonEmpty(array, ARRAY_IS_EMPTY);
+	return requireNonEmpty(array, null);
     }
 
-    public static int[] requireNonEmpty(final int[] array, final String message) {
+    public static int[] requireNonEmpty(final int[] array, final String parameter) {
 	if (nonEmpty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_EMPTY, parameter);
     }
 
     //
@@ -125,13 +125,13 @@ public final class MyArrays {
     }
 
     public static int[] requireNonZeroElements(final int[] array) {
-	return requireNonZeroElements(array, SOME_ELEMENTS_ARE_ZEROED);
+	return requireNonZeroElements(array, null);
     }
 
-    public static int[] requireNonZeroElements(final int[] array, final String message) {
+    public static int[] requireNonZeroElements(final int[] array, final String parameter) {
 	if (nonZeroElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_ZEROED, parameter);
     }
 
     //
@@ -142,13 +142,13 @@ public final class MyArrays {
     }
 
     public static int[] requireZeroElements(final int[] array) {
-	return requireZeroElements(array, SOME_ELEMENTS_ARE_NOT_ZEROED);
+	return requireZeroElements(array, null);
     }
 
-    public static int[] requireZeroElements(final int[] array, final String message) {
+    public static int[] requireZeroElements(final int[] array, final String parameter) {
 	if (zeroElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_ZEROED, parameter);
     }
 
     // DOUBLE
@@ -158,13 +158,13 @@ public final class MyArrays {
     }
 
     public static double[] requireEmpty(final double[] array) {
-	return requireEmpty(array, ARRAY_IS_NOT_EMPTY);
+	return requireEmpty(array, null);
     }
 
-    public static double[] requireEmpty(final double[] array, final String message) {
+    public static double[] requireEmpty(final double[] array, final String parameter) {
 	if (empty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_NOT_EMPTY, parameter);
     }
 
     //
@@ -174,13 +174,13 @@ public final class MyArrays {
     }
 
     public static double[] requireNonEmpty(final double[] array) {
-	return requireNonEmpty(array, ARRAY_IS_EMPTY);
+	return requireNonEmpty(array, null);
     }
 
-    public static double[] requireNonEmpty(final double[] array, final String message) {
+    public static double[] requireNonEmpty(final double[] array, final String parameter) {
 	if (nonEmpty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_EMPTY, parameter);
     }
 
     //
@@ -191,13 +191,13 @@ public final class MyArrays {
     }
 
     public static double[] requireNonZeroElements(final double[] array) {
-	return requireNonZeroElements(array, SOME_ELEMENTS_ARE_ZEROED);
+	return requireNonZeroElements(array, null);
     }
 
-    public static double[] requireNonZeroElements(final double[] array, final String message) {
+    public static double[] requireNonZeroElements(final double[] array, final String parameter) {
 	if (nonZeroElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_ZEROED, parameter);
     }
 
     //
@@ -208,13 +208,13 @@ public final class MyArrays {
     }
 
     public static double[] requireZeroElements(final double[] array) {
-	return requireZeroElements(array, SOME_ELEMENTS_ARE_NOT_ZEROED);
+	return requireZeroElements(array, null);
     }
 
-    public static double[] requireZeroElements(final double[] array, final String message) {
+    public static double[] requireZeroElements(final double[] array, final String parameter) {
 	if (zeroElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_ZEROED, parameter);
     }
 
     // T
@@ -224,13 +224,13 @@ public final class MyArrays {
     }
 
     public static <T> T[] requireEmpty(final T[] array) {
-	return requireEmpty(array, ARRAY_IS_NOT_EMPTY);
+	return requireEmpty(array, null);
     }
 
-    public static <T> T[] requireEmpty(final T[] array, final String message) {
+    public static <T> T[] requireEmpty(final T[] array, final String parameter) {
 	if (empty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_NOT_EMPTY, parameter);
     }
 
     //
@@ -240,13 +240,13 @@ public final class MyArrays {
     }
 
     public static <T> T[] requireNonEmpty(final T[] array) {
-	return requireNonEmpty(array, ARRAY_IS_EMPTY);
+	return requireNonEmpty(array, null);
     }
 
-    public static <T> T[] requireNonEmpty(final T[] array, final String message) {
+    public static <T> T[] requireNonEmpty(final T[] array, final String parameter) {
 	if (nonEmpty(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(ARRAY_IS_EMPTY, parameter);
     }
 
     //
@@ -257,13 +257,13 @@ public final class MyArrays {
     }
 
     public static <T> T[] requireNonNullElements(final T[] array) {
-	return requireNonNullElements(array, SOME_ELEMENTS_ARE_NULL);
+	return requireNonNullElements(array, null);
     }
 
-    public static <T> T[] requireNonNullElements(final T[] array, final String message) {
+    public static <T> T[] requireNonNullElements(final T[] array, final String parameter) {
 	if (nonNullElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, parameter);
     }
 
     //
@@ -274,12 +274,12 @@ public final class MyArrays {
     }
 
     public static <T> T[] requireNullElements(final T[] array) {
-	return requireNullElements(array, SOME_ELEMENTS_ARE_NOT_NULL);
+	return requireNullElements(array, null);
     }
 
-    public static <T> T[] requireNullElements(final T[] array, final String message) {
+    public static <T> T[] requireNullElements(final T[] array, final String parameter) {
 	if (nullElements(array)) //
 	    return array;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, parameter);
     }
 }

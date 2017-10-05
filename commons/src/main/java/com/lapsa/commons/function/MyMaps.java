@@ -9,8 +9,8 @@ public final class MyMaps {
     private MyMaps() {
     }
 
-    private static final String MAP_IS_EMPTY = "Map is empty";
-    private static final String MAP_IS_NOT_EMPTY = "Map is not empty";
+    private static final String MAP_IS_EMPTY = "Is empty";
+    private static final String MAP_IS_NOT_EMPTY = "Is not empty";
 
     // MAP
 
@@ -19,13 +19,13 @@ public final class MyMaps {
     }
 
     public static <K, V, M extends Map<K, V>> M requireEmpty(final M map) {
-	return requireEmpty(map, MAP_IS_NOT_EMPTY);
+	return requireEmpty(map, null);
     }
 
-    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map, final String message) {
+    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map, final String par) {
 	if (empty(map)) //
 	    return map;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(MAP_IS_NOT_EMPTY, par);
     }
 
     //
@@ -35,13 +35,13 @@ public final class MyMaps {
     }
 
     public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map) {
-	return requireNonEmpty(map, MAP_IS_EMPTY);
+	return requireNonEmpty(map, null);
     }
 
-    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map, final String message) {
+    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map, final String par) {
 	if (nonEmpty(map)) //
 	    return map;
-	throw new IllegalArgumentException(message);
+	throw Exceptions.illegalArgumentException(MAP_IS_EMPTY, par);
     }
 
     //
