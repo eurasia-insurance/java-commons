@@ -29,7 +29,7 @@ public final class MyNumbers {
     public static <T extends Number> T requireNonZero(final T number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static <T extends Number> T requireZero(final T number) {
@@ -39,7 +39,7 @@ public final class MyNumbers {
     public static <T extends Number> T requireZero(final T number, String par) {
 	if (zero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     // long
@@ -59,7 +59,7 @@ public final class MyNumbers {
     public static long requireNonZero(final long number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static long requireZero(final long number) {
@@ -69,7 +69,7 @@ public final class MyNumbers {
     public static long requireZero(final long number, String par) {
 	if (zero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     // double
@@ -89,7 +89,7 @@ public final class MyNumbers {
     public static double requireNonZero(final double number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static double requireZero(final double number) {
@@ -99,7 +99,7 @@ public final class MyNumbers {
     public static double requireZero(final double number, String par) {
 	if (zero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     // int
@@ -119,7 +119,7 @@ public final class MyNumbers {
     public static int requireNonZero(final int number, String par) {
 	if (nonZero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static int requireZero(final int number) {
@@ -129,7 +129,7 @@ public final class MyNumbers {
     public static int requireZero(final int number, String par) {
 	if (zero(number))
 	    return number;
-	throw Exceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
 }

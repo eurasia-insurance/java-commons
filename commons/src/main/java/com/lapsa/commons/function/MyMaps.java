@@ -25,7 +25,7 @@ public final class MyMaps {
     public static <K, V, M extends Map<K, V>> M requireEmpty(final M map, final String par) {
 	if (empty(map)) //
 	    return map;
-	throw Exceptions.illegalArgumentException(MAP_IS_NOT_EMPTY, par);
+	throw MyExceptions.illegalArgumentException(MAP_IS_NOT_EMPTY, par);
     }
 
     //
@@ -41,7 +41,7 @@ public final class MyMaps {
     public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map, final String par) {
 	if (nonEmpty(map)) //
 	    return map;
-	throw Exceptions.illegalArgumentException(MAP_IS_EMPTY, par);
+	throw MyExceptions.illegalArgumentException(MAP_IS_EMPTY, par);
     }
 
     //

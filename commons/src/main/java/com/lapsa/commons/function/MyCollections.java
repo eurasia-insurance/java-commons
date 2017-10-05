@@ -26,7 +26,7 @@ public final class MyCollections {
     public static <T, C extends Collection<T>> C requireEmpty(final C collection, final String par) {
 	if (empty(collection)) //
 	    return collection;
-	throw Exceptions.illegalArgumentException(COLLECTION_IS_NOT_EMPTY, par);
+	throw MyExceptions.illegalArgumentException(COLLECTION_IS_NOT_EMPTY, par);
     }
 
     //
@@ -42,7 +42,7 @@ public final class MyCollections {
     public static <T, C extends Collection<T>> C requireNonEmpty(final C collection, final String par) {
 	if (nonEmpty(collection)) //
 	    return collection;
-	throw Exceptions.illegalArgumentException(COLLECTION_IS_EMPTY, par);
+	throw MyExceptions.illegalArgumentException(COLLECTION_IS_EMPTY, par);
     }
 
     //
@@ -60,7 +60,7 @@ public final class MyCollections {
     public static <T, C extends Collection<T>> C requireNonNullElements(final C collection, final String par) {
 	if (nonNullElements(collection)) //
 	    return collection;
-	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, par);
+	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, par);
     }
 
     //
@@ -78,7 +78,7 @@ public final class MyCollections {
     public static <T, C extends Collection<T>> C requireNullElements(final C collection, final String par) {
 	if (nullElements(collection)) //
 	    return collection;
-	throw Exceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);
+	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);
     }
 
 }

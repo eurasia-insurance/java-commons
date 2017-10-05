@@ -35,7 +35,7 @@ public final class MyStrings {
 	try {
 	    new URL(requireNonEmpty(url));
 	} catch (MalformedURLException | IllegalArgumentException e) {
-	    throw Exceptions.illegalArgumentException(NOT_VALID_URL, par, String.valueOf(url), e);
+	    throw MyExceptions.illegalArgumentException(NOT_VALID_URL, par, String.valueOf(url), e);
 	}
 	return url;
     }
@@ -54,7 +54,7 @@ public final class MyStrings {
     public static String requireEmpty(final String string, String par) {
 	if (empty(string))
 	    return string;
-	throw Exceptions.illegalArgumentException(NON_EMPTY_STRING, par, String.valueOf(string));
+	throw MyExceptions.illegalArgumentException(NON_EMPTY_STRING, par, String.valueOf(string));
     }
 
     //
@@ -71,7 +71,7 @@ public final class MyStrings {
     public static String requireNonEmpty(final String string, String par) {
 	if (nonEmpty(string))
 	    return string;
-	throw Exceptions.illegalArgumentException(EMPTY_STRING, par, String.valueOf(string));
+	throw MyExceptions.illegalArgumentException(EMPTY_STRING, par, String.valueOf(string));
     }
 
     //

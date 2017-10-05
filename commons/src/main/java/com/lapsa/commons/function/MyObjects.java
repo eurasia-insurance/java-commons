@@ -23,7 +23,7 @@ public final class MyObjects {
     public static <T> T requireNonNull(T obj, String par) {
 	if (nonNull(obj))
 	    return obj;
-	throw Exceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
+	throw MyExceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
     }
 
     //
@@ -39,7 +39,7 @@ public final class MyObjects {
     public static <T> T requireNull(T obj, String par) {
 	if (isNull(obj))
 	    return obj;
-	throw Exceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
+	throw MyExceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
     }
 
     //
@@ -57,7 +57,7 @@ public final class MyObjects {
     public static final <T> T requireA(T obj, Class<?> clazz, String par) {
 	if (isA(obj, clazz))
 	    return obj;
-	throw Exceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
+	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
     //
@@ -74,7 +74,7 @@ public final class MyObjects {
     public static final <T> T requireNotA(T obj, Class<?> clazz, String par) {
 	if (isNotA(obj, clazz))
 	    return obj;
-	throw Exceptions.illegalArgumentException("Is a " + clazz.getName(), par);
+	throw MyExceptions.illegalArgumentException("Is a " + clazz.getName(), par);
     }
 
     //

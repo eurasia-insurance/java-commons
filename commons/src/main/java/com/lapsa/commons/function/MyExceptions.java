@@ -2,9 +2,9 @@ package com.lapsa.commons.function;
 
 import java.util.StringJoiner;
 
-final class Exceptions {
+final class MyExceptions {
 
-    private Exceptions() {
+    private MyExceptions() {
     }
 
     static IllegalArgumentException illegalArgumentException(final String message, final String par,
