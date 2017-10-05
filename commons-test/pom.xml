@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.lapsa.lapsa.commons</groupId>
+		<groupId>tech.lapsa.lapsa</groupId>
 		<artifactId>lapsa-commons-root</artifactId>
 		<version>2.2-SNAPSHOT</version>
 	</parent>
@@ -15,7 +15,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.lapsa.lapsa.commons</groupId>
+			<groupId>tech.lapsa.lapsa</groupId>
 			<artifactId>lapsa-commons</artifactId>
 			<scope>compile</scope>
 		</dependency>
