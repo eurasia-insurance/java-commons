@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>lapsa-commons-test</artifactId>
+	<artifactId>java-commons-test</artifactId>
 	<packaging>jar</packaging>
 
 	<name>Java SE Lib : Commons : Commons tests</name>
@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>tech.lapsa.java</groupId>
-			<artifactId>lapsa-commons</artifactId>
+			<artifactId>java-commons</artifactId>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
