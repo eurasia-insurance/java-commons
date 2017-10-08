@@ -3,15 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>tech.lapsa.lapsa</groupId>
+		<groupId>tech.lapsa.java</groupId>
 		<artifactId>lapsa-commons-root</artifactId>
-		<version>2.2-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>lapsa-commons</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Lapsa : Lapsa commons : Commons</name>
+	<name>Java SE Lib : Commons : Commons</name>
 
 	<dependencies>
 		<!-- test -->
