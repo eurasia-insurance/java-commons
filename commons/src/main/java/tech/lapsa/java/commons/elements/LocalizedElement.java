@@ -1,7 +1,7 @@
-package com.lapsa.commons.elements;
+package tech.lapsa.java.commons.elements;
 
-import static com.lapsa.commons.function.MyCollectors.*;
-import static com.lapsa.commons.function.MyMaps.*;
+import static tech.lapsa.java.commons.function.MyCollectors.*;
+import static tech.lapsa.java.commons.function.MyMaps.*;
 
 import java.util.Locale;
 import java.util.Map;
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
 
-import com.lapsa.commons.function.MyObjects;
+import tech.lapsa.java.commons.function.MyObjects;
 
 public interface LocalizedElement extends Localized {
 

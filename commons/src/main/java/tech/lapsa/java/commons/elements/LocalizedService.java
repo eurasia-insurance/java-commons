@@ -1,4 +1,4 @@
-package com.lapsa.commons.elements;
+package tech.lapsa.java.commons.elements;
 
 import java.util.Locale;
 

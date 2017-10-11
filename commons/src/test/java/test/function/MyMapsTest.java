@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.lapsa.commons.function.MyMaps;
+import tech.lapsa.java.commons.function.MyMaps;
 
 public class MyMapsTest {
 

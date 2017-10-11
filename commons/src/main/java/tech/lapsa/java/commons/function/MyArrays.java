@@ -1,4 +1,4 @@
-package com.lapsa.commons.function;
+package tech.lapsa.java.commons.function;
 
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
