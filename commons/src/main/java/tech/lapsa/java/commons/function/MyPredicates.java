@@ -1,4 +1,4 @@
-package com.lapsa.commons.function;
+package tech.lapsa.java.commons.function;
 
 import java.util.function.DoublePredicate;
 import java.util.function.IntPredicate;

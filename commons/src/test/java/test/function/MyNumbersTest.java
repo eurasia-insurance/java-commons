@@ -5,7 +5,7 @@ import static test.function.Exceptions.*;
 
 import org.junit.Test;
 
-import com.lapsa.commons.function.MyNumbers;
+import tech.lapsa.java.commons.function.MyNumbers;
 
 public class MyNumbersTest {
 
