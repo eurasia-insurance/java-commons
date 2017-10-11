@@ -1,4 +1,4 @@
-package tech.lapsa.java.commons.elements;
+package tech.lapsa.java.commons.localization;
 
 public interface ListingService<T> {
 
