@@ -12,8 +12,8 @@ import java.util.stream.Stream;
 import org.junit.Assert;
 import org.junit.Test;
 
-import tech.lapsa.java.commons.elements.Localized;
-import tech.lapsa.java.commons.elements.LocalizedElement;
+import tech.lapsa.java.commons.localization.Localized;
+import tech.lapsa.java.commons.localization.LocalizedElement;
 
 public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
 

@@ -1,4 +1,4 @@
-package tech.lapsa.java.commons.elements;
+package tech.lapsa.java.commons.localization;
 
 import static tech.lapsa.java.commons.function.MyCollectors.*;
 import static tech.lapsa.java.commons.function.MyMaps.*;
