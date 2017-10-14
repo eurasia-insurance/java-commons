@@ -22,8 +22,8 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
     public static final Locale LOCALE_KAZAKH = Locale.forLanguageTag("kk");
 
     private final T[] values;
-    private final Locale locale;
-    private final Class<T> clazz;
+    protected final Locale locale;
+    protected final Class<T> clazz;
 
     protected ElementsLocalizationTest(T[] values, Class<T> clazz, Locale locale) {
 	this.values = values;
@@ -82,5 +82,9 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
 		return value;
 	}
 	return null;
+    }
+    
+    protected Stream<T> stream() {
+	return Stream.of(values);
     }
 }
