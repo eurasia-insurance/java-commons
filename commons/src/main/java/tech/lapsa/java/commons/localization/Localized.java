@@ -5,78 +5,78 @@ import java.util.function.Function;
 
 public interface Localized {
 
-    enum DisplayNameVariant {
+    enum LocalizationVariant {
 	NORMAL, FULL, SHORT
     }
 
     //
 
-    default String displayName(DisplayNameVariant variant) {
-	return displayName(variant, Locale.getDefault());
+    default String localized(LocalizationVariant variant) {
+	return localized(variant, Locale.getDefault());
     }
 
-    String displayName(DisplayNameVariant variant, Locale locale);
+    String localized(LocalizationVariant variant, Locale locale);
 
     //
 
-    default String displayName() {
-	return displayName(Localized.DisplayNameVariant.NORMAL, Locale.getDefault());
+    default String regular() {
+	return localized(Localized.LocalizationVariant.NORMAL, Locale.getDefault());
     }
 
-    default String displayNameFull() {
-	return displayName(Localized.DisplayNameVariant.FULL, Locale.getDefault());
+    default String full() {
+	return localized(Localized.LocalizationVariant.FULL, Locale.getDefault());
     }
 
-    default String displayNameShort() {
-	return displayName(Localized.DisplayNameVariant.SHORT, Locale.getDefault());
-    }
-
-    //
-
-    default String displayName(final Locale locale) {
-	return displayName(DisplayNameVariant.NORMAL, locale);
-    }
-
-    default String displayNameFull(final Locale locale) {
-	return displayName(DisplayNameVariant.FULL, locale);
-    }
-
-    default String displayNameShort(final Locale locale) {
-	return displayName(DisplayNameVariant.SHORT, locale);
+    default String few() {
+	return localized(Localized.LocalizationVariant.SHORT, Locale.getDefault());
     }
 
     //
 
-    public static Function<? super Localized, ? extends String> toDisplayNameMapper(final DisplayNameVariant variant,
+    default String regular(final Locale locale) {
+	return localized(LocalizationVariant.NORMAL, locale);
+    }
+
+    default String full(final Locale locale) {
+	return localized(LocalizationVariant.FULL, locale);
+    }
+
+    default String few(final Locale locale) {
+	return localized(LocalizationVariant.SHORT, locale);
+    }
+
+    //
+
+    public static Function<? super Localized, ? extends String> toLocalizedMapper(final LocalizationVariant variant,
 	    final Locale locale) {
-	return x -> x.displayName(variant, locale);
+	return x -> x.localized(variant, locale);
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameMapper(final DisplayNameVariant variant) {
-	return x -> x.displayName(variant);
+    public static Function<? super Localized, ? extends String> toLocalizedMapper(final LocalizationVariant variant) {
+	return x -> x.localized(variant);
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameFullMapper(final Locale locale) {
-	return x -> x.displayNameFull(locale);
+    public static Function<? super Localized, ? extends String> toFullMapper(final Locale locale) {
+	return x -> x.full(locale);
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameShortMapper(final Locale locale) {
-	return x -> x.displayNameShort(locale);
+    public static Function<? super Localized, ? extends String> toFewMapper(final Locale locale) {
+	return x -> x.few(locale);
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameMapper(final Locale locale) {
-	return x -> x.displayName(locale);
+    public static Function<? super Localized, ? extends String> toRegularMapper(final Locale locale) {
+	return x -> x.regular(locale);
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameFullMapper() {
-	return x -> x.displayNameFull();
+    public static Function<? super Localized, ? extends String> toFullMapper() {
+	return x -> x.full();
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameShortMapper() {
-	return x -> x.displayNameShort();
+    public static Function<? super Localized, ? extends String> toFewMapper() {
+	return x -> x.few();
     }
 
-    public static Function<? super Localized, ? extends String> toDisplayNameMapper() {
-	return x -> x.displayName();
+    public static Function<? super Localized, ? extends String> toRegularMapper() {
+	return x -> x.regular();
     }
 }

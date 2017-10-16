@@ -41,8 +41,8 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
     @Test
     public void testDisplayNames() {
 	Stream.of(values) //
-		.flatMap(x -> Stream.of(Localized.DisplayNameVariant.values()) //
-			.map(y -> x.displayName(y, locale)))
+		.flatMap(x -> Stream.of(Localized.LocalizationVariant.values()) //
+			.map(y -> x.localized(y, locale)))
 		.forEach(Assert::assertNotNull);
     }
 
