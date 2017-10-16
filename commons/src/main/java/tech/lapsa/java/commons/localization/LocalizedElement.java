@@ -23,16 +23,16 @@ public interface LocalizedElement extends Localized {
     //
 
     @Override
-    default String displayName(final DisplayNameVariant variant, final Locale locale) {
+    default String localized(final LocalizationVariant variant, final Locale locale) {
 	MyObjects.requireNonNull(variant, "Display name variant must be provided");
 	MyObjects.requireNonNull(locale, "Locale must be provided");
 
-	Builder<DisplayNameVariant> builder = Stream.<DisplayNameVariant> builder() //
+	Builder<LocalizationVariant> builder = Stream.<LocalizationVariant> builder() //
 		.add(variant);
 	switch (variant) {
 	case FULL:
 	case SHORT:
-	    builder.accept(DisplayNameVariant.NORMAL);
+	    builder.accept(LocalizationVariant.NORMAL);
 	    break;
 	default:
 	}
@@ -54,14 +54,14 @@ public interface LocalizedElement extends Localized {
 
 	//
 
-	private static Map<DisplayNameVariant, String> KEY_PATTERNS = Stream.of( //
-		entry(DisplayNameVariant.FULL, "%1$s.%2$s.full"), //
-		entry(DisplayNameVariant.SHORT, "%1$s.%2$s.short"), //
-		entry(DisplayNameVariant.NORMAL, "%1$s.%2$s") //
+	private static Map<LocalizationVariant, String> KEY_PATTERNS = Stream.of( //
+		entry(LocalizationVariant.FULL, "%1$s.%2$s.full"), //
+		entry(LocalizationVariant.SHORT, "%1$s.%2$s.short"), //
+		entry(LocalizationVariant.NORMAL, "%1$s.%2$s") //
 	).collect(unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
 
 	private static <T extends LocalizedElement> String getResourceKey(final T entity,
-		final DisplayNameVariant variant) {
+		final LocalizationVariant variant) {
 	    return String.format(ResourceBundleUtil.KEY_PATTERNS.get(variant), //
 		    entity.getClass().getName(), //
 		    entity.name());
@@ -88,7 +88,7 @@ public interface LocalizedElement extends Localized {
 	//
 
 	private static <T extends LocalizedElement> String getLocalized(final T entity,
-		final DisplayNameVariant variant, final Locale locale) {
+		final LocalizationVariant variant, final Locale locale) {
 	    ResourceBundle bundle = getCachedResourceBundle(entity, locale);
 	    String key = getResourceKey(entity, variant);
 	    try {
