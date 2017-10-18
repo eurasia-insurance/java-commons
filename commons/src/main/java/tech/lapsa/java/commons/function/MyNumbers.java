@@ -134,8 +134,12 @@ public final class MyNumbers {
 
     //
 
+    public static <N1 extends Number, N2 extends Number> boolean numbericEquals(N1 n1, N2 n2) {
+	return n1 != null && n2 != null && n1.doubleValue() == n2.doubleValue();
+    }
+
     public static <N extends Number> boolean equals(N n1, N n2) {
-	return n1 != null && n1.equals(n2);
+	return n1 != null && n2 != null && n1.equals(n2);
     }
 
 }

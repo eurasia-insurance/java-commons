@@ -156,4 +156,21 @@ public class MyNumbersTest {
 	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
     }
 
+    @Test
+    public void test_equals() {
+	final Integer i1 = 123;
+	final Integer i2 = 123;
+
+	assertTrue(MyNumbers.numbericEquals(i1, i2));
+
+	final Long j1 = null;
+	final Long j2 = 456L;
+
+	assertFalse(MyNumbers.numbericEquals(j1, j2));
+
+	final Double k1 = 100d;
+	final Byte k2 = 100;
+
+	assertTrue(MyNumbers.numbericEquals(k1, k2));
+    }
 }
