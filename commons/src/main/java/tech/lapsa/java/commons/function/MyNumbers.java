@@ -132,4 +132,10 @@ public final class MyNumbers {
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
+    //
+
+    public static <N extends Number> boolean equals(N n1, N n2) {
+	return n1 != null && n1.equals(n2);
+    }
+
 }
