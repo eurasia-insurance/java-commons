@@ -66,7 +66,7 @@ public final class MyTemporals {
 	    return value == null ? false : LocalDate.now().isEqual(toLocalDate(value));
 	}
 
-	default boolean isYsterday(T value) {
+	default boolean isYesterday(T value) {
 	    return value == null ? false : LocalDate.now().minusDays(1).isEqual(toLocalDate(value));
 	}
 
