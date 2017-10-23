@@ -78,13 +78,18 @@ public final class MyLogger {
 	    return this;
 	}
 
+	public MyLoggerBuilder withName(String name) {
+	    this.name = MyStrings.requireNonEmpty(name, "name");
+	    return this;
+	}
+
 	public MyLoggerBuilder withPackageNameOf(Class<?> clazz) {
 	    this.name = MyObjects.requireNonNull(clazz).getPackage().getName();
 	    return this;
 	}
 
 	public MyLoggerBuilder withPrefix(String prefix) {
-	    this.prefix = MyStrings.requireNonEmpty(prefix);
+	    this.prefix = MyStrings.requireNonEmpty(prefix) + " : ";
 	    return this;
 	}
 
