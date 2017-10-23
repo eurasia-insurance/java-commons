@@ -49,14 +49,13 @@ public final class MyObjects {
 	return obj != null && clazz.isAssignableFrom(obj.getClass());
     }
 
-    public static final <T> T requireA(T obj, Class<?> clazz) {
-	requireNonNull(clazz, "clazz");
+    public static final <T> T requireA(Object obj, Class<T> clazz) {
 	return requireA(obj, clazz, null);
     }
 
-    public static final <T> T requireA(T obj, Class<?> clazz, String par) {
+    public static final <T> T requireA(Object obj, Class<T> clazz, String par) {
 	if (isA(obj, clazz))
-	    return obj;
+	    return clazz.cast(obj);
 	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
@@ -67,7 +66,6 @@ public final class MyObjects {
     }
 
     public static final <T> T requireNotA(T obj, Class<?> clazz) {
-	requireNonNull(clazz);
 	return requireNotA(obj, clazz, null);
     }
 
@@ -80,6 +78,7 @@ public final class MyObjects {
     //
 
     public static final <T> Function<Object, T> cast(Class<T> clazz) {
+	requireNonNull(clazz, "clazz");
 	return clazz::cast;
     }
 
