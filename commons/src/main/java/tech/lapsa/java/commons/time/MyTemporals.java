@@ -4,79 +4,108 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import tech.lapsa.java.commons.function.MyObjects;
 
 public final class MyTemporals {
 
-    public static MyTemporals getInstance() {
-	return getInstance(ZoneId.systemDefault());
-    }
+    private final static MyTemporals DEFAULT = getInstance(ZoneId.systemDefault());
 
     public static MyTemporals getInstance(ZoneId zoneId) {
 	return new MyTemporals(MyObjects.requireNonNull(zoneId, "zoneId"));
     }
 
+    public static FromDate date() {
+	return DEFAULT.fromDate;
+    }
+
+    public static FromCalendar calendar() {
+	return DEFAULT.fromCalendar;
+    }
+
+    public static FromLocalDateTime localDateTime() {
+	return DEFAULT.fromLocalDateTime;
+    }
+
+    public static FromLocalDate localDate() {
+	return DEFAULT.fromLocalDate;
+    }
+
+    public static FromInstant instant() {
+	return DEFAULT.fromInstant;
+    }
+
     private final ZoneId zoneId;
-    private final DateUtil dateUtil;
-    private final LocalDateTimeUtil localDateTimeUtil;
-    private final LocalDateUtil localDateUtil;
-    private final InstantUtil instantUtil;
+    private final FromDate fromDate;
+    private final FromLocalDateTime fromLocalDateTime;
+    private final FromLocalDate fromLocalDate;
+    private final FromInstant fromInstant;
+    private final FromCalendar fromCalendar;
 
     private MyTemporals(ZoneId zoneId) {
 	this.zoneId = zoneId;
-	this.dateUtil = new DateUtil();
-	this.instantUtil = new InstantUtil();
-	this.localDateUtil = new LocalDateUtil();
-	this.localDateTimeUtil = new LocalDateTimeUtil();
+	this.fromDate = new FromDate();
+	this.fromInstant = new FromInstant();
+	this.fromLocalDate = new FromLocalDate();
+	this.fromLocalDateTime = new FromLocalDateTime();
+	this.fromCalendar = new FromCalendar();
     }
 
-    public DateUtil forDate() {
-	return dateUtil;
+    public FromDate forDate() {
+	return fromDate;
     }
 
-    public LocalDateTimeUtil forLocalDateTime() {
-	return localDateTimeUtil;
+    public FromLocalDateTime forLocalDateTime() {
+	return fromLocalDateTime;
     }
 
-    public LocalDateUtil forLocalDate() {
-	return localDateUtil;
+    public FromLocalDate forLocalDate() {
+	return fromLocalDate;
     }
 
-    public InstantUtil forInstance() {
-	return instantUtil;
+    public FromInstant forInstant() {
+	return fromInstant;
     }
 
-    public interface TemporalUtil<T> {
+    public abstract class AFromTemporal<T> {
 
-	LocalDate toLocalDate(T value);
+	public abstract LocalDate toLocalDate(T value);
 
-	Instant toInstant(T value);
+	public abstract Instant toInstant(T value);
 
-	LocalDateTime toLocalDateTime(T value);
+	public abstract LocalDateTime toLocalDateTime(T value);
 
-	T now();
+	public abstract T now();
 
-	default Date toDate(T value) {
+	public Calendar toCalendar(T value) {
+	    if (value == null)
+		return null;
+	    return GregorianCalendar.from(toInstant(value).atZone(zoneId));
+	}
+
+	public Date toDate(T value) {
 	    return value == null ? null : Date.from(toInstant(value));
 	}
 
-	default boolean isToday(T value) {
+	public boolean isToday(T value) {
 	    return value == null ? false : LocalDate.now().isEqual(toLocalDate(value));
 	}
 
-	default boolean isYesterday(T value) {
+	public boolean isYesterday(T value) {
 	    return value == null ? false : LocalDate.now().minusDays(1).isEqual(toLocalDate(value));
 	}
 
-	default boolean isTommorow(T value) {
+	public boolean isTommorow(T value) {
 	    return value == null ? false : LocalDate.now().plusDays(1).isEqual(toLocalDate(value));
 	}
     }
 
-    public final class InstantUtil implements TemporalUtil<Instant> {
-	private InstantUtil() {
+    public final class FromInstant extends AFromTemporal<Instant> {
+	private FromInstant() {
 	}
 
 	@Override
@@ -100,8 +129,8 @@ public final class MyTemporals {
 	}
     }
 
-    public final class LocalDateUtil implements TemporalUtil<LocalDate> {
-	private LocalDateUtil() {
+    public final class FromLocalDate extends AFromTemporal<LocalDate> {
+	private FromLocalDate() {
 	}
 
 	@Override
@@ -123,11 +152,10 @@ public final class MyTemporals {
 	public LocalDate now() {
 	    return LocalDate.now();
 	}
-
     }
 
-    public final class LocalDateTimeUtil implements TemporalUtil<LocalDateTime> {
-	private LocalDateTimeUtil() {
+    public final class FromLocalDateTime extends AFromTemporal<LocalDateTime> {
+	private FromLocalDateTime() {
 	}
 
 	@Override
@@ -151,8 +179,8 @@ public final class MyTemporals {
 	}
     }
 
-    public final class DateUtil implements TemporalUtil<Date> {
-	private DateUtil() {
+    public final class FromDate extends AFromTemporal<Date> {
+	private FromDate() {
 	}
 
 	@Override
@@ -173,6 +201,46 @@ public final class MyTemporals {
 	@Override
 	public Date now() {
 	    return new Date();
+	}
+
+	@Override
+	public Date toDate(Date value) {
+	    return value;
+	}
+    }
+
+    public final class FromCalendar extends AFromTemporal<Calendar> {
+	private FromCalendar() {
+	}
+
+	@Override
+	public LocalDate toLocalDate(Calendar value) {
+	    return value == null ? null : value.toInstant().atZone(zoneId).toLocalDate();
+	}
+
+	@Override
+	public Instant toInstant(Calendar value) {
+	    return value == null ? null : value.toInstant();
+	}
+
+	@Override
+	public LocalDateTime toLocalDateTime(Calendar value) {
+	    return value == null ? null : value.toInstant().atZone(zoneId).toLocalDateTime();
+	}
+
+	@Override
+	public Calendar now() {
+	    return Calendar.getInstance(TimeZone.getTimeZone(zoneId));
+	}
+
+	@Override
+	public Date toDate(Calendar value) {
+	    return value == null ? null : value.getTime();
+	}
+
+	@Override
+	public Calendar toCalendar(Calendar value) {
+	    return value;
 	}
     }
 }
