@@ -4,13 +4,16 @@ import org.junit.Test;
 
 import tech.lapsa.java.commons.logging.MyLogger;
 
-public class MyLoggingTest {
+public class MyLoggerTest {
 
     @Test
     public void basicTest() {
 	MyLogger l = MyLogger.newBuilder() //
 		.withPackageNameOf(this.getClass()) //
 		.withPrefix("QAZKOM") //
+		.withCAPS() //
+		.clearHandlers() //
+		.withPrefix("ZXC")
 		.build();
 
 	l.WARNING.log("TEST");
