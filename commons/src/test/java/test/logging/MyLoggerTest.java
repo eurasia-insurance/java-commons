@@ -10,10 +10,10 @@ public class MyLoggerTest {
     public void basicTest() {
 	MyLogger l = MyLogger.newBuilder() //
 		.withPackageNameOf(this.getClass()) //
-		.withPrefix("QAZKOM") //
-		.withCAPS() //
-		.clearHandlers() //
-		.withPrefix("ZXC")
+		.addWithPrefix("QAZKOM") //
+		.addWithCAPS() //
+		.clearHandler() //
+		.addWithPrefix("ZXC")
 		.build();
 
 	l.WARNING.log("TEST");
