@@ -1,5 +1,6 @@
 package tech.lapsa.java.commons.logging;
 
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -9,11 +10,12 @@ import tech.lapsa.java.commons.function.MyStrings;
 public final class MyLogger {
 
     private final Logger logger;
-    private final String prefix;
+    private Function<String, String> handler;
 
-    private MyLogger(Logger logger, String prefix) {
+    private MyLogger(Logger logger, Function<String, String> handler) {
 	this.logger = MyObjects.requireNonNull(logger, "logger");
-	this.prefix = MyObjects.isNull(prefix) ? "" : prefix;
+	this.handler = MyObjects.requireNonNull(handler, "handler");
+
     }
 
     public final class MyLevel {
@@ -24,22 +26,27 @@ public final class MyLogger {
 	}
 
 	public MyLogger log(String message) {
-	    logger.log(level, prefix + message);
+	    logger.log(level, handler.apply(message));
 	    return MyLogger.this;
 	}
 
 	public MyLogger log(String format, Object... args) {
-	    logger.log(level, prefix + String.format(format, args));
+	    logger.log(level, handler.apply(String.format(format, args)));
 	    return MyLogger.this;
 	}
 
 	public MyLogger log(String message, Throwable cause) {
-	    logger.log(level, prefix + message, cause);
+	    logger.log(level, handler.apply(message), cause);
+	    return MyLogger.this;
+	}
+
+	public MyLogger log(Throwable cause) {
+	    logger.log(level, handler.apply(cause.getMessage()), cause);
 	    return MyLogger.this;
 	}
 
 	public MyLogger log(Throwable cause, String format, Object... args) {
-	    logger.log(level, prefix + String.format(format, args), cause);
+	    logger.log(level, handler.apply(String.format(format, args)), cause);
 	    return MyLogger.this;
 	}
     }
@@ -63,7 +70,8 @@ public final class MyLogger {
     public static final class MyLoggerBuilder {
 
 	private String name;
-	private String prefix = null;
+
+	private Function<String, String> handler = x -> x;
 
 	private MyLoggerBuilder() {
 	}
@@ -89,14 +97,24 @@ public final class MyLogger {
 	}
 
 	public MyLoggerBuilder withPrefix(String prefix) {
-	    this.prefix = MyStrings.requireNonEmpty(prefix) + " : ";
+	    MyStrings.requireNonEmpty(prefix);
+	    handler = handler.andThen(x -> prefix + " : " + x);
+	    return this;
+	}
+
+	public MyLoggerBuilder withCAPS() {
+	    handler = handler.andThen(String::toUpperCase);
+	    return this;
+	}
+
+	public MyLoggerBuilder clearHandlers() {
+	    handler = x -> x;
 	    return this;
 	}
 
 	public MyLogger build() {
 	    Logger logger = Logger.getLogger(MyStrings.requireNonEmpty(name));
-	    return new MyLogger(logger, prefix);
+	    return new MyLogger(logger, handler);
 	}
-
     }
 }
