@@ -1,6 +1,7 @@
 package tech.lapsa.java.commons.logging;
 
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -10,11 +11,12 @@ import tech.lapsa.java.commons.function.MyStrings;
 public final class MyLogger {
 
     private final Logger logger;
-    private Function<String, String> handler;
+    private final UnaryOperator<String> handler;
 
     private MyLogger(Logger logger, Function<String, String> handler) {
 	this.logger = MyObjects.requireNonNull(logger, "logger");
-	this.handler = MyObjects.requireNonNull(handler, "handler");
+	MyObjects.requireNonNull(handler, "handler");
+	this.handler = handler::apply;
 
     }
 
