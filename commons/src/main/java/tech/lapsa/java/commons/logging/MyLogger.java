@@ -36,7 +36,8 @@ public final class MyLogger {
 	}
 
 	public MyLogger log(Throwable thrown, String message) {
-	    return log(thrown, message);
+	    logger.log(level, handler.apply(message), thrown);
+	    return MyLogger.this;
 	}
 
 	public MyLogger log(Throwable thrown) {
