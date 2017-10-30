@@ -1,9 +1,10 @@
 package tech.lapsa.java.commons.localization;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.function.Function;
 
-public interface Localized {
+public interface Localized extends Serializable {
 
     enum LocalizationVariant {
 	NORMAL, FULL, SHORT

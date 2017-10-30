@@ -10,6 +10,8 @@ import tech.lapsa.java.commons.function.MyOptionals;
 
 public class DetachedLocalized implements Localized {
 
+    private static final long serialVersionUID = 1L;
+
     private final Map<String, Map<LocalizationVariant, String>> cache;
 
     public DetachedLocalized(Localized localized, Locale... locales) {
