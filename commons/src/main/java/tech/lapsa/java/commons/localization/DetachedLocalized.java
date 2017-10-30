@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
 
+import tech.lapsa.java.commons.function.MyArrays;
+import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyOptionals;
 
 public class DetachedLocalized implements Localized {
@@ -15,6 +17,8 @@ public class DetachedLocalized implements Localized {
     private final Map<String, Map<LocalizationVariant, String>> cache;
 
     public DetachedLocalized(Localized localized, Locale... locales) {
+	MyObjects.requireNull(localized, "localized");
+	MyArrays.requireNonEmpty(locales, "locales");
 
 	class Entry {
 	    Entry(Locale locale, LocalizationVariant variant, String string) {
@@ -39,6 +43,8 @@ public class DetachedLocalized implements Localized {
 
     @Override
     public String localized(LocalizationVariant variant, Locale locale) {
+	MyObjects.requireNonNull(locale, "locale");
+	MyObjects.requireNonNull(variant, "variant");
 	return MyOptionals.of(cache) //
 		.map(x -> x.get(locale.getLanguage())) //
 		.map(x -> x.get(variant)) //
