@@ -47,6 +47,18 @@ public interface Localized {
 
     //
 
+    default Localized detached(Locale... locales) {
+	return new DetachedLocalized(this, locales);
+
+    }
+
+    default Localized detached() {
+	return new DetachedLocalized(this, Locale.getDefault());
+
+    }
+
+    //
+
     public static Function<? super Localized, ? extends String> toLocalizedMapper(final LocalizationVariant variant,
 	    final Locale locale) {
 	return x -> x.localized(variant, locale);
