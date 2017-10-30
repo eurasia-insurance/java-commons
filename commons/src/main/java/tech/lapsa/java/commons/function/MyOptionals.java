@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.OptionalInt;
+import java.util.OptionalLong;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -178,6 +181,28 @@ public final class MyOptionals {
 	return ofZero(Double.valueOf(optional));
     }
 
+    public static OptionalDouble ofDouble(final double optional) {
+	return MyNumbers.nonZero(optional) //
+		? OptionalDouble.of(optional) //
+		: OptionalDouble.empty();
+    }
+
+    public static OptionalDouble ofZeroDouble(final double optional) {
+	return OptionalDouble.of(optional);
+    }
+
+    public static OptionalDouble ofDouble(final Double optional) {
+	return (optional == null) //
+		? OptionalDouble.empty() //
+		: ofDouble(optional.doubleValue());
+    }
+
+    public static OptionalDouble ofZeroDouble(final Double optional) {
+	return (optional == null) //
+		? OptionalDouble.empty() //
+		: ofZeroDouble(optional.doubleValue());
+    }
+
     //
 
     public static Optional<Integer> of(final int optional) {
@@ -186,6 +211,28 @@ public final class MyOptionals {
 
     public static Optional<Integer> ofZero(final int optional) {
 	return ofZero(Integer.valueOf(optional));
+    }
+
+    public static OptionalInt ofInt(final int optional) {
+	return MyNumbers.nonZero(optional) //
+		? OptionalInt.of(optional) //
+		: OptionalInt.empty();
+    }
+
+    public static OptionalInt ofZeroInt(final int optional) {
+	return OptionalInt.of(optional);
+    }
+
+    public static OptionalInt ofInt(final Integer optional) {
+	return (optional == null) //
+		? OptionalInt.empty() //
+		: ofInt(optional.intValue());
+    }
+
+    public static OptionalInt ofZeroInt(final Integer optional) {
+	return (optional == null) //
+		? OptionalInt.empty() //
+		: ofZeroInt(optional.intValue());
     }
 
     //
@@ -197,4 +244,27 @@ public final class MyOptionals {
     public static Optional<Long> ofZero(final long optional) {
 	return ofZero(Long.valueOf(optional));
     }
+
+    public static OptionalLong ofInt(final long optional) {
+	return MyNumbers.nonZero(optional) //
+		? OptionalLong.of(optional) //
+		: OptionalLong.empty();
+    }
+
+    public static OptionalLong ofZeroLong(final long optional) {
+	return OptionalLong.of(optional);
+    }
+
+    public static OptionalLong ofLong(final Long optional) {
+	return (optional == null) //
+		? OptionalLong.empty() //
+		: ofLong(optional.longValue());
+    }
+
+    public static OptionalLong ofZeroLong(final Long optional) {
+	return (optional == null) //
+		? OptionalLong.empty() //
+		: ofZeroLong(optional.longValue());
+    }
+
 }
