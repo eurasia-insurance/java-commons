@@ -1,6 +1,8 @@
 package tech.lapsa.java.commons.function;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Optional;
 
 public final class MyCollections {
 
@@ -79,6 +81,16 @@ public final class MyCollections {
 	if (nullElements(collection)) //
 	    return collection;
 	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);
+    }
+
+    //
+
+    public static <T> Optional<T> firstElement(Iterable<T> iterable) {
+	return MyOptionals.of(iterable) //
+		.map(Iterable::iterator) //
+		.filter(Iterator::hasNext) //
+		.map(Iterator::next);
+
     }
 
 }
