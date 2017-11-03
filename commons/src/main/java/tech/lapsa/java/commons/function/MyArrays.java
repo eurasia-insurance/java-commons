@@ -282,4 +282,56 @@ public final class MyArrays {
 	    return array;
 	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, parameter);
     }
+
+    //
+
+    public static byte[] reverse(byte[] array) {
+	MyObjects.requireNonNull(array, "array");
+	for (int i = 0; i < array.length / 2; i++) {
+	    byte t = array[i];
+	    array[i] = array[array.length - i - 1];
+	    array[array.length - i - 1] = t;
+	}
+	return array;
+    }
+
+    public static int[] reverse(int[] array) {
+	MyObjects.requireNonNull(array, "array");
+	for (int i = 0; i < array.length / 2; i++) {
+	    int t = array[i];
+	    array[i] = array[array.length - i - 1];
+	    array[array.length - i - 1] = t;
+	}
+	return array;
+    }
+
+    public static double[] reverse(double[] array) {
+	MyObjects.requireNonNull(array, "array");
+	for (int i = 0; i < array.length / 2; i++) {
+	    double t = array[i];
+	    array[i] = array[array.length - i - 1];
+	    array[array.length - i - 1] = t;
+	}
+	return array;
+    }
+
+    public static long[] reverse(long[] array) {
+	MyObjects.requireNonNull(array, "array");
+	for (int i = 0; i < array.length / 2; i++) {
+	    long t = array[i];
+	    array[i] = array[array.length - i - 1];
+	    array[array.length - i - 1] = t;
+	}
+	return array;
+    }
+
+    public static <T> T[] reverse(T[] array) {
+	MyObjects.requireNonNull(array, "array");
+	for (int i = 0; i < array.length / 2; i++) {
+	    T t = array[i];
+	    array[i] = array[array.length - i - 1];
+	    array[array.length - i - 1] = t;
+	}
+	return array;
+    }
 }
