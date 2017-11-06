@@ -14,48 +14,28 @@ public class MyNumbersTest {
 
 	final int ZERO = 0;
 	final int NON_ZERO = 1;
+	final int POSITIVE = 1;
+	final int NON_POSITIVE = -POSITIVE;
 
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
+	assertTrue(MyNumbers.positive(POSITIVE));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE, "par"));
 
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
+	assertFalse(MyNumbers.positive(NON_POSITIVE));
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
-    }
-
-    @Test
-    public void test_Integer() {
-
-	final Integer NULL = null;
-	final Integer ZERO = Integer.valueOf(0);
-	final Integer NON_ZERO = Integer.valueOf(-1);
-
-	assertTrue(MyNumbers.zero(NULL));
-	assertTrue(MyNumbers.zero(ZERO));
-	assertTrue(MyNumbers.nonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireZero(NULL));
-	unexpectException(() -> MyNumbers.requireZero(NULL, "par"));
-	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
-
-	assertFalse(MyNumbers.nonZero(NULL));
-	assertFalse(MyNumbers.nonZero(ZERO));
-	assertFalse(MyNumbers.zero(NON_ZERO));
-	expectException(() -> MyNumbers.requireNonZero(NULL), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(NULL, "par"), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -63,48 +43,28 @@ public class MyNumbersTest {
 
 	final double ZERO = 0d;
 	final double NON_ZERO = .00001d;
+	final double POSITIVE = .001d;
+	final double NON_POSITIVE = -POSITIVE;
 
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
+	assertTrue(MyNumbers.positive(POSITIVE));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE, "par"));
 
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
+	assertFalse(MyNumbers.positive(NON_POSITIVE));
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
-    }
-
-    @Test
-    public void test_Double() {
-
-	final Double NULL = null;
-	final Double ZERO = Double.valueOf(0d);
-	final Double NON_ZERO = Double.valueOf(0.02101d);
-
-	assertTrue(MyNumbers.zero(NULL));
-	assertTrue(MyNumbers.zero(ZERO));
-	assertTrue(MyNumbers.nonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireZero(NULL));
-	unexpectException(() -> MyNumbers.requireZero(NULL, "par"));
-	unexpectException(() -> MyNumbers.requireZero(ZERO));
-	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
-	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
-
-	assertFalse(MyNumbers.nonZero(NULL));
-	assertFalse(MyNumbers.nonZero(ZERO));
-	assertFalse(MyNumbers.zero(NON_ZERO));
-	expectException(() -> MyNumbers.requireNonZero(NULL), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(NULL, "par"), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
-	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE, "par"), IllegalArgumentException.class);
     }
 
     @Test
@@ -112,48 +72,64 @@ public class MyNumbersTest {
 
 	final long ZERO = 0L;
 	final long NON_ZERO = 1L;
+	final long POSITIVE = 1L;
+	final long NON_POSITIVE = -POSITIVE;
 
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
+	assertTrue(MyNumbers.positive(POSITIVE));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE, "par"));
 
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
+	assertFalse(MyNumbers.positive(NON_POSITIVE));
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE, "par"), IllegalArgumentException.class);
     }
 
     @Test
-    public void test_Long() {
+    public void test_Number() {
 
-	final Long NULL = null;
-	final Long ZERO = Long.valueOf(0L);
-	final Long NON_ZERO = Long.valueOf(1L);
+	final Number NULL = null;
+	final Number ZERO = Long.valueOf(0L);
+	final Number NON_ZERO = Long.valueOf(1L);
+	final Number POSITIVE = Double.valueOf(123123d);
+	final Number NON_POSITIVE = -POSITIVE.intValue();
 
 	assertTrue(MyNumbers.zero(NULL));
 	assertTrue(MyNumbers.zero(ZERO));
 	assertTrue(MyNumbers.nonZero(NON_ZERO));
+	assertTrue(MyNumbers.positive(POSITIVE));
 	unexpectException(() -> MyNumbers.requireZero(NULL));
 	unexpectException(() -> MyNumbers.requireZero(NULL, "par"));
 	unexpectException(() -> MyNumbers.requireZero(ZERO));
 	unexpectException(() -> MyNumbers.requireZero(ZERO, "par"));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO));
 	unexpectException(() -> MyNumbers.requireNonZero(NON_ZERO, "par"));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE));
+	unexpectException(() -> MyNumbers.requirePositive(POSITIVE, "par"));
 
 	assertFalse(MyNumbers.nonZero(NULL));
 	assertFalse(MyNumbers.nonZero(ZERO));
 	assertFalse(MyNumbers.zero(NON_ZERO));
+	assertFalse(MyNumbers.positive(NON_POSITIVE));
 	expectException(() -> MyNumbers.requireNonZero(NULL), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(NULL, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireNonZero(ZERO, "par"), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO), IllegalArgumentException.class);
 	expectException(() -> MyNumbers.requireZero(NON_ZERO, "par"), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE), IllegalArgumentException.class);
+	expectException(() -> MyNumbers.requirePositive(NON_POSITIVE, "par"), IllegalArgumentException.class);
     }
 
     @Test
