@@ -106,6 +106,9 @@ public class MySignatures {
 	    return sig.verify(digest);
 	}
 
+	public Signature getSignature() {
+	    return sig;
+	}
     }
 
     public static final class SigningSignature {
@@ -119,6 +122,10 @@ public class MySignatures {
 	public byte[] sign(byte[] data) throws SignatureException {
 	    sig.update(data);
 	    return sig.sign();
+	}
+	
+	public Signature getSignature() {
+	    return sig;
 	}
     }
 }
