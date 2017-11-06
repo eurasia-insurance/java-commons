@@ -13,23 +13,34 @@ public final class MyKeyStores {
     private MyKeyStores() {
     }
 
-    public static Optional<KeyStore> ofType(String storetype) {
-	if (MyStrings.empty(storetype))
-	    return Optional.empty();
-	return Optional.of(storetype)
-		.map(x -> {
-		    try {
-			return KeyStore.getInstance(storetype);
-		    } catch (KeyStoreException e) {
-			return null;
-		    }
-		});
+    public static enum StoreType {
+	JKS;
+
+	private StoreType() {
+	    getInstance(); // check
+	}
+
+	KeyStore getInstance() {
+	    try {
+		return KeyStore.getInstance(name());
+	    } catch (KeyStoreException e) {
+		throw new RuntimeException(e);
+	    }
+
+	}
     }
 
-    public static Optional<KeyStore> from(InputStream inputStream, String storetype, String storepass) {
+    public static Optional<KeyStore> ofType(StoreType storetype) {
+	if (MyObjects.isNull(storetype))
+	    return Optional.empty();
+	return Optional.of(storetype)
+		.map(StoreType::getInstance); //
+    }
+
+    public static Optional<KeyStore> from(InputStream inputStream, StoreType storetype, String storepass) {
 	if (MyObjects.isNull(inputStream))
 	    return Optional.empty();
-	if (MyStrings.empty(storetype))
+	if (MyObjects.isNull(storetype))
 	    return Optional.empty();
 	if (MyStrings.empty(storepass))
 	    return Optional.empty();

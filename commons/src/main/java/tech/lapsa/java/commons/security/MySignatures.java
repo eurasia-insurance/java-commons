@@ -9,30 +9,41 @@ import java.security.cert.X509Certificate;
 import java.util.Optional;
 
 import tech.lapsa.java.commons.function.MyObjects;
-import tech.lapsa.java.commons.function.MyStrings;
 
 public class MySignatures {
 
     private MySignatures() {
     }
 
-    public static Optional<Signature> ofAlgorithm(String algorithm) {
-	if (MyStrings.empty(algorithm))
-	    return Optional.empty();
-	return Optional.of(algorithm) //
-		.map(x -> {
-		    try {
-			return Signature.getInstance(algorithm);
-		    } catch (NoSuchAlgorithmException e) {
-			return null;
-		    }
-		});
+    public static enum Algorithm {
+	SHA1withRSA;
+
+	private Algorithm() {
+	    getInstance(); // check
+	}
+
+	Signature getInstance() {
+	    try {
+		return Signature.getInstance(name());
+	    } catch (NoSuchAlgorithmException e) {
+		throw new RuntimeException(e);
+	    }
+
+	}
+
     }
 
-    public static Optional<Signature> forSignature(PrivateKey key, String algorithm) {
+    public static Optional<Signature> ofAlgorithm(Algorithm algorithm) {
+	if (MyObjects.isNull(algorithm))
+	    return Optional.empty();
+	return Optional.of(algorithm) //
+		.map(Algorithm::getInstance);
+    }
+
+    public static Optional<Signature> forSignature(PrivateKey key, Algorithm algorithm) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
-	if (MyStrings.empty(algorithm))
+	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 
 	return ofAlgorithm(algorithm) //
@@ -46,10 +57,10 @@ public class MySignatures {
 		});
     }
 
-    public static Optional<Signature> forVerification(PublicKey key, String algorithm) {
+    public static Optional<Signature> forVerification(PublicKey key, Algorithm algorithm) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
-	if (MyStrings.empty(algorithm))
+	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 	return ofAlgorithm(algorithm) //
 		.map(x -> {
@@ -62,10 +73,10 @@ public class MySignatures {
 		});
     }
 
-    public static Optional<Signature> forVerification(X509Certificate cert, String algorithm) {
+    public static Optional<Signature> forVerification(X509Certificate cert, Algorithm algorithm) {
 	if (MyObjects.isNull(cert))
 	    return Optional.empty();
-	if (MyStrings.empty(algorithm))
+	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 	return ofAlgorithm(algorithm) //
 		.map(x -> {
