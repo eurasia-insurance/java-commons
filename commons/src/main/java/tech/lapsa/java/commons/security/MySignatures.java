@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.security.SignatureException;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
 
@@ -40,7 +41,7 @@ public class MySignatures {
 		.map(Algorithm::getInstance);
     }
 
-    public static Optional<Signature> forSignature(PrivateKey key, Algorithm algorithm) {
+    public static Optional<SigningSignature> forSignature(PrivateKey key, Algorithm algorithm) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
 	if (MyObjects.isNull(algorithm))
@@ -54,10 +55,11 @@ public class MySignatures {
 		    } catch (InvalidKeyException e) {
 			return null;
 		    }
-		});
+		}) //
+		.map(SigningSignature::new);
     }
 
-    public static Optional<Signature> forVerification(PublicKey key, Algorithm algorithm) {
+    public static Optional<VerifyingSignature> forVerification(PublicKey key, Algorithm algorithm) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
 	if (MyObjects.isNull(algorithm))
@@ -70,10 +72,11 @@ public class MySignatures {
 		    } catch (InvalidKeyException e) {
 			return null;
 		    }
-		});
+		}) //
+		.map(VerifyingSignature::new);
     }
 
-    public static Optional<Signature> forVerification(X509Certificate cert, Algorithm algorithm) {
+    public static Optional<VerifyingSignature> forVerification(X509Certificate cert, Algorithm algorithm) {
 	if (MyObjects.isNull(cert))
 	    return Optional.empty();
 	if (MyObjects.isNull(algorithm))
@@ -86,7 +89,36 @@ public class MySignatures {
 		    } catch (InvalidKeyException e) {
 			return null;
 		    }
-		});
+		}) //
+		.map(VerifyingSignature::new);
     }
 
+    public static final class VerifyingSignature {
+
+	private final Signature sig;
+
+	private VerifyingSignature(Signature sig) {
+	    this.sig = MyObjects.requireNonNull(sig, "sig");
+	}
+
+	public boolean verify(byte[] data, byte[] digest) throws SignatureException {
+	    sig.update(data);
+	    return sig.verify(digest);
+	}
+
+    }
+
+    public static final class SigningSignature {
+
+	private final Signature sig;
+
+	private SigningSignature(Signature sig) {
+	    this.sig = MyObjects.requireNonNull(sig, "sig");
+	}
+
+	public byte[] sign(byte[] data) throws SignatureException {
+	    sig.update(data);
+	    return sig.sign();
+	}
+    }
 }
