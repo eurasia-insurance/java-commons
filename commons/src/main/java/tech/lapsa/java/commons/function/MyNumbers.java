@@ -9,6 +9,7 @@ public final class MyNumbers {
 
     private static final String NON_ZERO_NUMBER = "Is not zero";
     private static final String ZERO_NUMBER = "Is zero";
+    private static final String NON_POSITIVE_NUMBER = "Is not positive or zero";
 
     private MyNumbers() {
     }
@@ -16,25 +17,7 @@ public final class MyNumbers {
     // Number
 
     public static <T extends Number> boolean zero(final T number) {
-	return MyObjects.isNull(number) || zero(number.doubleValue()); // double
-								       // is the
-								       // widest
-								       // numeric
-								       // type
-    }
-
-    public static <T extends Number> boolean nonZero(final T number) {
-	return !zero(number);
-    }
-
-    public static <T extends Number> T requireNonZero(final T number) {
-	return requireNonZero(number, null);
-    }
-
-    public static <T extends Number> T requireNonZero(final T number, String par) {
-	if (nonZero(number))
-	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	return number == null || zero(number.doubleValue());  // double is the widest numeric type
     }
 
     public static <T extends Number> T requireZero(final T number) {
@@ -47,24 +30,38 @@ public final class MyNumbers {
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
+    public static <T extends Number> boolean nonZero(final T number) {
+	return number != null && nonZero(number.doubleValue()); // double is the widest numeric type
+    }
+
+    public static <T extends Number> T requireNonZero(final T number) {
+	return requireNonZero(number, null);
+    }
+
+    public static <T extends Number> T requireNonZero(final T number, String par) {
+	if (nonZero(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+    }
+
+    public static <T extends Number> boolean positive(final T number) {
+	return number != null && positive(number.doubleValue()); // double is the widest numeric type
+    }
+
+    public static <T extends Number> T requirePositive(final T number) {
+	return requirePositive(number, null);
+    }
+
+    public static <T extends Number> T requirePositive(final T number, String par) {
+	if (positive(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+    }
+
     // long
 
     public static boolean zero(final long number) {
 	return number == 0;
-    }
-
-    public static boolean nonZero(final long number) {
-	return !zero(number);
-    }
-
-    public static long requireNonZero(final long number) {
-	return requireNonZero(number, null);
-    }
-
-    public static long requireNonZero(final long number, String par) {
-	if (nonZero(number))
-	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static long requireZero(final long number) {
@@ -77,24 +74,38 @@ public final class MyNumbers {
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
+    public static boolean nonZero(final long number) {
+	return number != 0;
+    }
+
+    public static long requireNonZero(final long number) {
+	return requireNonZero(number, null);
+    }
+
+    public static long requireNonZero(final long number, String par) {
+	if (nonZero(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+    }
+
+    public static boolean positive(final long number) {
+	return number > 0;
+    }
+
+    public static long requirePositive(final long number) {
+	return requirePositive(number, null);
+    }
+
+    public static long requirePositive(final long number, String par) {
+	if (positive(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+    }
+    
     // double
 
     public static boolean zero(final double number) {
 	return number == 0;
-    }
-
-    public static boolean nonZero(final double number) {
-	return !zero(number);
-    }
-
-    public static double requireNonZero(final double number) {
-	return requireNonZero(number, null);
-    }
-
-    public static double requireNonZero(final double number, String par) {
-	if (nonZero(number))
-	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static double requireZero(final double number) {
@@ -107,14 +118,52 @@ public final class MyNumbers {
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
+    public static boolean nonZero(final double number) {
+	return number != 0;
+    }
+
+    public static double requireNonZero(final double number) {
+	return requireNonZero(number, null);
+    }
+
+    public static double requireNonZero(final double number, String par) {
+	if (nonZero(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+    }
+
+    public static boolean positive(final double number) {
+	return number > 0;
+    }
+
+    public static double requirePositive(final double number) {
+	return requirePositive(number, null);
+    }
+
+    public static double requirePositive(final double number, String par) {
+	if (positive(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+    }
+
     // int
 
     public static boolean zero(final int number) {
 	return number == 0;
     }
 
+    public static int requireZero(final int number) {
+	return requireZero(number, null);
+    }
+
+    public static int requireZero(final int number, String par) {
+	if (zero(number))
+	    return number;
+	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+    }
+
     public static boolean nonZero(final int number) {
-	return !zero(number);
+	return number != 0;
     }
 
     public static int requireNonZero(final int number) {
@@ -127,14 +176,18 @@ public final class MyNumbers {
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
     }
 
-    public static int requireZero(final int number) {
-	return requireZero(number, null);
+    public static boolean positive(final int number) {
+	return number > 0;
     }
 
-    public static int requireZero(final int number, String par) {
-	if (zero(number))
+    public static int requirePositive(final int number) {
+	return requirePositive(number, null);
+    }
+
+    public static int requirePositive(final int number, String par) {
+	if (positive(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
     }
 
     //
