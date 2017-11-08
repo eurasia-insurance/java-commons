@@ -8,6 +8,7 @@ import java.security.UnrecoverableKeyException;
 import java.util.Optional;
 
 import tech.lapsa.java.commons.function.MyObjects;
+import tech.lapsa.java.commons.function.MyOptionals;
 import tech.lapsa.java.commons.function.MyStrings;
 
 public final class MyPrivateKeys {
@@ -23,7 +24,7 @@ public final class MyPrivateKeys {
 	if (MyStrings.empty(pass))
 	    return Optional.empty();
 	try {
-	    return Optional.of(keystore.getKey(alias, pass.toCharArray())) //
+	    return MyOptionals.of(keystore.getKey(alias, pass.toCharArray())) //
 		    .filter(k -> MyObjects.isA(k, PrivateKey.class)) //
 		    .map(MyObjects.cast(PrivateKey.class));
 	} catch (UnrecoverableKeyException | KeyStoreException | NoSuchAlgorithmException e) {

@@ -10,6 +10,7 @@ import java.security.cert.X509Certificate;
 import java.util.Optional;
 
 import tech.lapsa.java.commons.function.MyObjects;
+import tech.lapsa.java.commons.function.MyOptionals;
 
 public class MySignatures {
 
@@ -37,7 +38,7 @@ public class MySignatures {
     public static Optional<Signature> ofAlgorithm(Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
-	return Optional.of(algorithm) //
+	return MyOptionals.of(algorithm) //
 		.map(Algorithm::getInstance);
     }
 
@@ -101,9 +102,18 @@ public class MySignatures {
 	    this.sig = MyObjects.requireNonNull(sig, "sig");
 	}
 
-	public boolean verify(byte[] data, byte[] digest) throws SignatureException {
-	    sig.update(data);
-	    return sig.verify(digest);
+	public boolean verify(byte[] data, byte[] digest) {
+	    try {
+		sig.update(data);
+		return sig.verify(digest);
+	    } catch (SignatureException e) {
+		throw new RuntimeException(e);
+	    } finally {
+		try {
+		    sig.update(new byte[0]);
+		} catch (SignatureException ignored) {
+		}
+	    }
 	}
 
 	public Signature getSignature() {
@@ -119,11 +129,20 @@ public class MySignatures {
 	    this.sig = MyObjects.requireNonNull(sig, "sig");
 	}
 
-	public byte[] sign(byte[] data) throws SignatureException {
-	    sig.update(data);
-	    return sig.sign();
+	public byte[] sign(byte[] data) {
+	    try {
+		sig.update(data);
+		return sig.sign();
+	    } catch (SignatureException e) {
+		throw new RuntimeException(e);
+	    } finally {
+		try {
+		    sig.update(new byte[0]);
+		} catch (SignatureException ignored) {
+		}
+	    }
 	}
-	
+
 	public Signature getSignature() {
 	    return sig;
 	}
