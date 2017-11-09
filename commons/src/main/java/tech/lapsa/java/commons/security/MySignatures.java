@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyOptionals;
+import tech.lapsa.java.commons.function.MyStrings;
 
 public class MySignatures {
 
@@ -30,7 +31,6 @@ public class MySignatures {
 	    } catch (NoSuchAlgorithmException e) {
 		throw new RuntimeException(e);
 	    }
-
 	}
 
     }
@@ -42,13 +42,26 @@ public class MySignatures {
 		.map(Algorithm::getInstance);
     }
 
-    public static Optional<SigningSignature> forSignature(PrivateKey key, Algorithm algorithm) {
+    public static Optional<Signature> ofAlgorithm(String algorithmName) {
+	if (MyStrings.empty(algorithmName))
+	    return Optional.empty();
+	return MyOptionals.of(algorithmName) //
+		.map(x -> {
+		    try {
+			return Signature.getInstance(x);
+		    } catch (NoSuchAlgorithmException e) {
+			return null;
+		    }
+		});
+    }
+
+    public static Optional<SigningSignature> forSignature(PrivateKey key, String algorithmName) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
-	if (MyObjects.isNull(algorithm))
+	if (MyStrings.empty(algorithmName))
 	    return Optional.empty();
 
-	return ofAlgorithm(algorithm) //
+	return ofAlgorithm(algorithmName) //
 		.map(x -> {
 		    try {
 			x.initSign(key);
@@ -60,12 +73,18 @@ public class MySignatures {
 		.map(SigningSignature::new);
     }
 
-    public static Optional<VerifyingSignature> forVerification(PublicKey key, Algorithm algorithm) {
-	if (MyObjects.isNull(key))
-	    return Optional.empty();
+    public static Optional<SigningSignature> forSignature(PrivateKey key, Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
-	return ofAlgorithm(algorithm) //
+	return forSignature(key, algorithm.name());
+    }
+
+    public static Optional<VerifyingSignature> forVerification(PublicKey key, String algorithmName) {
+	if (MyObjects.isNull(key))
+	    return Optional.empty();
+	if (MyStrings.empty(algorithmName))
+	    return Optional.empty();
+	return ofAlgorithm(algorithmName) //
 		.map(x -> {
 		    try {
 			x.initVerify(key);
@@ -77,12 +96,18 @@ public class MySignatures {
 		.map(VerifyingSignature::new);
     }
 
-    public static Optional<VerifyingSignature> forVerification(X509Certificate cert, Algorithm algorithm) {
-	if (MyObjects.isNull(cert))
-	    return Optional.empty();
+    public static Optional<VerifyingSignature> forVerification(PublicKey key, Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
-	return ofAlgorithm(algorithm) //
+	return forVerification(key, algorithm.name());
+    }
+
+    public static Optional<VerifyingSignature> forVerification(X509Certificate cert, String algorithmName) {
+	if (MyObjects.isNull(cert))
+	    return Optional.empty();
+	if (MyStrings.empty(algorithmName))
+	    return Optional.empty();
+	return ofAlgorithm(algorithmName) //
 		.map(x -> {
 		    try {
 			x.initVerify(cert);
@@ -92,6 +117,12 @@ public class MySignatures {
 		    }
 		}) //
 		.map(VerifyingSignature::new);
+    }
+
+    public static Optional<VerifyingSignature> forVerification(X509Certificate cert, Algorithm algorithm) {
+	if (MyObjects.isNull(algorithm))
+	    return Optional.empty();
+	return forVerification(cert, algorithm.name());
     }
 
     public static final class VerifyingSignature {
