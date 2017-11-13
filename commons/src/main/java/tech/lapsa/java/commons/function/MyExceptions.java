@@ -7,6 +7,8 @@ public final class MyExceptions {
     private MyExceptions() {
     }
 
+    //TODO needs to refactor
+
     public static IllegalArgumentException illegalArgumentException(final String message, final String par,
 	    final String value) {
 	StringJoiner sj = new StringJoiner(" ");
@@ -48,5 +50,9 @@ public final class MyExceptions {
 	if (MyStrings.nonEmpty(par))
 	    sj.add("(" + par + ")");
 	return new IllegalArgumentException(sj.toString(), cause);
+    }
+
+    public static IllegalArgumentException illegalArgumentFormat(String format, Object... args) {
+	return new IllegalArgumentException(String.format(format, args));
     }
 }
