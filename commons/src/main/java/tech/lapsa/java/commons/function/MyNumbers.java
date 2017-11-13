@@ -10,6 +10,7 @@ public final class MyNumbers {
     private static final String NON_ZERO_NUMBER = "Is not zero";
     private static final String ZERO_NUMBER = "Is zero";
     private static final String NON_POSITIVE_NUMBER = "Is not positive or zero";
+    private static final String NUMBERS_NOT_EQUALS = "Numbers are not equals";
 
     private MyNumbers() {
     }
@@ -198,6 +199,12 @@ public final class MyNumbers {
 
     public static <N extends Number> boolean equals(N n1, N n2) {
 	return n1 != null && n2 != null && n1.equals(n2);
+    }
+
+    public static <N extends Number> void requireEquals(N n1, N n2) {
+	if (!numbericEquals(n1, n2))
+	    throw MyExceptions.illegalArgumentException(NUMBERS_NOT_EQUALS, "n1 and n2",
+		    "'" + n1 + "' and '" + n2 + "'");
     }
 
     // parsers
