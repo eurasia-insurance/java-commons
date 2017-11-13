@@ -37,6 +37,10 @@ public final class MyExceptions {
 	return new IllegalArgumentException(sj.toString());
     }
 
+    public static IllegalArgumentException illegalArgumentException(final String message) {
+	return new IllegalArgumentException(message);
+    }
+
     public static IllegalArgumentException illegalArgumentException(String message, String par,
 	    Throwable cause) {
 	StringJoiner sj = new StringJoiner(" ");
