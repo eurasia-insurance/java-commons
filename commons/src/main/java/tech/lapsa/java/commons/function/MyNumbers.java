@@ -18,7 +18,9 @@ public final class MyNumbers {
     // Number
 
     public static <T extends Number> boolean zero(final T number) {
-	return number == null || zero(number.doubleValue());  // double is the widest numeric type
+	return number == null || zero(number.doubleValue()); // double is the
+							     // widest numeric
+							     // type
     }
 
     public static <T extends Number> T requireZero(final T number) {
@@ -32,7 +34,9 @@ public final class MyNumbers {
     }
 
     public static <T extends Number> boolean nonZero(final T number) {
-	return number != null && nonZero(number.doubleValue()); // double is the widest numeric type
+	return number != null && nonZero(number.doubleValue()); // double is the
+								// widest
+								// numeric type
     }
 
     public static <T extends Number> T requireNonZero(final T number) {
@@ -46,7 +50,9 @@ public final class MyNumbers {
     }
 
     public static <T extends Number> boolean positive(final T number) {
-	return number != null && positive(number.doubleValue()); // double is the widest numeric type
+	return number != null && positive(number.doubleValue()); // double is
+								 // the widest
+								 // numeric type
     }
 
     public static <T extends Number> T requirePositive(final T number) {
@@ -102,7 +108,7 @@ public final class MyNumbers {
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
     }
-    
+
     // double
 
     public static boolean zero(final double number) {
