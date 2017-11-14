@@ -28,34 +28,34 @@ public class MySignatures {
 	Signature getInstance() {
 	    try {
 		return Signature.getInstance(name());
-	    } catch (NoSuchAlgorithmException e) {
+	    } catch (final NoSuchAlgorithmException e) {
 		throw new RuntimeException(e);
 	    }
 	}
 
     }
 
-    public static Optional<Signature> ofAlgorithm(Algorithm algorithm) {
+    public static Optional<Signature> ofAlgorithm(final Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 	return MyOptionals.of(algorithm) //
 		.map(Algorithm::getInstance);
     }
 
-    public static Optional<Signature> ofAlgorithm(String algorithmName) {
+    public static Optional<Signature> ofAlgorithm(final String algorithmName) {
 	if (MyStrings.empty(algorithmName))
 	    return Optional.empty();
 	return MyOptionals.of(algorithmName) //
 		.map(x -> {
 		    try {
 			return Signature.getInstance(x);
-		    } catch (NoSuchAlgorithmException e) {
+		    } catch (final NoSuchAlgorithmException e) {
 			return null;
 		    }
 		});
     }
 
-    public static Optional<SigningSignature> forSignature(PrivateKey key, String algorithmName) {
+    public static Optional<SigningSignature> forSignature(final PrivateKey key, final String algorithmName) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
 	if (MyStrings.empty(algorithmName))
@@ -66,20 +66,20 @@ public class MySignatures {
 		    try {
 			x.initSign(key);
 			return x;
-		    } catch (InvalidKeyException e) {
+		    } catch (final InvalidKeyException e) {
 			return null;
 		    }
 		}) //
 		.map(SigningSignature::new);
     }
 
-    public static Optional<SigningSignature> forSignature(PrivateKey key, Algorithm algorithm) {
+    public static Optional<SigningSignature> forSignature(final PrivateKey key, final Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 	return forSignature(key, algorithm.name());
     }
 
-    public static Optional<VerifyingSignature> forVerification(PublicKey key, String algorithmName) {
+    public static Optional<VerifyingSignature> forVerification(final PublicKey key, final String algorithmName) {
 	if (MyObjects.isNull(key))
 	    return Optional.empty();
 	if (MyStrings.empty(algorithmName))
@@ -89,20 +89,20 @@ public class MySignatures {
 		    try {
 			x.initVerify(key);
 			return x;
-		    } catch (InvalidKeyException e) {
+		    } catch (final InvalidKeyException e) {
 			return null;
 		    }
 		}) //
 		.map(VerifyingSignature::new);
     }
 
-    public static Optional<VerifyingSignature> forVerification(PublicKey key, Algorithm algorithm) {
+    public static Optional<VerifyingSignature> forVerification(final PublicKey key, final Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 	return forVerification(key, algorithm.name());
     }
 
-    public static Optional<VerifyingSignature> forVerification(X509Certificate cert, String algorithmName) {
+    public static Optional<VerifyingSignature> forVerification(final X509Certificate cert, final String algorithmName) {
 	if (MyObjects.isNull(cert))
 	    return Optional.empty();
 	if (MyStrings.empty(algorithmName))
@@ -112,14 +112,14 @@ public class MySignatures {
 		    try {
 			x.initVerify(cert);
 			return x;
-		    } catch (InvalidKeyException e) {
+		    } catch (final InvalidKeyException e) {
 			return null;
 		    }
 		}) //
 		.map(VerifyingSignature::new);
     }
 
-    public static Optional<VerifyingSignature> forVerification(X509Certificate cert, Algorithm algorithm) {
+    public static Optional<VerifyingSignature> forVerification(final X509Certificate cert, final Algorithm algorithm) {
 	if (MyObjects.isNull(algorithm))
 	    return Optional.empty();
 	return forVerification(cert, algorithm.name());
@@ -129,20 +129,20 @@ public class MySignatures {
 
 	private final Signature sig;
 
-	private VerifyingSignature(Signature sig) {
+	private VerifyingSignature(final Signature sig) {
 	    this.sig = MyObjects.requireNonNull(sig, "sig");
 	}
 
-	public boolean verify(byte[] data, byte[] digest) {
+	public boolean verify(final byte[] data, final byte[] digest) {
 	    try {
 		sig.update(data);
 		return sig.verify(digest);
-	    } catch (SignatureException e) {
+	    } catch (final SignatureException e) {
 		throw new RuntimeException(e);
 	    } finally {
 		try {
 		    sig.update(new byte[0]);
-		} catch (SignatureException ignored) {
+		} catch (final SignatureException ignored) {
 		}
 	    }
 	}
@@ -156,20 +156,20 @@ public class MySignatures {
 
 	private final Signature sig;
 
-	private SigningSignature(Signature sig) {
+	private SigningSignature(final Signature sig) {
 	    this.sig = MyObjects.requireNonNull(sig, "sig");
 	}
 
-	public byte[] sign(byte[] data) {
+	public byte[] sign(final byte[] data) {
 	    try {
 		sig.update(data);
 		return sig.sign();
-	    } catch (SignatureException e) {
+	    } catch (final SignatureException e) {
 		throw new RuntimeException(e);
 	    } finally {
 		try {
 		    sig.update(new byte[0]);
-		} catch (SignatureException ignored) {
+		} catch (final SignatureException ignored) {
 		}
 	    }
 	}

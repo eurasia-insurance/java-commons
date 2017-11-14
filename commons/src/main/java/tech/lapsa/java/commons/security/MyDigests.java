@@ -12,14 +12,14 @@ public final class MyDigests {
     private MyDigests() {
     }
 
-    public static Optional<MessageDigest> ofAlgorithm(String algorithmName) {
+    public static Optional<MessageDigest> ofAlgorithm(final String algorithmName) {
 	if (MyStrings.empty(algorithmName))
 	    return Optional.empty();
 	return MyOptionals.of(algorithmName) //
 		.map(x -> {
 		    try {
 			return MessageDigest.getInstance(x);
-		    } catch (NoSuchAlgorithmException e) {
+		    } catch (final NoSuchAlgorithmException e) {
 			return null;
 		    }
 		});

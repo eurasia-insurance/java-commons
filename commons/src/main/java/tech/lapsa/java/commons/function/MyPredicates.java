@@ -12,7 +12,7 @@ public final class MyPredicates {
 
     //
 
-    public static final <T> Predicate<T> isA(Class<?> clazz) {
+    public static final <T> Predicate<T> isA(final Class<?> clazz) {
 	return x -> MyObjects.isA(x, clazz);
     }
 

@@ -23,7 +23,7 @@ public final class MyStrings {
 	try {
 	    new URL(url);
 	    return true;
-	} catch (MalformedURLException e) {
+	} catch (final MalformedURLException e) {
 	    return false;
 	}
     }
@@ -52,7 +52,7 @@ public final class MyStrings {
 
     }
 
-    public static String requireEmpty(final String string, String par) {
+    public static String requireEmpty(final String string, final String par) {
 	if (empty(string))
 	    return string;
 	throw MyExceptions.illegalArgumentException(NON_EMPTY_STRING, par, String.valueOf(string));
@@ -69,7 +69,7 @@ public final class MyStrings {
 
     }
 
-    public static String requireNonEmpty(final String string, String par) {
+    public static String requireNonEmpty(final String string, final String par) {
 	if (nonEmpty(string))
 	    return string;
 	throw MyExceptions.illegalArgumentException(EMPTY_STRING, par, String.valueOf(string));
@@ -99,17 +99,17 @@ public final class MyStrings {
 
     //
 
-    public static boolean equals(String s1, String s2) {
+    public static boolean equals(final String s1, final String s2) {
 	return s1 != null && s2 != null && s1.equals(s2);
     }
 
-    public static void requireEquals(String s1, String s2) {
+    public static void requireEquals(final String s1, final String s2) {
 	if (!equals(s1, s2))
 	    throw MyExceptions.illegalArgumentException(STRINGS_NOT_EQUALS, "s1 and s2",
 		    "'" + s1 + "' and '" + s2 + "'");
     }
 
-    public static void requireEqualsMsg(String s1, String s2, String message) {
+    public static void requireEqualsMsg(final String s1, final String s2, final String message) {
 	if (!equals(s1, s2))
 	    throw MyExceptions.illegalArgumentException(message);
     }

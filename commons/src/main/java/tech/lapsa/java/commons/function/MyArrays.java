@@ -285,50 +285,50 @@ public final class MyArrays {
 
     //
 
-    public static byte[] reverse(byte[] array) {
+    public static byte[] reverse(final byte[] array) {
 	MyObjects.requireNonNull(array, "array");
 	for (int i = 0; i < array.length / 2; i++) {
-	    byte t = array[i];
+	    final byte t = array[i];
 	    array[i] = array[array.length - i - 1];
 	    array[array.length - i - 1] = t;
 	}
 	return array;
     }
 
-    public static int[] reverse(int[] array) {
+    public static int[] reverse(final int[] array) {
 	MyObjects.requireNonNull(array, "array");
 	for (int i = 0; i < array.length / 2; i++) {
-	    int t = array[i];
+	    final int t = array[i];
 	    array[i] = array[array.length - i - 1];
 	    array[array.length - i - 1] = t;
 	}
 	return array;
     }
 
-    public static double[] reverse(double[] array) {
+    public static double[] reverse(final double[] array) {
 	MyObjects.requireNonNull(array, "array");
 	for (int i = 0; i < array.length / 2; i++) {
-	    double t = array[i];
+	    final double t = array[i];
 	    array[i] = array[array.length - i - 1];
 	    array[array.length - i - 1] = t;
 	}
 	return array;
     }
 
-    public static long[] reverse(long[] array) {
+    public static long[] reverse(final long[] array) {
 	MyObjects.requireNonNull(array, "array");
 	for (int i = 0; i < array.length / 2; i++) {
-	    long t = array[i];
+	    final long t = array[i];
 	    array[i] = array[array.length - i - 1];
 	    array[array.length - i - 1] = t;
 	}
 	return array;
     }
 
-    public static <T> T[] reverse(T[] array) {
+    public static <T> T[] reverse(final T[] array) {
 	MyObjects.requireNonNull(array, "array");
 	for (int i = 0; i < array.length / 2; i++) {
-	    T t = array[i];
+	    final T t = array[i];
 	    array[i] = array[array.length - i - 1];
 	    array[array.length - i - 1] = t;
 	}

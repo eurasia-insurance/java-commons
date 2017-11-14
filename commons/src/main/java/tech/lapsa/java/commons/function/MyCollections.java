@@ -85,7 +85,7 @@ public final class MyCollections {
 
     //
 
-    public static <T> Optional<T> firstElement(Iterable<T> iterable) {
+    public static <T> Optional<T> firstElement(final Iterable<T> iterable) {
 	return MyOptionals.of(iterable) //
 		.map(Iterable::iterator) //
 		.filter(Iterator::hasNext) //

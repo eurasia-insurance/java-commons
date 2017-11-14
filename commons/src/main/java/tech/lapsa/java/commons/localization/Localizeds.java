@@ -17,44 +17,44 @@ public final class Localizeds {
     private Localizeds() {
     }
 
-    public static final Function<LocalDate, String> localDateMapper(Locale locale) {
+    public static final Function<LocalDate, String> localDateMapper(final Locale locale) {
 	return x -> localDateFormatter(locale).format(x);
     }
 
-    public static final Function<LocalDateTime, String> localDateTimeMapper(Locale locale) {
+    public static final Function<LocalDateTime, String> localDateTimeMapper(final Locale locale) {
 	return x -> localDateTimeFormatter(locale).format(x);
     }
 
-    public static final Function<Instant, String> instantMapper(Locale locale) {
+    public static final Function<Instant, String> instantMapper(final Locale locale) {
 	return x -> instantFormatter(locale).format(x);
     }
 
-    public static final Function<LocalTime, String> localTimeMapper(Locale locale) {
+    public static final Function<LocalTime, String> localTimeMapper(final Locale locale) {
 	return x -> localTimeFormatter(locale).format(x);
     }
 
-    public static DateTimeFormatter localDateTimeFormatter(Locale locale) {
+    public static DateTimeFormatter localDateTimeFormatter(final Locale locale) {
 	MyObjects.requireNonNull(locale, "locale");
 	return new DateTimeFormatterBuilder() //
 		.appendLocalized(FormatStyle.MEDIUM, FormatStyle.MEDIUM) //
 		.toFormatter(locale);
     }
 
-    public static DateTimeFormatter localDateFormatter(Locale locale) {
+    public static DateTimeFormatter localDateFormatter(final Locale locale) {
 	MyObjects.requireNonNull(locale, "locale");
 	return new DateTimeFormatterBuilder() //
 		.appendLocalized(FormatStyle.MEDIUM, null) //
 		.toFormatter(locale);
     }
 
-    public static DateTimeFormatter localTimeFormatter(Locale locale) {
+    public static DateTimeFormatter localTimeFormatter(final Locale locale) {
 	MyObjects.requireNonNull(locale, "locale");
 	return new DateTimeFormatterBuilder() //
 		.appendLocalized(null, FormatStyle.MEDIUM) //
 		.toFormatter(locale);
     }
 
-    public static DateTimeFormatter instantFormatter(Locale locale) {
+    public static DateTimeFormatter instantFormatter(final Locale locale) {
 	MyObjects.requireNonNull(locale, "locale");
 	return new DateTimeFormatterBuilder() //
 		.appendInstant() //

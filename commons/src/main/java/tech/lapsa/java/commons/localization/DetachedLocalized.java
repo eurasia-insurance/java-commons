@@ -16,12 +16,12 @@ public class DetachedLocalized implements Localized {
 
     private final Map<String, Map<LocalizationVariant, String>> cache;
 
-    public DetachedLocalized(Localized localized, Locale... locales) {
+    public DetachedLocalized(final Localized localized, final Locale... locales) {
 	MyObjects.requireNull(localized, "localized");
 	MyArrays.requireNonEmpty(locales, "locales");
 
 	class Entry {
-	    Entry(Locale locale, LocalizationVariant variant, String string) {
+	    Entry(final Locale locale, final LocalizationVariant variant, final String string) {
 		this.locale = locale;
 		this.variant = variant;
 		this.string = string;
@@ -32,9 +32,9 @@ public class DetachedLocalized implements Localized {
 	    String string;
 	}
 
-	Builder<Entry> z = Stream.builder();
-	for (Locale locale : locales)
-	    for (LocalizationVariant variant : LocalizationVariant.values())
+	final Builder<Entry> z = Stream.builder();
+	for (final Locale locale : locales)
+	    for (final LocalizationVariant variant : LocalizationVariant.values())
 		z.accept(new Entry(locale, variant, localized.localized(variant, locale)));
 	cache = z.build() //
 		.collect(Collectors.groupingBy(e -> e.locale.getLanguage(),
@@ -42,7 +42,7 @@ public class DetachedLocalized implements Localized {
     }
 
     @Override
-    public String localized(LocalizationVariant variant, Locale locale) {
+    public String localized(final LocalizationVariant variant, final Locale locale) {
 	MyObjects.requireNonNull(locale, "locale");
 	MyObjects.requireNonNull(variant, "variant");
 	return MyOptionals.of(cache) //

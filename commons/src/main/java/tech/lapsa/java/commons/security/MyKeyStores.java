@@ -23,21 +23,22 @@ public final class MyKeyStores {
 	KeyStore getInstance() {
 	    try {
 		return KeyStore.getInstance(name());
-	    } catch (KeyStoreException e) {
+	    } catch (final KeyStoreException e) {
 		throw new RuntimeException(e);
 	    }
 
 	}
     }
 
-    public static Optional<KeyStore> ofType(StoreType storetype) {
+    public static Optional<KeyStore> ofType(final StoreType storetype) {
 	if (MyObjects.isNull(storetype))
 	    return Optional.empty();
 	return Optional.of(storetype)
 		.map(StoreType::getInstance); //
     }
 
-    public static Optional<KeyStore> from(InputStream inputStream, StoreType storetype, String storepass) {
+    public static Optional<KeyStore> from(final InputStream inputStream, final StoreType storetype,
+	    final String storepass) {
 	if (MyObjects.isNull(inputStream))
 	    return Optional.empty();
 	if (MyObjects.isNull(storetype))
@@ -49,7 +50,7 @@ public final class MyKeyStores {
 		    try {
 			x.load(inputStream, storepass.toCharArray());
 			return x;
-		    } catch (Exception e) {
+		    } catch (final Exception e) {
 			return null;
 		    }
 		});

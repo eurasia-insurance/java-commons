@@ -27,7 +27,7 @@ public final class MyNumbers {
 	return requireZero(number, null);
     }
 
-    public static <T extends Number> T requireZero(final T number, String par) {
+    public static <T extends Number> T requireZero(final T number, final String par) {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -43,7 +43,7 @@ public final class MyNumbers {
 	return requireNonZero(number, null);
     }
 
-    public static <T extends Number> T requireNonZero(final T number, String par) {
+    public static <T extends Number> T requireNonZero(final T number, final String par) {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -59,7 +59,7 @@ public final class MyNumbers {
 	return requirePositive(number, null);
     }
 
-    public static <T extends Number> T requirePositive(final T number, String par) {
+    public static <T extends Number> T requirePositive(final T number, final String par) {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -75,7 +75,7 @@ public final class MyNumbers {
 	return requireZero(number, null);
     }
 
-    public static long requireZero(final long number, String par) {
+    public static long requireZero(final long number, final String par) {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -89,7 +89,7 @@ public final class MyNumbers {
 	return requireNonZero(number, null);
     }
 
-    public static long requireNonZero(final long number, String par) {
+    public static long requireNonZero(final long number, final String par) {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -103,7 +103,7 @@ public final class MyNumbers {
 	return requirePositive(number, null);
     }
 
-    public static long requirePositive(final long number, String par) {
+    public static long requirePositive(final long number, final String par) {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -119,7 +119,7 @@ public final class MyNumbers {
 	return requireZero(number, null);
     }
 
-    public static double requireZero(final double number, String par) {
+    public static double requireZero(final double number, final String par) {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -133,7 +133,7 @@ public final class MyNumbers {
 	return requireNonZero(number, null);
     }
 
-    public static double requireNonZero(final double number, String par) {
+    public static double requireNonZero(final double number, final String par) {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -147,7 +147,7 @@ public final class MyNumbers {
 	return requirePositive(number, null);
     }
 
-    public static double requirePositive(final double number, String par) {
+    public static double requirePositive(final double number, final String par) {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -163,7 +163,7 @@ public final class MyNumbers {
 	return requireZero(number, null);
     }
 
-    public static int requireZero(final int number, String par) {
+    public static int requireZero(final int number, final String par) {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -177,7 +177,7 @@ public final class MyNumbers {
 	return requireNonZero(number, null);
     }
 
-    public static int requireNonZero(final int number, String par) {
+    public static int requireNonZero(final int number, final String par) {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -191,7 +191,7 @@ public final class MyNumbers {
 	return requirePositive(number, null);
     }
 
-    public static int requirePositive(final int number, String par) {
+    public static int requirePositive(final int number, final String par) {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -199,21 +199,21 @@ public final class MyNumbers {
 
     //
 
-    public static <N1 extends Number, N2 extends Number> boolean numbericEquals(N1 n1, N2 n2) {
+    public static <N1 extends Number, N2 extends Number> boolean numbericEquals(final N1 n1, final N2 n2) {
 	return n1 != null && n2 != null && n1.doubleValue() == n2.doubleValue();
     }
 
-    public static <N extends Number> boolean equals(N n1, N n2) {
+    public static <N extends Number> boolean equals(final N n1, final N n2) {
 	return n1 != null && n2 != null && n1.equals(n2);
     }
 
-    public static <N extends Number> void requireEquals(N n1, N n2) {
+    public static <N extends Number> void requireEquals(final N n1, final N n2) {
 	if (!numbericEquals(n1, n2))
 	    throw MyExceptions.illegalArgumentException(NUMBERS_NOT_EQUALS, "n1 and n2",
 		    "'" + n1 + "' and '" + n2 + "'");
     }
 
-    public static <N extends Number> void requireEqualsMsg(N n1, N n2, String message) {
+    public static <N extends Number> void requireEqualsMsg(final N n1, final N n2, final String message) {
 	if (!numbericEquals(n1, n2))
 	    throw MyExceptions.illegalArgumentException(message);
     }
@@ -224,35 +224,35 @@ public final class MyNumbers {
 
     // primitive
 
-    public static OptionalInt parseInt(String s) {
+    public static OptionalInt parseInt(final String s) {
 	try {
 	    return OptionalInt.of(Integer.parseInt(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return OptionalInt.empty();
 	}
     }
 
-    public static OptionalInt parseNonZeroInt(String s) {
+    public static OptionalInt parseNonZeroInt(final String s) {
 	try {
 	    return OptionalInt.of(requireNonZero(Integer.parseInt(s)));
-	} catch (IllegalArgumentException e) {
+	} catch (final IllegalArgumentException e) {
 	    // also catches NumberFormatException
 	    return OptionalInt.empty();
 	}
     }
 
-    public static OptionalInt parseInt(String s, int radix) {
+    public static OptionalInt parseInt(final String s, final int radix) {
 	try {
 	    return OptionalInt.of(Integer.parseInt(s, radix));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return OptionalInt.empty();
 	}
     }
 
-    public static OptionalInt parseNonZeroInt(String s, int radix) {
+    public static OptionalInt parseNonZeroInt(final String s, final int radix) {
 	try {
 	    return OptionalInt.of(requireNonZero(Integer.parseInt(s, radix)));
-	} catch (IllegalArgumentException e) {
+	} catch (final IllegalArgumentException e) {
 	    // also catches NumberFormatException
 	    return OptionalInt.empty();
 	}
@@ -260,34 +260,34 @@ public final class MyNumbers {
 
     // boxed
 
-    public static Optional<Integer> valueOfInt(String s) {
+    public static Optional<Integer> valueOfInt(final String s) {
 	try {
 	    return Optional.of(Integer.valueOf(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Integer> nonZeroValueOfInt(String s) {
+    public static Optional<Integer> nonZeroValueOfInt(final String s) {
 	try {
 	    return MyOptionals.of(Integer.valueOf(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Integer> valueOfInt(String s, int radix) {
+    public static Optional<Integer> valueOfInt(final String s, final int radix) {
 	try {
 	    return Optional.of(Integer.valueOf(s, radix));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Integer> nonZeroValueOfInt(String s, int radix) {
+    public static Optional<Integer> nonZeroValueOfInt(final String s, final int radix) {
 	try {
 	    return MyOptionals.of(Integer.valueOf(s, radix));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
@@ -296,18 +296,18 @@ public final class MyNumbers {
 
     // primitive
 
-    public static OptionalDouble parseDbl(String s) {
+    public static OptionalDouble parseDbl(final String s) {
 	try {
 	    return OptionalDouble.of(Double.parseDouble(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return OptionalDouble.empty();
 	}
     }
 
-    public static OptionalDouble parseNonZeroDbl(String s) {
+    public static OptionalDouble parseNonZeroDbl(final String s) {
 	try {
 	    return OptionalDouble.of(requireNonZero(Double.parseDouble(s)));
-	} catch (IllegalArgumentException e) {
+	} catch (final IllegalArgumentException e) {
 	    // also catches NumberFormatException
 	    return OptionalDouble.empty();
 	}
@@ -315,18 +315,18 @@ public final class MyNumbers {
 
     // boxed
 
-    public static Optional<Double> valueOfDbl(String doubleStr) {
+    public static Optional<Double> valueOfDbl(final String doubleStr) {
 	try {
 	    return Optional.of(Double.valueOf(doubleStr));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Double> nonZeroValueOfDbl(String s) {
+    public static Optional<Double> nonZeroValueOfDbl(final String s) {
 	try {
 	    return MyOptionals.of(Double.valueOf(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
@@ -335,35 +335,35 @@ public final class MyNumbers {
 
     // primitive
 
-    public static OptionalLong parseLng(String s) {
+    public static OptionalLong parseLng(final String s) {
 	try {
 	    return OptionalLong.of(Long.parseLong(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return OptionalLong.empty();
 	}
     }
 
-    public static OptionalLong parseNonZeroLng(String s) {
+    public static OptionalLong parseNonZeroLng(final String s) {
 	try {
 	    return OptionalLong.of(requireNonZero(Long.parseLong(s)));
-	} catch (IllegalArgumentException e) {
+	} catch (final IllegalArgumentException e) {
 	    // also catches NumberFormatException
 	    return OptionalLong.empty();
 	}
     }
 
-    public static OptionalLong parseLng(String s, int radix) {
+    public static OptionalLong parseLng(final String s, final int radix) {
 	try {
 	    return OptionalLong.of(Long.parseLong(s, radix));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return OptionalLong.empty();
 	}
     }
 
-    public static OptionalLong parseNonZeroLng(String s, int radix) {
+    public static OptionalLong parseNonZeroLng(final String s, final int radix) {
 	try {
 	    return OptionalLong.of(requireNonZero(Long.parseLong(s, radix)));
-	} catch (IllegalArgumentException e) {
+	} catch (final IllegalArgumentException e) {
 	    // also catches NumberFormatException
 	    return OptionalLong.empty();
 	}
@@ -371,34 +371,34 @@ public final class MyNumbers {
 
     // boxed
 
-    public static Optional<Long> valueOfLng(String s) {
+    public static Optional<Long> valueOfLng(final String s) {
 	try {
 	    return Optional.of(Long.valueOf(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Long> nonZeroValueOfLng(String s) {
+    public static Optional<Long> nonZeroValueOfLng(final String s) {
 	try {
 	    return MyOptionals.of(Long.valueOf(s));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Long> valueOfLng(String s, int radix) {
+    public static Optional<Long> valueOfLng(final String s, final int radix) {
 	try {
 	    return Optional.of(Long.valueOf(s, radix));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static Optional<Long> nonZeroValueOfLng(String s, int radix) {
+    public static Optional<Long> nonZeroValueOfLng(final String s, final int radix) {
 	try {
 	    return MyOptionals.of(Long.valueOf(s, radix));
-	} catch (NumberFormatException e) {
+	} catch (final NumberFormatException e) {
 	    return Optional.empty();
 	}
     }

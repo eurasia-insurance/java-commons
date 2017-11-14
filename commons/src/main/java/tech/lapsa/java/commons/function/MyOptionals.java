@@ -192,13 +192,13 @@ public final class MyOptionals {
     }
 
     public static OptionalDouble ofDouble(final Double optional) {
-	return (optional == null) //
+	return optional == null //
 		? OptionalDouble.empty() //
 		: ofDouble(optional.doubleValue());
     }
 
     public static OptionalDouble ofZeroDouble(final Double optional) {
-	return (optional == null) //
+	return optional == null //
 		? OptionalDouble.empty() //
 		: ofZeroDouble(optional.doubleValue());
     }
@@ -224,13 +224,13 @@ public final class MyOptionals {
     }
 
     public static OptionalInt ofInt(final Integer optional) {
-	return (optional == null) //
+	return optional == null //
 		? OptionalInt.empty() //
 		: ofInt(optional.intValue());
     }
 
     public static OptionalInt ofZeroInt(final Integer optional) {
-	return (optional == null) //
+	return optional == null //
 		? OptionalInt.empty() //
 		: ofZeroInt(optional.intValue());
     }
@@ -256,13 +256,13 @@ public final class MyOptionals {
     }
 
     public static OptionalLong ofLong(final Long optional) {
-	return (optional == null) //
+	return optional == null //
 		? OptionalLong.empty() //
 		: ofLong(optional.longValue());
     }
 
     public static OptionalLong ofZeroLong(final Long optional) {
-	return (optional == null) //
+	return optional == null //
 		? OptionalLong.empty() //
 		: ofZeroLong(optional.longValue());
     }

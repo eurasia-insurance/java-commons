@@ -15,7 +15,7 @@ public final class MyTemporals {
 
     private final static MyTemporals DEFAULT = getInstance(ZoneId.systemDefault());
 
-    public static MyTemporals getInstance(ZoneId zoneId) {
+    public static MyTemporals getInstance(final ZoneId zoneId) {
 	return new MyTemporals(MyObjects.requireNonNull(zoneId, "zoneId"));
     }
 
@@ -46,13 +46,13 @@ public final class MyTemporals {
     private final FromInstant fromInstant;
     private final FromCalendar fromCalendar;
 
-    private MyTemporals(ZoneId zoneId) {
+    private MyTemporals(final ZoneId zoneId) {
 	this.zoneId = zoneId;
-	this.fromDate = new FromDate();
-	this.fromInstant = new FromInstant();
-	this.fromLocalDate = new FromLocalDate();
-	this.fromLocalDateTime = new FromLocalDateTime();
-	this.fromCalendar = new FromCalendar();
+	fromDate = new FromDate();
+	fromInstant = new FromInstant();
+	fromLocalDate = new FromLocalDate();
+	fromLocalDateTime = new FromLocalDateTime();
+	fromCalendar = new FromCalendar();
     }
 
     public FromDate forDate() {
@@ -81,25 +81,25 @@ public final class MyTemporals {
 
 	public abstract T now();
 
-	public Calendar toCalendar(T value) {
+	public Calendar toCalendar(final T value) {
 	    if (value == null)
 		return null;
 	    return GregorianCalendar.from(toInstant(value).atZone(zoneId));
 	}
 
-	public Date toDate(T value) {
+	public Date toDate(final T value) {
 	    return value == null ? null : Date.from(toInstant(value));
 	}
 
-	public boolean isToday(T value) {
+	public boolean isToday(final T value) {
 	    return value == null ? false : LocalDate.now().isEqual(toLocalDate(value));
 	}
 
-	public boolean isYesterday(T value) {
+	public boolean isYesterday(final T value) {
 	    return value == null ? false : LocalDate.now().minusDays(1).isEqual(toLocalDate(value));
 	}
 
-	public boolean isTommorow(T value) {
+	public boolean isTommorow(final T value) {
 	    return value == null ? false : LocalDate.now().plusDays(1).isEqual(toLocalDate(value));
 	}
     }
@@ -109,17 +109,17 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public LocalDate toLocalDate(Instant value) {
+	public LocalDate toLocalDate(final Instant value) {
 	    return value == null ? null : value.atZone(zoneId).toLocalDate();
 	}
 
 	@Override
-	public Instant toInstant(Instant value) {
+	public Instant toInstant(final Instant value) {
 	    return value;
 	}
 
 	@Override
-	public LocalDateTime toLocalDateTime(Instant value) {
+	public LocalDateTime toLocalDateTime(final Instant value) {
 	    return value == null ? null : value.atZone(zoneId).toLocalDateTime();
 	}
 
@@ -134,17 +134,17 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public LocalDate toLocalDate(LocalDate value) {
+	public LocalDate toLocalDate(final LocalDate value) {
 	    return value;
 	}
 
 	@Override
-	public Instant toInstant(LocalDate value) {
+	public Instant toInstant(final LocalDate value) {
 	    return value == null ? null : value.atStartOfDay(zoneId).toInstant();
 	}
 
 	@Override
-	public LocalDateTime toLocalDateTime(LocalDate value) {
+	public LocalDateTime toLocalDateTime(final LocalDate value) {
 	    return value == null ? null : value.atStartOfDay();
 	}
 
@@ -159,17 +159,17 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public LocalDate toLocalDate(LocalDateTime value) {
+	public LocalDate toLocalDate(final LocalDateTime value) {
 	    return value.toLocalDate();
 	}
 
 	@Override
-	public Instant toInstant(LocalDateTime value) {
+	public Instant toInstant(final LocalDateTime value) {
 	    return value == null ? null : value.atZone(zoneId).toInstant();
 	}
 
 	@Override
-	public LocalDateTime toLocalDateTime(LocalDateTime value) {
+	public LocalDateTime toLocalDateTime(final LocalDateTime value) {
 	    return value;
 	}
 
@@ -184,17 +184,17 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public LocalDate toLocalDate(Date value) {
+	public LocalDate toLocalDate(final Date value) {
 	    return value == null ? null : value.toInstant().atZone(zoneId).toLocalDate();
 	}
 
 	@Override
-	public Instant toInstant(Date value) {
+	public Instant toInstant(final Date value) {
 	    return value == null ? null : value.toInstant();
 	}
 
 	@Override
-	public LocalDateTime toLocalDateTime(Date value) {
+	public LocalDateTime toLocalDateTime(final Date value) {
 	    return value == null ? null : value.toInstant().atZone(zoneId).toLocalDateTime();
 	}
 
@@ -204,7 +204,7 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public Date toDate(Date value) {
+	public Date toDate(final Date value) {
 	    return value;
 	}
     }
@@ -214,17 +214,17 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public LocalDate toLocalDate(Calendar value) {
+	public LocalDate toLocalDate(final Calendar value) {
 	    return value == null ? null : value.toInstant().atZone(zoneId).toLocalDate();
 	}
 
 	@Override
-	public Instant toInstant(Calendar value) {
+	public Instant toInstant(final Calendar value) {
 	    return value == null ? null : value.toInstant();
 	}
 
 	@Override
-	public LocalDateTime toLocalDateTime(Calendar value) {
+	public LocalDateTime toLocalDateTime(final Calendar value) {
 	    return value == null ? null : value.toInstant().atZone(zoneId).toLocalDateTime();
 	}
 
@@ -234,12 +234,12 @@ public final class MyTemporals {
 	}
 
 	@Override
-	public Date toDate(Calendar value) {
+	public Date toDate(final Calendar value) {
 	    return value == null ? null : value.getTime();
 	}
 
 	@Override
-	public Calendar toCalendar(Calendar value) {
+	public Calendar toCalendar(final Calendar value) {
 	    return value;
 	}
     }

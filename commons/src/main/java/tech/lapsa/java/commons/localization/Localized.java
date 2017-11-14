@@ -12,7 +12,7 @@ public interface Localized extends Serializable {
 
     //
 
-    default String localized(LocalizationVariant variant) {
+    default String localized(final LocalizationVariant variant) {
 	return localized(variant, Locale.getDefault());
     }
 
@@ -48,7 +48,7 @@ public interface Localized extends Serializable {
 
     //
 
-    default Localized detached(Locale... locales) {
+    default Localized detached(final Locale... locales) {
 	return new DetachedLocalized(this, locales);
 
     }

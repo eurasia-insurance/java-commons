@@ -21,7 +21,7 @@ public final class MyFiles {
 	MyStrings.requireNonEmpty(file, "file");
 	try {
 	    return new FileInputStream(file);
-	} catch (FileNotFoundException e) {
+	} catch (final FileNotFoundException e) {
 	    return null;
 	}
     }

@@ -14,7 +14,7 @@ public final class MyCertificates {
     private MyCertificates() {
     }
 
-    public static Optional<X509Certificate> from(KeyStore keystore, String alias) {
+    public static Optional<X509Certificate> from(final KeyStore keystore, final String alias) {
 	if (MyObjects.isNull(keystore))
 	    return Optional.empty();
 	if (MyStrings.empty(alias))
@@ -23,7 +23,7 @@ public final class MyCertificates {
 	    return MyOptionals.of(keystore.getCertificate(alias)) //
 		    .filter(k -> MyObjects.isA(k, X509Certificate.class)) //
 		    .map(MyObjects.cast(X509Certificate.class));
-	} catch (KeyStoreException e) {
+	} catch (final KeyStoreException e) {
 	    return Optional.empty();
 	}
     }
