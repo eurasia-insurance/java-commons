@@ -7,7 +7,7 @@ import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyOptionals;
 import tech.lapsa.java.commons.function.MyStrings;
 
-//TODO REFACTOR : rename to MyResources
+//TODO REFACTOR : Need to rename to MyResources
 public final class Resources {
 
     private Resources() {
