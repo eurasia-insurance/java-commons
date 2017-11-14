@@ -10,6 +10,7 @@ public final class MyStrings {
 
     private static final String EMPTY_STRING = "Is empty";
     private static final String NON_EMPTY_STRING = "Is not empty";
+    private static final String STRINGS_NOT_EQUALS = "Strings are not equals";
 
     private MyStrings() {
     }
@@ -96,4 +97,15 @@ public final class MyStrings {
 	return empty(string) ? null : string;
     }
 
+    //
+
+    public static boolean equals(String s1, String s2) {
+	return s1 != null && s2 != null && s1.equals(s2);
+    }
+
+    public static void requireEquals(String s1, String s2) {
+	if (!equals(s1, s2))
+	    throw MyExceptions.illegalArgumentException(STRINGS_NOT_EQUALS, "s1 and s2",
+		    "'" + s1 + "' and '" + s2 + "'");
+    }
 }

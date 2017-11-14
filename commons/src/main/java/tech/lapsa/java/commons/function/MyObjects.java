@@ -26,6 +26,12 @@ public final class MyObjects {
 	throw MyExceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
     }
 
+    public static <T> T requireNonNullMsg(T obj, String message) {
+	if (nonNull(obj))
+	    return obj;
+	throw MyExceptions.illegalArgumentException(message);
+    }
+
     //
 
     public static <T> boolean isNull(T obj) {
@@ -40,6 +46,12 @@ public final class MyObjects {
 	if (isNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
+    }
+
+    public static <T> T requireNullMsg(T obj, String message) {
+	if (isNull(obj))
+	    return obj;
+	throw MyExceptions.illegalArgumentException(message);
     }
 
     //
@@ -59,6 +71,12 @@ public final class MyObjects {
 	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
+    public static final <T> T requireAMsg(Object obj, Class<T> clazz, String message) {
+	if (isA(obj, clazz))
+	    return clazz.cast(obj);
+	throw MyExceptions.illegalArgumentException(message);
+    }
+
     //
 
     public static final boolean isNotA(Object obj, Class<?> clazz) {
@@ -73,6 +91,12 @@ public final class MyObjects {
 	if (isNotA(obj, clazz))
 	    return obj;
 	throw MyExceptions.illegalArgumentException("Is a " + clazz.getName(), par);
+    }
+
+    public static final <T> T requireNotAMsg(T obj, Class<?> clazz, String message) {
+	if (isNotA(obj, clazz))
+	    return obj;
+	throw MyExceptions.illegalArgumentException(message);
     }
 
     //
