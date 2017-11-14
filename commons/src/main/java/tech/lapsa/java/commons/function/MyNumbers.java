@@ -213,6 +213,11 @@ public final class MyNumbers {
 		    "'" + n1 + "' and '" + n2 + "'");
     }
 
+    public static <N extends Number> void requireEqualsMsg(N n1, N n2, String message) {
+	if (!numbericEquals(n1, n2))
+	    throw MyExceptions.illegalArgumentException(message);
+    }
+
     // parsers
 
     // int

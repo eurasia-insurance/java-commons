@@ -108,4 +108,9 @@ public final class MyStrings {
 	    throw MyExceptions.illegalArgumentException(STRINGS_NOT_EQUALS, "s1 and s2",
 		    "'" + s1 + "' and '" + s2 + "'");
     }
+
+    public static void requireEqualsMsg(String s1, String s2, String message) {
+	if (!equals(s1, s2))
+	    throw MyExceptions.illegalArgumentException(message);
+    }
 }
