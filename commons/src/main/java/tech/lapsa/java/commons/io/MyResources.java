@@ -1,4 +1,4 @@
-package tech.lapsa.java.commons.resources;
+package tech.lapsa.java.commons.io;
 
 import java.io.InputStream;
 import java.util.Optional;
@@ -7,10 +7,17 @@ import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyOptionals;
 import tech.lapsa.java.commons.function.MyStrings;
 
-//TODO REFACTOR : Need to rename to MyResources
-public final class Resources {
+public final class MyResources {
 
-    private Resources() {
+    private MyResources() {
+    }
+
+    public static Optional<InputStream> optionalAsStream(String resource) {
+	return optionalAsStream(MyResources.class, resource);
+    }
+
+    public static InputStream getAsStream(String resource) {
+	return getAsStream(MyResources.class, resource);
     }
 
     public static Optional<InputStream> optionalAsStream(Class<?> thisClazz, String resource) {
