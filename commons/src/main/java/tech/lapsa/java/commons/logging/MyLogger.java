@@ -13,7 +13,7 @@ public final class MyLogger {
     private final Logger logger;
     private final UnaryOperator<String> handler;
 
-    private MyLogger(Logger logger, UnaryOperator<String> handler) {
+    private MyLogger(final Logger logger, final UnaryOperator<String> handler) {
 	this.logger = MyObjects.requireNonNull(logger, "logger");
 	this.handler = MyObjects.requireNonNull(handler, "handler");
     }
@@ -21,32 +21,32 @@ public final class MyLogger {
     public final class MyLevel {
 	private final Level level;
 
-	private MyLevel(Level level) {
+	private MyLevel(final Level level) {
 	    this.level = level;
 	}
 
-	public MyLogger log(String message) {
+	public MyLogger log(final String message) {
 	    logger.log(level, handler.apply(message));
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(String format, Object... args) {
+	public MyLogger log(final String format, final Object... args) {
 	    logger.log(level, handler.apply(String.format(format, args)));
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(Throwable thrown, String message) {
+	public MyLogger log(final Throwable thrown, final String message) {
 	    logger.log(level, handler.apply(message), thrown);
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(Throwable thrown) {
+	public MyLogger log(final Throwable thrown) {
 	    MyObjects.requireNonNull(thrown, "thrown");
 	    logger.log(level, handler.apply(thrown.getMessage()), thrown);
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(Throwable thrown, String format, Object... args) {
+	public MyLogger log(final Throwable thrown, final String format, final Object... args) {
 	    logger.log(level, handler.apply(String.format(format, args)), thrown);
 	    return MyLogger.this;
 	}
@@ -84,33 +84,33 @@ public final class MyLogger {
 	private MyLoggerBuilder() {
 	}
 
-	public MyLoggerBuilder withNameOf(Package pack) {
-	    this.name = MyObjects.requireNonNull(pack, "pack").getName();
+	public MyLoggerBuilder withNameOf(final Package pack) {
+	    name = MyObjects.requireNonNull(pack, "pack").getName();
 	    return this;
 	}
 
-	public MyLoggerBuilder withNameOf(Class<?> clazz) {
-	    this.name = MyObjects.requireNonNull(clazz, "clazz").getName();
+	public MyLoggerBuilder withNameOf(final Class<?> clazz) {
+	    name = MyObjects.requireNonNull(clazz, "clazz").getName();
 	    return this;
 	}
 
-	public MyLoggerBuilder withName(String name) {
+	public MyLoggerBuilder withName(final String name) {
 	    this.name = MyStrings.requireNonEmpty(name, "name");
 	    return this;
 	}
 
-	public MyLoggerBuilder withPackageNameOf(Class<?> clazz) {
-	    this.name = MyObjects.requireNonNull(clazz, "clazz").getPackage().getName();
+	public MyLoggerBuilder withPackageNameOf(final Class<?> clazz) {
+	    name = MyObjects.requireNonNull(clazz, "clazz").getPackage().getName();
 	    return this;
 	}
 
-	public MyLoggerBuilder addWithPrefix(String prefix) {
+	public MyLoggerBuilder addWithPrefix(final String prefix) {
 	    MyStrings.requireNonEmpty(prefix);
 	    addAfter(x -> prefix + " : " + x);
 	    return this;
 	}
 
-	public MyLoggerBuilder addWithSuffix(String suffix) {
+	public MyLoggerBuilder addWithSuffix(final String suffix) {
 	    MyStrings.requireNonEmpty(suffix);
 	    addAfter(x -> x + " " + suffix);
 	    return this;
@@ -126,7 +126,7 @@ public final class MyLogger {
 	    return this;
 	}
 
-	private void addAfter(Function<String, String> after) {
+	private void addAfter(final Function<String, String> after) {
 	    MyObjects.requireNonNull(after, "after");
 	    handler = MyObjects.isNull(handler) //
 		    ? after //

@@ -16,7 +16,7 @@ public final class MyPrivateKeys {
     private MyPrivateKeys() {
     }
 
-    public static Optional<PrivateKey> from(KeyStore keystore, String alias, String pass) {
+    public static Optional<PrivateKey> from(final KeyStore keystore, final String alias, final String pass) {
 	if (MyObjects.isNull(keystore))
 	    return Optional.empty();
 	if (MyStrings.empty(alias))

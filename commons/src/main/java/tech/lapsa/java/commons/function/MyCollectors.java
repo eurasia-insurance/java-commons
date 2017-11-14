@@ -14,8 +14,8 @@ public final class MyCollectors {
     private MyCollectors() {
     }
 
-    public static <T, K, U> Collector<T, ?, Map<K, U>> unmodifiableMap(Function<? super T, ? extends K> keyMapper,
-	    Function<? super T, ? extends U> valueMapper) {
+    public static <T, K, U> Collector<T, ?, Map<K, U>> unmodifiableMap(final Function<? super T, ? extends K> keyMapper,
+	    final Function<? super T, ? extends U> valueMapper) {
 	return collectingAndThen(toMap(keyMapper, valueMapper), Collections::unmodifiableMap);
     }
 

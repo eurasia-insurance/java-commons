@@ -10,12 +10,12 @@ public class SingletonLocalized implements Localized {
 
     public final String string;
 
-    public SingletonLocalized(String string) {
+    public SingletonLocalized(final String string) {
 	this.string = MyStrings.requireNonEmpty(string, "string");
     }
 
     @Override
-    public String localized(LocalizationVariant variant, Locale locale) {
+    public String localized(final LocalizationVariant variant, final Locale locale) {
 	return string;
     }
 }

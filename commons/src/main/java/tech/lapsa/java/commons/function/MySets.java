@@ -9,7 +9,7 @@ public final class MySets {
     }
 
     @SafeVarargs
-    public static <E> Set<E> of(E... elements) {
+    public static <E> Set<E> of(final E... elements) {
 	return Stream.of(elements) //
 		.collect(MyCollectors.unmodifiableSet());
     }

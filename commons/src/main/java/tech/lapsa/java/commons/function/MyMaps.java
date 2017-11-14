@@ -60,7 +60,7 @@ public final class MyMaps {
 	    }
 
 	    @Override
-	    public V setValue(V value) {
+	    public V setValue(final V value) {
 		throw new UnsupportedOperationException();
 	    }
 	};
@@ -76,59 +76,66 @@ public final class MyMaps {
 	return Collections.emptyMap();
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1) {
 	return Stream.of(entry(k1, v1)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2) {
 	return Stream.of(entry(k1, v1), entry(k2, v2)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4, final K k5, final V v5) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4, final K k5, final V v5, final K k6, final V v6) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5), entry(k6, v6)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7,
-	    V v7) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4, final K k5, final V v5, final K k6, final V v6, final K k7,
+	    final V v7) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5), entry(k6, v6),
 		entry(k7, v7)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7,
-	    V v7, K k8, V v8) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4, final K k5, final V v5, final K k6, final V v6, final K k7,
+	    final V v7, final K k8, final V v8) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5), entry(k6, v6),
 		entry(k7, v7), entry(k8, v8)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7,
-	    V v7, K k8, V v8, K k9, V v9) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4, final K k5, final V v5, final K k6, final V v6, final K k7,
+	    final V v7, final K k8, final V v8, final K k9, final V v9) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5), entry(k6, v6),
 		entry(k7, v7), entry(k8, v8), entry(k9, v9)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7,
-	    V v7, K k8, V v8, K k9, V v9, K k10, V v10) {
+    public static <K, V> Map<K, V> of(final K k1, final V v1, final K k2, final V v2, final K k3, final V v3,
+	    final K k4, final V v4, final K k5, final V v5, final K k6, final V v6, final K k7,
+	    final V v7, final K k8, final V v8, final K k9, final V v9, final K k10, final V v10) {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5), entry(k6, v6),
 		entry(k7, v7), entry(k8, v8), entry(k9, v9), entry(k10, v10)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));

@@ -12,19 +12,19 @@ public final class MyResources {
     private MyResources() {
     }
 
-    public static Optional<InputStream> optionalAsStream(String resource) {
+    public static Optional<InputStream> optionalAsStream(final String resource) {
 	return optionalAsStream(MyResources.class, resource);
     }
 
-    public static InputStream getAsStream(String resource) {
+    public static InputStream getAsStream(final String resource) {
 	return getAsStream(MyResources.class, resource);
     }
 
-    public static Optional<InputStream> optionalAsStream(Class<?> thisClazz, String resource) {
+    public static Optional<InputStream> optionalAsStream(final Class<?> thisClazz, final String resource) {
 	return MyOptionals.of(getAsStream(thisClazz, resource));
     }
 
-    public static InputStream getAsStream(Class<?> thisClazz, String resource) {
+    public static InputStream getAsStream(final Class<?> thisClazz, String resource) {
 	MyStrings.requireNonEmpty(resource, "resource");
 	MyObjects.requireNonNull(thisClazz, "thisClazz");
 

@@ -27,7 +27,7 @@ public interface LocalizedElement extends Localized {
 	MyObjects.requireNonNull(variant, "Display name variant must be provided");
 	MyObjects.requireNonNull(locale, "Locale must be provided");
 
-	Builder<LocalizationVariant> builder = Stream.<LocalizationVariant> builder() //
+	final Builder<LocalizationVariant> builder = Stream.<LocalizationVariant> builder() //
 		.add(variant);
 	switch (variant) {
 	case FULL:
@@ -89,11 +89,11 @@ public interface LocalizedElement extends Localized {
 
 	private static <T extends LocalizedElement> String getLocalized(final T entity,
 		final LocalizationVariant variant, final Locale locale) {
-	    ResourceBundle bundle = getCachedResourceBundle(entity, locale);
-	    String key = getResourceKey(entity, variant);
+	    final ResourceBundle bundle = getCachedResourceBundle(entity, locale);
+	    final String key = getResourceKey(entity, variant);
 	    try {
 		return bundle.getString(key);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		return null;
 	    }
 	}

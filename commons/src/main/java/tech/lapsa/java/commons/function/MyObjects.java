@@ -12,21 +12,21 @@ public final class MyObjects {
 
     //
 
-    public static <T> boolean nonNull(T obj) {
+    public static <T> boolean nonNull(final T obj) {
 	return obj != null;
     }
 
-    public static <T> T requireNonNull(T obj) {
+    public static <T> T requireNonNull(final T obj) {
 	return requireNonNull(obj, null);
     }
 
-    public static <T> T requireNonNull(T obj, String par) {
+    public static <T> T requireNonNull(final T obj, final String par) {
 	if (nonNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
     }
 
-    public static <T> T requireNonNullMsg(T obj, String message) {
+    public static <T> T requireNonNullMsg(final T obj, final String message) {
 	if (nonNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(message);
@@ -34,21 +34,21 @@ public final class MyObjects {
 
     //
 
-    public static <T> boolean isNull(T obj) {
+    public static <T> boolean isNull(final T obj) {
 	return obj == null;
     }
 
-    public static <T> T requireNull(T obj) {
+    public static <T> T requireNull(final T obj) {
 	return requireNull(obj, null);
     }
 
-    public static <T> T requireNull(T obj, String par) {
+    public static <T> T requireNull(final T obj, final String par) {
 	if (isNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
     }
 
-    public static <T> T requireNullMsg(T obj, String message) {
+    public static <T> T requireNullMsg(final T obj, final String message) {
 	if (isNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(message);
@@ -56,22 +56,22 @@ public final class MyObjects {
 
     //
 
-    public static final boolean isA(Object obj, Class<?> clazz) {
+    public static final boolean isA(final Object obj, final Class<?> clazz) {
 	requireNonNull(clazz, "clazz");
 	return obj != null && clazz.isAssignableFrom(obj.getClass());
     }
 
-    public static final <T> T requireA(Object obj, Class<T> clazz) {
+    public static final <T> T requireA(final Object obj, final Class<T> clazz) {
 	return requireA(obj, clazz, null);
     }
 
-    public static final <T> T requireA(Object obj, Class<T> clazz, String par) {
+    public static final <T> T requireA(final Object obj, final Class<T> clazz, final String par) {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
 	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
-    public static final <T> T requireAMsg(Object obj, Class<T> clazz, String message) {
+    public static final <T> T requireAMsg(final Object obj, final Class<T> clazz, final String message) {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
 	throw MyExceptions.illegalArgumentException(message);
@@ -79,21 +79,21 @@ public final class MyObjects {
 
     //
 
-    public static final boolean isNotA(Object obj, Class<?> clazz) {
+    public static final boolean isNotA(final Object obj, final Class<?> clazz) {
 	return !isA(obj, clazz);
     }
 
-    public static final <T> T requireNotA(T obj, Class<?> clazz) {
+    public static final <T> T requireNotA(final T obj, final Class<?> clazz) {
 	return requireNotA(obj, clazz, null);
     }
 
-    public static final <T> T requireNotA(T obj, Class<?> clazz, String par) {
+    public static final <T> T requireNotA(final T obj, final Class<?> clazz, final String par) {
 	if (isNotA(obj, clazz))
 	    return obj;
 	throw MyExceptions.illegalArgumentException("Is a " + clazz.getName(), par);
     }
 
-    public static final <T> T requireNotAMsg(T obj, Class<?> clazz, String message) {
+    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message) {
 	if (isNotA(obj, clazz))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(message);
@@ -101,7 +101,7 @@ public final class MyObjects {
 
     //
 
-    public static final <T> Function<Object, T> cast(Class<T> clazz) {
+    public static final <T> Function<Object, T> cast(final Class<T> clazz) {
 	requireNonNull(clazz, "clazz");
 	return clazz::cast;
     }
