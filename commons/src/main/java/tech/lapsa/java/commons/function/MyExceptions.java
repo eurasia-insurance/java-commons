@@ -1,6 +1,7 @@
 package tech.lapsa.java.commons.function;
 
 import java.util.StringJoiner;
+import java.util.function.Supplier;
 
 public final class MyExceptions {
 
@@ -137,7 +138,25 @@ public final class MyExceptions {
 	return new IllegalArgumentException(sj.toString(), cause);
     }
 
+    // format
+
     public static IllegalArgumentException illegalArgumentFormat(final String format, final Object... args) {
 	return new IllegalArgumentException(String.format(format, args));
+    }
+
+    public static IllegalStateException illegalStateFormat(final String format, final Object... args) {
+	return new IllegalStateException(String.format(format, args));
+    }
+
+    // supplier
+
+    public static Supplier<IllegalArgumentException> illegalArgumentSupplierFormat(final String format,
+	    final Object... args) {
+	return () -> illegalArgumentFormat(format, args);
+    }
+
+    public static Supplier<IllegalStateException> illegalStateSupplierFormat(final String format,
+	    final Object... args) {
+	return () -> illegalStateFormat(format, args);
     }
 }
