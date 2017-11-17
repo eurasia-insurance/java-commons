@@ -26,10 +26,10 @@ public final class MyObjects {
 	throw MyExceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
     }
 
-    public static <T> T requireNonNullMsg(final T obj, final String message) {
+    public static <T> T requireNonNullMsg(final T obj, final String message, Object... args) {
 	if (nonNull(obj))
 	    return obj;
-	throw MyExceptions.illegalArgumentException(message);
+	throw MyExceptions.illegalArgumentFormat(message, args);
     }
 
     //
@@ -48,10 +48,10 @@ public final class MyObjects {
 	throw MyExceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
     }
 
-    public static <T> T requireNullMsg(final T obj, final String message) {
+    public static <T> T requireNullMsg(final T obj, final String message, Object... args) {
 	if (isNull(obj))
 	    return obj;
-	throw MyExceptions.illegalArgumentException(message);
+	throw MyExceptions.illegalArgumentFormat(message, args);
     }
 
     //
@@ -71,10 +71,11 @@ public final class MyObjects {
 	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
-    public static final <T> T requireAMsg(final Object obj, final Class<T> clazz, final String message) {
+    public static final <T> T requireAMsg(final Object obj, final Class<T> clazz, final String message,
+	    Object... args) {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
-	throw MyExceptions.illegalArgumentException(message);
+	throw MyExceptions.illegalArgumentFormat(message, args);
     }
 
     //
@@ -93,10 +94,10 @@ public final class MyObjects {
 	throw MyExceptions.illegalArgumentException("Is a " + clazz.getName(), par);
     }
 
-    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message) {
+    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message, Object... args) {
 	if (isNotA(obj, clazz))
 	    return obj;
-	throw MyExceptions.illegalArgumentException(message);
+	throw MyExceptions.illegalArgumentFormat(message, args);
     }
 
     //
