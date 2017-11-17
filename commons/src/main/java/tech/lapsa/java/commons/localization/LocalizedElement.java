@@ -24,8 +24,8 @@ public interface LocalizedElement extends Localized {
 
     @Override
     default String localized(final LocalizationVariant variant, final Locale locale) {
-	MyObjects.requireNonNull(variant, "Display name variant must be provided");
-	MyObjects.requireNonNull(locale, "Locale must be provided");
+	MyObjects.requireNonNullMsg(variant, "Display name variant must be provided");
+	MyObjects.requireNonNullMsg(locale, "Locale must be provided");
 
 	final Builder<LocalizationVariant> builder = Stream.<LocalizationVariant> builder() //
 		.add(variant);
