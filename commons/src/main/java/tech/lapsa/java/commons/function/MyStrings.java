@@ -2,6 +2,7 @@ package tech.lapsa.java.commons.function;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.IllegalFormatException;
 import java.util.Locale;
 
 public final class MyStrings {
@@ -99,6 +100,16 @@ public final class MyStrings {
 
     //
 
+    public static String format(String format, Object... args) {
+	try {
+	    return String.format(format, args);
+	} catch (IllegalFormatException | NullPointerException e) {
+	    return "" + format + " {" + e.getClass().getSimpleName() + " " + e.getMessage() + "}";
+	}
+    }
+
+    //
+
     public static boolean equals(final String s1, final String s2) {
 	return s1 != null && s2 != null && s1.equals(s2);
     }
@@ -109,8 +120,8 @@ public final class MyStrings {
 		    "'" + s1 + "' and '" + s2 + "'");
     }
 
-    public static void requireEqualsMsg(final String s1, final String s2, final String message) {
+    public static void requireEqualsMsg(final String s1, final String s2, final String message, Object... args) {
 	if (!equals(s1, s2))
-	    throw MyExceptions.illegalArgumentException(message);
+	    throw MyExceptions.illegalArgumentFormat(message, args);
     }
 }

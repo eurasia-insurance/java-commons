@@ -213,9 +213,10 @@ public final class MyNumbers {
 		    "'" + n1 + "' and '" + n2 + "'");
     }
 
-    public static <N extends Number> void requireEqualsMsg(final N n1, final N n2, final String message) {
+    public static <N extends Number> void requireEqualsMsg(final N n1, final N n2, final String message,
+	    Object... args) {
 	if (!numbericEquals(n1, n2))
-	    throw MyExceptions.illegalArgumentException(message);
+	    throw MyExceptions.illegalArgumentFormat(message, args);
     }
 
     // parsers

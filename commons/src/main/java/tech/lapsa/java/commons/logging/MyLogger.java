@@ -31,7 +31,7 @@ public final class MyLogger {
 	}
 
 	public MyLogger log(final String format, final Object... args) {
-	    logger.log(level, handler.apply(String.format(format, args)));
+	    logger.log(level, handler.apply(MyStrings.format(format, args)));
 	    return MyLogger.this;
 	}
 
@@ -47,7 +47,7 @@ public final class MyLogger {
 	}
 
 	public MyLogger log(final Throwable thrown, final String format, final Object... args) {
-	    logger.log(level, handler.apply(String.format(format, args)), thrown);
+	    logger.log(level, handler.apply(MyStrings.format(format, args)), thrown);
 	    return MyLogger.this;
 	}
     }

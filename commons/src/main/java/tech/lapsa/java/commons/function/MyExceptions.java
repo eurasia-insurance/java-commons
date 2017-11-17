@@ -106,8 +106,7 @@ public final class MyExceptions {
     }
 
     public static IllegalArgumentException illegalArgumentException(final String message, final String par,
-	    final String value,
-	    final Throwable cause) {
+	    final String value, final Throwable cause) {
 	final StringJoiner sj = new StringJoiner(" ");
 	sj.add(message);
 	if (MyStrings.nonEmpty(value))
@@ -125,10 +124,6 @@ public final class MyExceptions {
 	return new IllegalArgumentException(sj.toString());
     }
 
-    public static IllegalArgumentException illegalArgumentException(final String message) {
-	return new IllegalArgumentException(message);
-    }
-
     public static IllegalArgumentException illegalArgumentException(final String message, final String par,
 	    final Throwable cause) {
 	final StringJoiner sj = new StringJoiner(" ");
@@ -141,11 +136,11 @@ public final class MyExceptions {
     // format
 
     public static IllegalArgumentException illegalArgumentFormat(final String format, final Object... args) {
-	return new IllegalArgumentException(String.format(format, args));
+	return new IllegalArgumentException(MyStrings.format(format, args));
     }
 
     public static IllegalStateException illegalStateFormat(final String format, final Object... args) {
-	return new IllegalStateException(String.format(format, args));
+	return new IllegalStateException(MyStrings.format(format, args));
     }
 
     // supplier

@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
 
 import tech.lapsa.java.commons.function.MyObjects;
+import tech.lapsa.java.commons.function.MyStrings;
 
 public interface LocalizedElement extends Localized {
 
@@ -62,7 +63,7 @@ public interface LocalizedElement extends Localized {
 
 	private static <T extends LocalizedElement> String getResourceKey(final T entity,
 		final LocalizationVariant variant) {
-	    return String.format(ResourceBundleUtil.KEY_PATTERNS.get(variant), //
+	    return MyStrings.format(ResourceBundleUtil.KEY_PATTERNS.get(variant), //
 		    entity.getClass().getName(), //
 		    entity.name());
 	}
