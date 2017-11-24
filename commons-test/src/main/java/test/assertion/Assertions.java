@@ -7,20 +7,22 @@ public final class Assertions {
     private Assertions() {
     }
 
-    public static void expectException(Statement statement, Class<? extends Throwable> exceptionClazz) {
+    public static void expectException(Statement statement, Class<? extends Throwable> expectingException)
+	    throws Exception {
 	try {
 	    statement.call();
-	} catch (Throwable e) {
-	    if (exceptionClazz.isAssignableFrom(e.getClass()))
+	} catch (Exception e) {
+	    if (expectingException.isAssignableFrom(e.getClass()))
 		return; // OK
+	    throw e;
 	}
-	fail(exceptionClazz.getName() + " exception is expected");
+	fail(expectingException.getName() + " exception is expected");
     }
 
     public static void expectException(Statement statement) {
 	try {
 	    statement.call();
-	} catch (Throwable e) {
+	} catch (Exception e) {
 	    return; // OK
 	}
 	fail("Any exception expected");
@@ -29,13 +31,13 @@ public final class Assertions {
     public static void unexpectException(Statement statement) {
 	try {
 	    statement.call();
-	} catch (Throwable e) {
+	} catch (Exception e) {
 	    fail("Unexpected exception thrown " + e.getClass().getName() + ": " + e.getMessage());
 	}
     }
 
     @FunctionalInterface
     public static interface Statement {
-	void call();
+	void call() throws Exception;
     }
 }
