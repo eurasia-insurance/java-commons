@@ -110,6 +110,12 @@ public final class MyLogger {
 	    return this;
 	}
 
+	public MyLoggerBuilder addHandler(final UnaryOperator<String> handler) {
+	    MyObjects.requireNonNull(handler, "handler");
+	    addAfter(handler);
+	    return this;
+	}
+
 	public MyLoggerBuilder addWithSuffix(final String suffix) {
 	    MyStrings.requireNonEmpty(suffix);
 	    addAfter(x -> x + " " + suffix);
