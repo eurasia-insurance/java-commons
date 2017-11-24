@@ -1,5 +1,6 @@
 package tech.lapsa.java.commons.function;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 public final class MyObjects {
@@ -59,6 +60,12 @@ public final class MyObjects {
     public static final boolean isA(final Object obj, final Class<?> clazz) {
 	requireNonNull(clazz, "clazz");
 	return obj != null && clazz.isAssignableFrom(obj.getClass());
+    }
+
+    public static final <T> Optional<T> optionalA(final Object obj, final Class<T> clazz) {
+	if (isA(obj, clazz))
+	    return MyOptionals.of(clazz.cast(obj));
+	return Optional.empty();
     }
 
     public static final <T> T requireA(final Object obj, final Class<T> clazz) {
