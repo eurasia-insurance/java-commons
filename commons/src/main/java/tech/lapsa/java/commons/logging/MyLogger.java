@@ -35,19 +35,27 @@ public final class MyLogger {
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(final Throwable thrown, final String message) {
-	    logger.log(level, handler.apply(message), thrown);
-	    return MyLogger.this;
-	}
+	private static final String EXCEPTION_MESSAGE_FORMAT = "Exception has thrown %1$s '%2$s'";
 
 	public MyLogger log(final Throwable thrown) {
 	    MyObjects.requireNonNull(thrown, "thrown");
-	    logger.log(level, handler.apply(thrown.getMessage()), thrown);
+	    logger.log(level,
+		    handler.apply(String.format(EXCEPTION_MESSAGE_FORMAT, thrown.getClass(), thrown.getMessage())),
+		    thrown);
+	    return MyLogger.this;
+	}
+
+	public MyLogger log(final Throwable thrown, final String message) {
+	    log(thrown);
+	    if (MyStrings.nonEmpty(message))
+		logger.log(level, handler.apply(message));
 	    return MyLogger.this;
 	}
 
 	public MyLogger log(final Throwable thrown, final String format, final Object... args) {
-	    logger.log(level, handler.apply(MyStrings.format(format, args)), thrown);
+	    log(thrown);
+	    if (MyStrings.nonEmpty(format))
+		logger.log(level, handler.apply(String.format(format, args)));
 	    return MyLogger.this;
 	}
     }
@@ -114,6 +122,10 @@ public final class MyLogger {
 	    MyObjects.requireNonNull(handler, "handler");
 	    addAfter(handler);
 	    return this;
+	}
+
+	public MyLoggerBuilder addLoggerNameAsPrefix() {
+	    return addWithPrefix(name);
 	}
 
 	public MyLoggerBuilder addWithSuffix(final String suffix) {
