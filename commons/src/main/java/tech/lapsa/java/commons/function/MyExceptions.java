@@ -154,6 +154,16 @@ public final class MyExceptions {
 	return creator.apply(MyStrings.format(format, args));
     }
 
+    public static <X extends RuntimeException> X runtimeExceptionFormat(final Function<String, X> creator,
+	    final String format, final Object... args) {
+	return creator.apply(MyStrings.format(format, args));
+    }
+
+    public static <X extends Throwable> X format(final Function<String, X> creator,
+	    final String format, final Object... args) {
+	return creator.apply(MyStrings.format(format, args));
+    }
+
     // supplier
 
     public static Supplier<IllegalArgumentException> illegalArgumentSupplierFormat(final String format,
@@ -164,5 +174,14 @@ public final class MyExceptions {
     public static Supplier<IllegalStateException> illegalStateSupplierFormat(final String format,
 	    final Object... args) {
 	return () -> illegalStateFormat(format, args);
+    }
+
+    public static <X extends RuntimeException> Supplier<X> runtimeExceptionSupplierFormat(
+	    final Function<String, X> creator, final String format, final Object... args) {
+	return () -> runtimeExceptionFormat(creator, format, args);
+    }
+
+    public static <X extends Throwable> Supplier<X> supplier(final Function<String, X> creator, final String format, final Object... args) {
+	return () -> format(creator, format, args);
     }
 }
