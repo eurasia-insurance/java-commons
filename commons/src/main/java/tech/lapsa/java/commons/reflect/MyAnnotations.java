@@ -34,4 +34,13 @@ public class MyAnnotations {
 		.getAnnotation(MyObjects.requireNonNull(annotationClazz, "annotationClazz"));
     }
 
+    public static <T extends Annotation> boolean notAnnotated(final Class<?> clazz, final Class<T> annotationClazz) {
+	return !optionalOf(clazz, annotationClazz).isPresent();
+    }
+
+    public static <T extends Annotation> boolean notAnnotatedSupers(final Class<?> clazz,
+	    final Class<T> annotationClazz) {
+	return !optionalOfSupers(clazz, annotationClazz).isPresent();
+    }
+
 }
