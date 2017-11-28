@@ -6,7 +6,11 @@ import java.util.Optional;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyOptionals;
 
-public class MyAnnotations {
+public final class MyAnnotations {
+
+    private MyAnnotations() {
+	throw new AssertionError("Can't instantiate");
+    }
 
     public static <T extends Annotation> Optional<T> optionalOfSupers(final Class<?> clazz,
 	    final Class<T> annotationClazz) {
