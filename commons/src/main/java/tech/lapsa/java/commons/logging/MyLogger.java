@@ -1,5 +1,6 @@
 package tech.lapsa.java.commons.logging;
 
+import java.time.Instant;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.logging.Level;
@@ -61,12 +62,23 @@ public final class MyLogger {
     }
 
     public final MyLevel CONFIG = new MyLevel(Level.CONFIG);
+
     public final MyLevel INFO = new MyLevel(Level.INFO);
+    public final MyLevel MESSAGE = INFO;
+
     public final MyLevel FINE = new MyLevel(Level.FINE);
+    public final MyLevel DEBUG = FINE;
+
     public final MyLevel FINER = new MyLevel(Level.FINER);
+    public final MyLevel TRACE = FINER;
+
     public final MyLevel FINEST = new MyLevel(Level.FINEST);
+    public final MyLevel SUPER_TRACE = FINEST;
+
     public final MyLevel SEVERE = new MyLevel(Level.SEVERE);
+
     public final MyLevel WARNING = new MyLevel(Level.WARNING);
+
     public final MyLevel WARN = WARNING;
 
     public Logger logger() {
@@ -112,7 +124,12 @@ public final class MyLogger {
 	    return this;
 	}
 
-	public MyLoggerBuilder addWithPrefix(final String prefix) {
+	public MyLoggerBuilder addInstantPrefix() {
+	    addAfter(x -> Instant.now().toString() + " " + x);
+	    return this;
+	}
+
+	public MyLoggerBuilder addPrefix(final String prefix) {
 	    MyStrings.requireNonEmpty(prefix);
 	    addAfter(x -> prefix + " : " + x);
 	    return this;
@@ -125,7 +142,7 @@ public final class MyLogger {
 	}
 
 	public MyLoggerBuilder addLoggerNameAsPrefix() {
-	    return addWithPrefix(name);
+	    return addPrefix(name);
 	}
 
 	public MyLoggerBuilder addWithSuffix(final String suffix) {
@@ -148,7 +165,7 @@ public final class MyLogger {
 	    MyObjects.requireNonNull(after, "after");
 	    handler = MyObjects.isNull(handler) //
 		    ? after //
-		    : handler.andThen(after);
+		    : after.andThen(handler);
 	}
 
 	public MyLogger build() {

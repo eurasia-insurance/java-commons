@@ -37,6 +37,16 @@ public final class MyExceptions {
     }
 
     @FunctionalInterface
+    public static interface CheckedExceptionThrowingSupplier<T, E extends Exception> {
+	T get() throws E;
+    }
+
+    @FunctionalInterface
+    public static interface CheckedExceptionThrowingCallable<E extends Exception> {
+	void call() throws E;
+    }
+
+    @FunctionalInterface
     public static interface ReThrowingCallable<E extends Exception> {
 	void call() throws IllegalArgument, IllegalState, E;
     }
@@ -181,7 +191,8 @@ public final class MyExceptions {
 	return () -> runtimeExceptionFormat(creator, format, args);
     }
 
-    public static <X extends Throwable> Supplier<X> supplier(final Function<String, X> creator, final String format, final Object... args) {
+    public static <X extends Throwable> Supplier<X> supplier(final Function<String, X> creator, final String format,
+	    final Object... args) {
 	return () -> format(creator, format, args);
     }
 }
