@@ -56,7 +56,7 @@ public final class MyLogger {
 	public MyLogger log(final Throwable thrown, final String format, final Object... args) {
 	    log(thrown);
 	    if (MyStrings.nonEmpty(format))
-		logger.log(level, handler.apply(String.format(format, args)));
+		logger.log(level, handler.apply(MyStrings.format(format, args)));
 	    return MyLogger.this;
 	}
     }
