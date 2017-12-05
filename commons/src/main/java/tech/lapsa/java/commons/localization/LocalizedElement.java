@@ -5,15 +5,13 @@ import static tech.lapsa.java.commons.function.MyMaps.*;
 
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Stream;
 import java.util.stream.Stream.Builder;
 
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyStrings;
+import tech.lapsa.java.commons.util.MyResourceBundles;
 
 public interface LocalizedElement extends Localized {
 
@@ -69,20 +67,10 @@ public interface LocalizedElement extends Localized {
 
 	//
 
-	private static final ConcurrentMap<String, ConcurrentMap<Locale, ResourceBundle>> CACHE = new ConcurrentHashMap<>();
-
 	private static <T extends LocalizedElement> ResourceBundle getCachedResourceBundle(final T entity,
 		final Locale locale) {
-	    return CACHE //
-		    .computeIfAbsent(entity.getClass().getCanonicalName(), x -> new ConcurrentHashMap<>()) //
-		    .computeIfAbsent(locale, x -> {
-			try {
-			    return ResourceBundle.getBundle(entity.getClass().getCanonicalName(), x);
-			} catch (NullPointerException | MissingResourceException e) {
-			    return null;
-			}
-		    }) //
-	    ;
+	    final String baseName = entity.getClass().getCanonicalName();
+	    return MyResourceBundles.optOf(entity.getClass(), baseName, locale).orElseGet(null);
 	}
 
 	//
