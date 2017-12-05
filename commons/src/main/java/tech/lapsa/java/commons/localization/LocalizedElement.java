@@ -42,8 +42,7 @@ public interface LocalizedElement extends Localized {
 		.map(x -> ResourceBundleUtil.getLocalized(this, x, locale)) //
 		.filter(MyObjects::nonNull) //
 		.findFirst()
-		.orElseThrow(() -> new IllegalArgumentException("No ResourceBundle is supplied or key "
-			+ "is not mapped correctly"));
+		.orElseThrow(() -> new NoLocalizationException(this, variant, locale));
     }
 
     //
