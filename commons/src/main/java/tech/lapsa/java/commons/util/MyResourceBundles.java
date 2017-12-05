@@ -8,11 +8,16 @@ import java.util.ResourceBundle;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyStrings;
 import tech.lapsa.java.commons.lang.MyClassLoaderBased;
+import tech.lapsa.java.commons.logging.MyLogger;
 
 public final class MyResourceBundles {
 
     private MyResourceBundles() {
     }
+
+    private static final MyLogger LOGGER = MyLogger.newBuilder() //
+	    .withNameOf(MyResourceBundles.class) //
+	    .build();
 
     public static Optional<ResourceBundle> optOf(final Class<?> thisClazz, final String baseName, final Locale locale) {
 	MyObjects.requireNonNull(thisClazz, "thisClazz");
@@ -20,9 +25,14 @@ public final class MyResourceBundles {
 	MyObjects.requireNonNull(locale, "locale");
 
 	return MyClassLoaderBased.optOf(thisClazz, cl -> {
+	    LOGGER.DEBUG.log("Searching for resource bundle for '%1$s', locale %2$s", baseName, locale);
 	    try {
-		return ResourceBundle.getBundle(baseName, locale, cl);
+		final ResourceBundle rb = ResourceBundle.getBundle(baseName, locale, cl);
+		if (rb != null)
+		    LOGGER.SUPER_TRACE.log("Resource bundle found %1$s", rb.keySet());
+		return rb;
 	    } catch (MissingResourceException e) {
+		LOGGER.SEVERE.log(e);
 		return null;
 	    }
 	});

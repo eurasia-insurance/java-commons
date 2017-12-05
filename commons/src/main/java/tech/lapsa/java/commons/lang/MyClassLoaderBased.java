@@ -23,7 +23,7 @@ public final class MyClassLoaderBased {
 	ClassLoader classLoader = Thread.currentThread()
 		.getContextClassLoader();
 
-	Optional<T> result = null;
+	Optional<T> result = Optional.empty();
 	if (classLoader == null) {
 	    classLoader = thisClazz.getClassLoader();
 	    result = MyOptionals.of(classLoaderBasedFunction.apply(classLoader));
