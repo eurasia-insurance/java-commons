@@ -4,49 +4,29 @@ import java.io.InputStream;
 import java.util.Optional;
 
 import tech.lapsa.java.commons.function.MyObjects;
-import tech.lapsa.java.commons.function.MyOptionals;
 import tech.lapsa.java.commons.function.MyStrings;
+import tech.lapsa.java.commons.lang.MyClassLoaderBased;
 
 public final class MyResources {
 
     private MyResources() {
     }
 
-    public static Optional<InputStream> optionalAsStream(final String resource) {
-	return optionalAsStream(MyResources.class, resource);
-    }
-
-    public static InputStream getAsStream(final String resource) {
-	return getAsStream(MyResources.class, resource);
-    }
-
-    public static Optional<InputStream> optionalAsStream(final Class<?> thisClazz, final String resource) {
-	return MyOptionals.of(getAsStream(thisClazz, resource));
-    }
-
-    public static InputStream getAsStream(final Class<?> thisClazz, String resource) {
-	MyStrings.requireNonEmpty(resource, "resource");
+    public static Optional<InputStream> optAsStream(final Class<?> thisClazz, final String resource) {
 	MyObjects.requireNonNull(thisClazz, "thisClazz");
+	MyStrings.requireNonEmpty(resource, "resource");
 
-	while (resource.startsWith("/"))
-	    resource = resource.substring(1);
+	final String res = resource.startsWith("/") ? resource.substring(1) : resource;
 
-	ClassLoader classLoader = Thread.currentThread()
-		.getContextClassLoader();
+	return MyClassLoaderBased.optOf(thisClazz, cl -> cl.getResourceAsStream(res));
+    }
 
-	InputStream result = null;
-	if (classLoader == null) {
-	    classLoader = thisClazz.getClassLoader();
-	    result = classLoader.getResourceAsStream(resource);
-	} else {
-	    result = classLoader.getResourceAsStream(resource);
+    public static InputStream getAsStream(final Class<?> thisClazz, final String resource) {
+	return optAsStream(thisClazz, resource).orElse(null);
+    }
 
-	    if (result == null) {
-		classLoader = thisClazz.getClassLoader();
-		if (classLoader != null)
-		    result = classLoader.getResourceAsStream(resource);
-	    }
-	}
-	return result;
+    @Deprecated
+    public static Optional<InputStream> optionalAsStream(final Class<?> thisClazz, final String resource) {
+	return optAsStream(thisClazz, resource);
     }
 }
