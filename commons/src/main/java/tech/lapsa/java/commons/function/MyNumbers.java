@@ -403,4 +403,18 @@ public final class MyNumbers {
 	    return Optional.empty();
 	}
     }
+
+    //
+
+    public static double safeUnbox(final Double boxed) {
+	return boxed == null ? 0 : boxed.doubleValue();
+    }
+
+    public static int safeUnbox(final Integer boxed) {
+	return boxed == null ? 0 : boxed.intValue();
+    }
+
+    public static long safeUnbox(final Long boxed) {
+	return boxed == null ? 0 : boxed.longValue();
+    }
 }
