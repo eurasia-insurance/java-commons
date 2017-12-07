@@ -7,10 +7,13 @@ import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.function.Supplier;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
+
+import tech.lapsa.java.commons.function.MyExceptions.CheckedExceptionThrowingSupplier;
 
 public final class MyOptionals {
 
@@ -265,6 +268,36 @@ public final class MyOptionals {
 	return optional == null //
 		? OptionalLong.empty() //
 		: ofZeroLong(optional.longValue());
+    }
+
+    //
+
+    @SafeVarargs
+    public static <T> Optional<T> ifUncheckedException(Supplier<T> supplier,
+	    Class<? extends RuntimeException>... expectingExceptions) {
+	try {
+	    final T t = supplier.get();
+	    return of(t);
+	} catch (RuntimeException e) {
+	    if (MyArrays.empty(expectingExceptions))
+		return Optional.empty(); // ignores any RuntimeException
+
+	    if (MyStreams.orEmptyOf(expectingExceptions) //
+		    .anyMatch(expected -> MyObjects.isA(e, expected)))
+		return Optional.empty(); // ignores only if expecting exception
+					 // occured
+	    throw e;
+	}
+    }
+
+    public static <T> Optional<T> ifAnyException(
+	    CheckedExceptionThrowingSupplier<T, ?> supplier) {
+	try {
+	    final T t = supplier.get();
+	    return of(t);
+	} catch (Exception suppressed) {
+	    return Optional.empty(); // ignores any RuntimeException
+	}
     }
 
 }
