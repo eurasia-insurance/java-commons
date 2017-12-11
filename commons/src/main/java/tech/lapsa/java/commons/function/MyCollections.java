@@ -1,7 +1,9 @@
 package tech.lapsa.java.commons.function;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 public final class MyCollections {
@@ -91,6 +93,18 @@ public final class MyCollections {
 		.filter(Iterator::hasNext) //
 		.map(Iterator::next);
 
+    }
+
+    //
+
+    public static <T> List<T> orEmptyList(List<T> list) {
+	if (empty(list))
+	    return Collections.emptyList();
+	return list;
+    }
+
+    public static <T> List<T> unmodifiableOrEmptyList(List<T> list) {
+	return Collections.unmodifiableList(orEmptyList(list));
     }
 
 }
