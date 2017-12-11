@@ -300,4 +300,16 @@ public final class MyOptionals {
 	}
     }
 
+    public static <T, E extends Exception> Optional<T> ifCheckedException(
+	    CheckedExceptionThrowingSupplier<T, E> supplier, Class<E> exceptionClazz) {
+	try {
+	    final T t = supplier.get();
+	    return of(t);
+	} catch (Exception suppressed) {
+	    if (MyObjects.isA(suppressed, exceptionClazz))
+		return Optional.empty();
+	    throw new RuntimeException("Unexpected exception has thrown", suppressed);
+	}
+    }
+
 }
