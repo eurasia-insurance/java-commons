@@ -23,11 +23,12 @@ public final class MyCollections {
 	return MyObjects.isNull(collection) || collection.isEmpty();
     }
 
-    public static <T, C extends Collection<T>> C requireEmpty(final C collection) {
+    public static <T, C extends Collection<T>> C requireEmpty(final C collection) throws IllegalArgumentException {
 	return requireEmpty(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireEmpty(final C collection, final String par) {
+    public static <T, C extends Collection<T>> C requireEmpty(final C collection, final String par)
+	    throws IllegalArgumentException {
 	if (empty(collection)) //
 	    return collection;
 	throw MyExceptions.illegalArgumentException(COLLECTION_IS_NOT_EMPTY, par);
@@ -39,11 +40,12 @@ public final class MyCollections {
 	return !empty(collection);
     }
 
-    public static <T, C extends Collection<T>> C requireNonEmpty(final C collection) {
+    public static <T, C extends Collection<T>> C requireNonEmpty(final C collection) throws IllegalArgumentException {
 	return requireNonEmpty(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireNonEmpty(final C collection, final String par) {
+    public static <T, C extends Collection<T>> C requireNonEmpty(final C collection, final String par)
+	    throws IllegalArgumentException {
 	if (nonEmpty(collection)) //
 	    return collection;
 	throw MyExceptions.illegalArgumentException(COLLECTION_IS_EMPTY, par);
@@ -57,11 +59,13 @@ public final class MyCollections {
 		.allMatch(MyObjects::nonNull);
     }
 
-    public static <T, C extends Collection<T>> C requireNonNullElements(final C collection) {
+    public static <T, C extends Collection<T>> C requireNonNullElements(final C collection)
+	    throws IllegalArgumentException {
 	return requireNonNullElements(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireNonNullElements(final C collection, final String par) {
+    public static <T, C extends Collection<T>> C requireNonNullElements(final C collection, final String par)
+	    throws IllegalArgumentException {
 	if (nonNullElements(collection)) //
 	    return collection;
 	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, par);
@@ -75,11 +79,13 @@ public final class MyCollections {
 		.allMatch(MyObjects::isNull);
     }
 
-    public static <T, C extends Collection<T>> C requireNullElements(final C collection) {
+    public static <T, C extends Collection<T>> C requireNullElements(final C collection)
+	    throws IllegalArgumentException {
 	return requireNullElements(collection, null);
     }
 
-    public static <T, C extends Collection<T>> C requireNullElements(final C collection, final String par) {
+    public static <T, C extends Collection<T>> C requireNullElements(final C collection, final String par)
+	    throws IllegalArgumentException {
 	if (nullElements(collection)) //
 	    return collection;
 	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);

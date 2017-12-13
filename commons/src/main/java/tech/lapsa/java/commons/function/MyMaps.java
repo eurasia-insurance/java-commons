@@ -18,11 +18,12 @@ public final class MyMaps {
 	return MyObjects.isNull(map) || map.isEmpty();
     }
 
-    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map) {
+    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map) throws IllegalArgumentException {
 	return requireEmpty(map, null);
     }
 
-    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map, final String par) {
+    public static <K, V, M extends Map<K, V>> M requireEmpty(final M map, final String par)
+	    throws IllegalArgumentException {
 	if (empty(map)) //
 	    return map;
 	throw MyExceptions.illegalArgumentException(MAP_IS_NOT_EMPTY, par);
@@ -34,11 +35,12 @@ public final class MyMaps {
 	return !empty(map);
     }
 
-    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map) {
+    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map) throws IllegalArgumentException {
 	return requireNonEmpty(map, null);
     }
 
-    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map, final String par) {
+    public static <K, V, M extends Map<K, V>> M requireNonEmpty(final M map, final String par)
+	    throws IllegalArgumentException {
 	if (nonEmpty(map)) //
 	    return map;
 	throw MyExceptions.illegalArgumentException(MAP_IS_EMPTY, par);
