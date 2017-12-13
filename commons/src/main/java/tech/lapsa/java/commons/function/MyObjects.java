@@ -5,8 +5,7 @@ import java.util.function.Function;
 
 public final class MyObjects {
 
-    private static final String IS_A_NON_NULL_OBJECT = "Is not null";
-    private static final String IS_A_NULL_OBJECT = "Is null";
+    private static final String DEFAULT_PAR = "object";
 
     private MyObjects() {
     }
@@ -17,21 +16,39 @@ public final class MyObjects {
 	return obj != null;
     }
 
+    // reqs
+
     public static <T> T requireNonNull(final T obj) throws IllegalArgumentException {
-	return requireNonNull(obj, null);
+	return requireNonNull(IllegalArgumentException::new, obj);
     }
 
     public static <T> T requireNonNull(final T obj, final String par) throws IllegalArgumentException {
-	if (nonNull(obj))
-	    return obj;
-	throw MyExceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
+	return requireNonNull(IllegalArgumentException::new, obj, par);
     }
 
     public static <T> T requireNonNullMsg(final T obj, final String message, Object... args)
 	    throws IllegalArgumentException {
+	return requireNonNullMsg(IllegalArgumentException::new, obj, message, args);
+    }
+
+    // with creators
+
+    private static final String IS_A_NULL_OBJECT = "%1$s is null";
+
+    public static <T, X extends Throwable> T requireNonNull(final Function<String, X> creator, final T obj) throws X {
+	return requireNonNull(creator, obj, DEFAULT_PAR);
+    }
+
+    public static <T, X extends Throwable> T requireNonNull(final Function<String, X> creator, final T obj,
+	    final String par) throws X {
+	return requireNonNullMsg(creator, obj, IS_A_NULL_OBJECT, par);
+    }
+
+    public static <T, X extends Throwable> T requireNonNullMsg(final Function<String, X> creator, final T obj,
+	    final String message, Object... args) throws X {
 	if (nonNull(obj))
 	    return obj;
-	throw MyExceptions.illegalArgumentFormat(message, args);
+	throw MyExceptions.format(creator, message, args);
     }
 
     //
@@ -40,21 +57,39 @@ public final class MyObjects {
 	return obj == null;
     }
 
+    // reqs
+
     public static <T> T requireNull(final T obj) throws IllegalArgumentException {
-	return requireNull(obj, null);
+	return requireNull(IllegalArgumentException::new, obj);
     }
 
     public static <T> T requireNull(final T obj, final String par) throws IllegalArgumentException {
-	if (isNull(obj))
-	    return obj;
-	throw MyExceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
+	return requireNull(IllegalArgumentException::new, obj, par);
     }
 
     public static <T> T requireNullMsg(final T obj, final String message, Object... args)
 	    throws IllegalArgumentException {
+	return requireNullMsg(IllegalArgumentException::new, obj, message, args);
+    }
+
+    // with creators
+
+    private static final String IS_A_NOT_NULL_OBJECT = "%1$s is not null";
+
+    public static <T, X extends Throwable> T requireNull(final Function<String, X> creator, final T obj) throws X {
+	return requireNull(creator, obj, DEFAULT_PAR);
+    }
+
+    public static <T, X extends Throwable> T requireNull(final Function<String, X> creator, final T obj,
+	    final String par) throws X {
+	return requireNullMsg(creator, obj, IS_A_NOT_NULL_OBJECT, par);
+    }
+
+    public static <T, X extends Throwable> T requireNullMsg(final Function<String, X> creator, final T obj,
+	    final String message, Object... args) throws X {
 	if (isNull(obj))
 	    return obj;
-	throw MyExceptions.illegalArgumentFormat(message, args);
+	throw MyExceptions.format(creator, message, args);
     }
 
     //
@@ -70,22 +105,41 @@ public final class MyObjects {
 	return Optional.empty();
     }
 
+    // reqs
+
     public static final <T> T requireA(final Object obj, final Class<T> clazz) throws IllegalArgumentException {
-	return requireA(obj, clazz, null);
+	return requireA(IllegalArgumentException::new, obj, clazz);
     }
 
     public static final <T> T requireA(final Object obj, final Class<T> clazz, final String par)
 	    throws IllegalArgumentException {
-	if (isA(obj, clazz))
-	    return clazz.cast(obj);
-	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
+	return requireA(IllegalArgumentException::new, obj, clazz, par);
     }
 
     public static final <T> T requireAMsg(final Object obj, final Class<T> clazz, final String message,
 	    Object... args) throws IllegalArgumentException {
+	return requireAMsg(IllegalArgumentException::new, obj, clazz, message, args);
+    }
+
+    // with creators
+
+    private static final String IS_NOT_A = "%1$s is not a %2$s";
+
+    public static final <T, X extends Throwable> T requireA(final Function<String, X> creator, final Object obj,
+	    final Class<T> clazz) throws X {
+	return requireA(creator, obj, clazz, DEFAULT_PAR);
+    }
+
+    public static final <T, X extends Throwable> T requireA(final Function<String, X> creator, final Object obj,
+	    final Class<T> clazz, final String par) throws X {
+	return requireAMsg(creator, obj, clazz, IS_NOT_A, par, clazz);
+    }
+
+    public static final <T, X extends Throwable> T requireAMsg(final Function<String, X> creator, final Object obj,
+	    final Class<T> clazz, final String message, Object... args) throws X {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
-	throw MyExceptions.illegalArgumentFormat(message, args);
+	throw MyExceptions.format(creator, message, args);
     }
 
     //
@@ -94,22 +148,41 @@ public final class MyObjects {
 	return !isA(obj, clazz);
     }
 
+    // reqs
+
     public static final <T> T requireNotA(final T obj, final Class<?> clazz) throws IllegalArgumentException {
-	return requireNotA(obj, clazz, null);
+	return requireNotA(IllegalArgumentException::new, obj, clazz);
     }
 
     public static final <T> T requireNotA(final T obj, final Class<?> clazz, final String par)
 	    throws IllegalArgumentException {
-	if (isNotA(obj, clazz))
-	    return obj;
-	throw MyExceptions.illegalArgumentException("Is a " + clazz.getName(), par);
+	return requireNotA(IllegalArgumentException::new, obj, clazz, par);
     }
 
-    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message, Object... args)
-	    throws IllegalArgumentException {
+    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message,
+	    Object... args) throws IllegalArgumentException {
+	return requireNotAMsg(IllegalArgumentException::new, obj, clazz, message, args);
+    }
+
+    // with creators
+
+    private static final String IS_A = "%1$s is a %2$s";
+
+    public static final <T, X extends Throwable> T requireNotA(final Function<String, X> creator, final T obj,
+	    final Class<?> clazz) throws X {
+	return requireNotA(creator, obj, clazz, DEFAULT_PAR);
+    }
+
+    public static final <T, X extends Throwable> T requireNotA(final Function<String, X> creator, final T obj,
+	    final Class<?> clazz, final String par) throws X {
+	return requireNotAMsg(creator, obj, clazz, IS_A, par, clazz);
+    }
+
+    public static final <T, X extends Throwable> T requireNotAMsg(final Function<String, X> creator, final T obj,
+	    final Class<?> clazz, final String message, Object... args) throws X {
 	if (isNotA(obj, clazz))
 	    return obj;
-	throw MyExceptions.illegalArgumentFormat(message, args);
+	throw MyExceptions.format(creator, message, args);
     }
 
     //

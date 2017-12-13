@@ -4,12 +4,12 @@ import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.function.Function;
 
 public final class MyNumbers {
 
-    private static final String NON_ZERO_NUMBER = "Is not zero";
-    private static final String ZERO_NUMBER = "Is zero";
-    private static final String NON_POSITIVE_NUMBER = "Is not positive or zero";
+    private static final String DEFAULT_PAR = "number";
+
     private static final String NUMBERS_NOT_EQUALS = "Numbers are not equals";
 
     private MyNumbers() {
@@ -23,15 +23,43 @@ public final class MyNumbers {
 							     // type
     }
 
+    // reqs
+
     public static <T extends Number> T requireZero(final T number) throws IllegalArgumentException {
-	return requireZero(number, null);
+	return requireZero(IllegalArgumentException::new, number);
     }
 
     public static <T extends Number> T requireZero(final T number, final String par) throws IllegalArgumentException {
+	return requireZero(IllegalArgumentException::new, number, par);
+    }
+
+    public static <T extends Number> T requireZeroMsg(final T number, final String message, Object... args)
+	    throws IllegalArgumentException {
+	return requireZeroMsg(IllegalArgumentException::new, number, message, args);
+    }
+
+    // with creators
+
+    private static final String NON_ZERO_NUMBER = "%1$s is not zero (=%2$s)";
+
+    public static <T extends Number, X extends Throwable> T requireZero(final Function<String, X> creator,
+	    final T number) throws X {
+	return requireZero(creator, number, DEFAULT_PAR);
+    }
+
+    public static <T extends Number, X extends Throwable> T requireZero(final Function<String, X> creator,
+	    final T number, final String par) throws X {
+	return requireZeroMsg(creator, number, NON_ZERO_NUMBER, par, String.valueOf(number));
+    }
+
+    public static <T extends Number, X extends Throwable> T requireZeroMsg(final Function<String, X> creator,
+	    final T number, final String message, Object... args) throws X {
 	if (zero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.format(creator, NON_ZERO_NUMBER, args);
     }
+
+    //
 
     public static <T extends Number> boolean nonZero(final T number) {
 	return number != null && nonZero(number.doubleValue()); // double is the
@@ -39,16 +67,44 @@ public final class MyNumbers {
 								// numeric type
     }
 
+    // reqs
+
     public static <T extends Number> T requireNonZero(final T number) throws IllegalArgumentException {
-	return requireNonZero(number, null);
+	return requireNonZero(IllegalArgumentException::new, number);
     }
 
     public static <T extends Number> T requireNonZero(final T number, final String par)
 	    throws IllegalArgumentException {
+	return requireNonZero(IllegalArgumentException::new, number, par);
+    }
+
+    public static <T extends Number> T requireNonZeroMsg(final T number, final String message, Object... args)
+	    throws IllegalArgumentException {
+	return requireNonZeroMsg(IllegalArgumentException::new, number, message, args);
+    }
+
+    // with creators
+
+    private static final String ZERO_NUMBER = "%1$s is zero";
+
+    public static <T extends Number, X extends Throwable> T requireNonZero(final Function<String, X> creator,
+	    final T number) throws X {
+	return requireNonZero(creator, number, DEFAULT_PAR);
+    }
+
+    public static <T extends Number, X extends Throwable> T requireNonZero(final Function<String, X> creator,
+	    final T number, final String par) throws X {
+	return requireNonZeroMsg(creator, number, ZERO_NUMBER, par);
+    }
+
+    public static <T extends Number, X extends Throwable> T requireNonZeroMsg(final Function<String, X> creator,
+	    final T number, final String message, Object... args) throws X {
 	if (nonZero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.format(creator, message, args);
     }
+
+    //
 
     public static <T extends Number> boolean positive(final T number) {
 	return number != null && positive(number.doubleValue()); // double is
@@ -56,15 +112,41 @@ public final class MyNumbers {
 								 // numeric type
     }
 
+    // reqs
+
     public static <T extends Number> T requirePositive(final T number) throws IllegalArgumentException {
-	return requirePositive(number, null);
+	return requirePositive(IllegalArgumentException::new, number);
     }
 
     public static <T extends Number> T requirePositive(final T number, final String par)
 	    throws IllegalArgumentException {
+	return requirePositive(IllegalArgumentException::new, number, par);
+    }
+
+    public static <T extends Number> T requirePositiveMsg(final T number, final String message, Object... args)
+	    throws IllegalArgumentException {
+	return requirePositiveMsg(IllegalArgumentException::new, number, message, args);
+    }
+
+    // with creators
+
+    private static final String NON_POSITIVE_NUMBER = "%1$s is not positive, zero or null";
+
+    public static <T extends Number, X extends Throwable> T requirePositive(final Function<String, X> creator,
+	    final T number) throws X {
+	return requirePositive(creator, number, DEFAULT_PAR);
+    }
+
+    public static <T extends Number, X extends Throwable> T requirePositive(final Function<String, X> creator,
+	    final T number, final String par) throws X {
+	return requirePositiveMsg(creator, number, NON_POSITIVE_NUMBER, par);
+    }
+
+    public static <T extends Number, X extends Throwable> T requirePositiveMsg(final Function<String, X> creator,
+	    final T number, final String message, Object... args) throws X {
 	if (positive(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.format(creator, message, args);
     }
 
     // long
@@ -111,6 +193,8 @@ public final class MyNumbers {
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
     }
 
+    // TODOs IMPLEMENT : Implement requirers with creator
+    
     // double
 
     public static boolean zero(final double number) {
