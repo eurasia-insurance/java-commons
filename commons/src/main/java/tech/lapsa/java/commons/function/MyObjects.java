@@ -17,17 +17,18 @@ public final class MyObjects {
 	return obj != null;
     }
 
-    public static <T> T requireNonNull(final T obj) {
+    public static <T> T requireNonNull(final T obj) throws IllegalArgumentException {
 	return requireNonNull(obj, null);
     }
 
-    public static <T> T requireNonNull(final T obj, final String par) {
+    public static <T> T requireNonNull(final T obj, final String par) throws IllegalArgumentException {
 	if (nonNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(IS_A_NULL_OBJECT, par);
     }
 
-    public static <T> T requireNonNullMsg(final T obj, final String message, Object... args) {
+    public static <T> T requireNonNullMsg(final T obj, final String message, Object... args)
+	    throws IllegalArgumentException {
 	if (nonNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentFormat(message, args);
@@ -39,17 +40,18 @@ public final class MyObjects {
 	return obj == null;
     }
 
-    public static <T> T requireNull(final T obj) {
+    public static <T> T requireNull(final T obj) throws IllegalArgumentException {
 	return requireNull(obj, null);
     }
 
-    public static <T> T requireNull(final T obj, final String par) {
+    public static <T> T requireNull(final T obj, final String par) throws IllegalArgumentException {
 	if (isNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentException(IS_A_NON_NULL_OBJECT, par);
     }
 
-    public static <T> T requireNullMsg(final T obj, final String message, Object... args) {
+    public static <T> T requireNullMsg(final T obj, final String message, Object... args)
+	    throws IllegalArgumentException {
 	if (isNull(obj))
 	    return obj;
 	throw MyExceptions.illegalArgumentFormat(message, args);
@@ -68,18 +70,19 @@ public final class MyObjects {
 	return Optional.empty();
     }
 
-    public static final <T> T requireA(final Object obj, final Class<T> clazz) {
+    public static final <T> T requireA(final Object obj, final Class<T> clazz) throws IllegalArgumentException {
 	return requireA(obj, clazz, null);
     }
 
-    public static final <T> T requireA(final Object obj, final Class<T> clazz, final String par) {
+    public static final <T> T requireA(final Object obj, final Class<T> clazz, final String par)
+	    throws IllegalArgumentException {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
 	throw MyExceptions.illegalArgumentException("Is not a " + clazz.getName(), par);
     }
 
     public static final <T> T requireAMsg(final Object obj, final Class<T> clazz, final String message,
-	    Object... args) {
+	    Object... args) throws IllegalArgumentException {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
 	throw MyExceptions.illegalArgumentFormat(message, args);
@@ -91,17 +94,19 @@ public final class MyObjects {
 	return !isA(obj, clazz);
     }
 
-    public static final <T> T requireNotA(final T obj, final Class<?> clazz) {
+    public static final <T> T requireNotA(final T obj, final Class<?> clazz) throws IllegalArgumentException {
 	return requireNotA(obj, clazz, null);
     }
 
-    public static final <T> T requireNotA(final T obj, final Class<?> clazz, final String par) {
+    public static final <T> T requireNotA(final T obj, final Class<?> clazz, final String par)
+	    throws IllegalArgumentException {
 	if (isNotA(obj, clazz))
 	    return obj;
 	throw MyExceptions.illegalArgumentException("Is a " + clazz.getName(), par);
     }
 
-    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message, Object... args) {
+    public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message, Object... args)
+	    throws IllegalArgumentException {
 	if (isNotA(obj, clazz))
 	    return obj;
 	throw MyExceptions.illegalArgumentFormat(message, args);

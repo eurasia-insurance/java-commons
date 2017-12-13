@@ -29,11 +29,11 @@ public final class MyStrings {
 	}
     }
 
-    public static String requireValidURL(final String url) {
+    public static String requireValidURL(final String url) throws IllegalArgumentException {
 	return requireValidURL(url, null);
     }
 
-    public static String requireValidURL(final String url, final String par) {
+    public static String requireValidURL(final String url, final String par) throws IllegalArgumentException {
 	try {
 	    new URL(requireNonEmpty(url));
 	} catch (MalformedURLException | IllegalArgumentException e) {
@@ -48,12 +48,12 @@ public final class MyStrings {
 	return MyObjects.isNull(string) || string.trim().isEmpty();
     }
 
-    public static String requireEmpty(final String string) {
+    public static String requireEmpty(final String string) throws IllegalArgumentException {
 	return requireEmpty(string, null);
 
     }
 
-    public static String requireEmpty(final String string, final String par) {
+    public static String requireEmpty(final String string, final String par) throws IllegalArgumentException {
 	if (empty(string))
 	    return string;
 	throw MyExceptions.illegalArgumentException(NON_EMPTY_STRING, par, String.valueOf(string));
@@ -65,12 +65,12 @@ public final class MyStrings {
 	return !empty(string);
     }
 
-    public static String requireNonEmpty(final String string) {
+    public static String requireNonEmpty(final String string) throws IllegalArgumentException {
 	return requireNonEmpty(string, null);
 
     }
 
-    public static String requireNonEmpty(final String string, final String par) {
+    public static String requireNonEmpty(final String string, final String par) throws IllegalArgumentException {
 	if (nonEmpty(string))
 	    return string;
 	throw MyExceptions.illegalArgumentException(EMPTY_STRING, par, String.valueOf(string));
@@ -114,13 +114,14 @@ public final class MyStrings {
 	return s1 != null && s2 != null && s1.equals(s2);
     }
 
-    public static void requireEquals(final String s1, final String s2) {
+    public static void requireEquals(final String s1, final String s2) throws IllegalArgumentException {
 	if (!equals(s1, s2))
 	    throw MyExceptions.illegalArgumentException(STRINGS_NOT_EQUALS, "s1 and s2",
 		    "'" + s1 + "' and '" + s2 + "'");
     }
 
-    public static void requireEqualsMsg(final String s1, final String s2, final String message, Object... args) {
+    public static void requireEqualsMsg(final String s1, final String s2, final String message, Object... args)
+	    throws IllegalArgumentException {
 	if (!equals(s1, s2))
 	    throw MyExceptions.illegalArgumentFormat(message, args);
     }

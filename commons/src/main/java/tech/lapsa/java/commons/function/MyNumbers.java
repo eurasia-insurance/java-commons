@@ -23,11 +23,11 @@ public final class MyNumbers {
 							     // type
     }
 
-    public static <T extends Number> T requireZero(final T number) {
+    public static <T extends Number> T requireZero(final T number) throws IllegalArgumentException {
 	return requireZero(number, null);
     }
 
-    public static <T extends Number> T requireZero(final T number, final String par) {
+    public static <T extends Number> T requireZero(final T number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -39,11 +39,12 @@ public final class MyNumbers {
 								// numeric type
     }
 
-    public static <T extends Number> T requireNonZero(final T number) {
+    public static <T extends Number> T requireNonZero(final T number) throws IllegalArgumentException {
 	return requireNonZero(number, null);
     }
 
-    public static <T extends Number> T requireNonZero(final T number, final String par) {
+    public static <T extends Number> T requireNonZero(final T number, final String par)
+	    throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -55,11 +56,12 @@ public final class MyNumbers {
 								 // numeric type
     }
 
-    public static <T extends Number> T requirePositive(final T number) {
+    public static <T extends Number> T requirePositive(final T number) throws IllegalArgumentException {
 	return requirePositive(number, null);
     }
 
-    public static <T extends Number> T requirePositive(final T number, final String par) {
+    public static <T extends Number> T requirePositive(final T number, final String par)
+	    throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -71,11 +73,11 @@ public final class MyNumbers {
 	return number == 0;
     }
 
-    public static long requireZero(final long number) {
+    public static long requireZero(final long number) throws IllegalArgumentException {
 	return requireZero(number, null);
     }
 
-    public static long requireZero(final long number, final String par) {
+    public static long requireZero(final long number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -85,11 +87,11 @@ public final class MyNumbers {
 	return number != 0;
     }
 
-    public static long requireNonZero(final long number) {
+    public static long requireNonZero(final long number) throws IllegalArgumentException {
 	return requireNonZero(number, null);
     }
 
-    public static long requireNonZero(final long number, final String par) {
+    public static long requireNonZero(final long number, final String par) throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -99,11 +101,11 @@ public final class MyNumbers {
 	return number > 0;
     }
 
-    public static long requirePositive(final long number) {
+    public static long requirePositive(final long number) throws IllegalArgumentException {
 	return requirePositive(number, null);
     }
 
-    public static long requirePositive(final long number, final String par) {
+    public static long requirePositive(final long number, final String par) throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -115,11 +117,11 @@ public final class MyNumbers {
 	return number == 0;
     }
 
-    public static double requireZero(final double number) {
+    public static double requireZero(final double number) throws IllegalArgumentException {
 	return requireZero(number, null);
     }
 
-    public static double requireZero(final double number, final String par) {
+    public static double requireZero(final double number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -129,11 +131,11 @@ public final class MyNumbers {
 	return number != 0;
     }
 
-    public static double requireNonZero(final double number) {
+    public static double requireNonZero(final double number) throws IllegalArgumentException {
 	return requireNonZero(number, null);
     }
 
-    public static double requireNonZero(final double number, final String par) {
+    public static double requireNonZero(final double number, final String par) throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -143,11 +145,11 @@ public final class MyNumbers {
 	return number > 0;
     }
 
-    public static double requirePositive(final double number) {
+    public static double requirePositive(final double number) throws IllegalArgumentException {
 	return requirePositive(number, null);
     }
 
-    public static double requirePositive(final double number, final String par) {
+    public static double requirePositive(final double number, final String par) throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -159,11 +161,11 @@ public final class MyNumbers {
 	return number == 0;
     }
 
-    public static int requireZero(final int number) {
+    public static int requireZero(final int number) throws IllegalArgumentException {
 	return requireZero(number, null);
     }
 
-    public static int requireZero(final int number, final String par) {
+    public static int requireZero(final int number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
@@ -173,11 +175,11 @@ public final class MyNumbers {
 	return number != 0;
     }
 
-    public static int requireNonZero(final int number) {
+    public static int requireNonZero(final int number) throws IllegalArgumentException {
 	return requireNonZero(number, null);
     }
 
-    public static int requireNonZero(final int number, final String par) {
+    public static int requireNonZero(final int number, final String par) throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
@@ -187,11 +189,11 @@ public final class MyNumbers {
 	return number > 0;
     }
 
-    public static int requirePositive(final int number) {
+    public static int requirePositive(final int number) throws IllegalArgumentException {
 	return requirePositive(number, null);
     }
 
-    public static int requirePositive(final int number, final String par) {
+    public static int requirePositive(final int number, final String par) throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
@@ -207,14 +209,14 @@ public final class MyNumbers {
 	return n1 != null && n2 != null && n1.equals(n2);
     }
 
-    public static <N extends Number> void requireEquals(final N n1, final N n2) {
+    public static <N extends Number> void requireEquals(final N n1, final N n2) throws IllegalArgumentException {
 	if (!numbericEquals(n1, n2))
 	    throw MyExceptions.illegalArgumentException(NUMBERS_NOT_EQUALS, "n1 and n2",
 		    "'" + n1 + "' and '" + n2 + "'");
     }
 
     public static <N extends Number> void requireEqualsMsg(final N n1, final N n2, final String message,
-	    Object... args) {
+	    Object... args) throws IllegalArgumentException {
 	if (!numbericEquals(n1, n2))
 	    throw MyExceptions.illegalArgumentFormat(message, args);
     }
