@@ -4,6 +4,9 @@ import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import tech.lapsa.java.commons.exceptions.IllegalArgument;
+import tech.lapsa.java.commons.exceptions.IllegalState;
+
 public final class MyExceptions {
 
     private MyExceptions() {
@@ -70,38 +73,6 @@ public final class MyExceptions {
 	    throw new IllegalArgument(e);
 	} catch (final IllegalStateException e) {
 	    throw new IllegalState(e);
-	}
-    }
-
-    public static class IllegalArgument extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
-	private final IllegalArgumentException runtime;
-
-	public IllegalArgument(final IllegalArgumentException cause) {
-	    super(cause);
-	    runtime = cause;
-	}
-
-	public IllegalArgumentException getRuntime() {
-	    return runtime;
-	}
-    }
-
-    public static class IllegalState extends Exception {
-
-	private static final long serialVersionUID = 1L;
-
-	private final IllegalStateException runtime;
-
-	public IllegalState(final IllegalStateException cause) {
-	    super(cause);
-	    runtime = cause;
-	}
-
-	public IllegalStateException getRuntime() {
-	    return runtime;
 	}
     }
 
