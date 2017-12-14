@@ -11,6 +11,11 @@ public class IllegalArgument extends Exception {
 	runtime = cause;
     }
 
+    public IllegalArgument(final String message) {
+	super(message);
+	runtime = new IllegalArgumentException(message);
+    }
+
     public void reThrow() throws IllegalArgumentException {
 	throw runtime;
     }
