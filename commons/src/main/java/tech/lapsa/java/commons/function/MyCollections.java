@@ -31,7 +31,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (empty(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(COLLECTION_IS_NOT_EMPTY, par);
+	throw MyExceptions.illegalArgumentPar(COLLECTION_IS_NOT_EMPTY, par);
     }
 
     //
@@ -48,7 +48,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (nonEmpty(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(COLLECTION_IS_EMPTY, par);
+	throw MyExceptions.illegalArgumentPar(COLLECTION_IS_EMPTY, par);
     }
 
     //
@@ -68,7 +68,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (nonNullElements(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, par);
+	throw MyExceptions.illegalArgumentPar(SOME_ELEMENTS_ARE_NULL, par);
     }
 
     //
@@ -88,7 +88,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (nullElements(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);
+	throw MyExceptions.illegalArgumentPar(SOME_ELEMENTS_ARE_NOT_NULL, par);
     }
 
     //

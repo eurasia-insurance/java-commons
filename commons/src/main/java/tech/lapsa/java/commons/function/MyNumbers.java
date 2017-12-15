@@ -162,7 +162,7 @@ public final class MyNumbers {
     public static long requireZero(final long number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static boolean nonZero(final long number) {
@@ -176,7 +176,7 @@ public final class MyNumbers {
     public static long requireNonZero(final long number, final String par) throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static boolean positive(final long number) {
@@ -190,11 +190,11 @@ public final class MyNumbers {
     public static long requirePositive(final long number, final String par) throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(NON_POSITIVE_NUMBER, par, String.valueOf(number));
     }
 
     // TODOs IMPLEMENT : Implement requirers with creator
-    
+
     // double
 
     public static boolean zero(final double number) {
@@ -208,7 +208,7 @@ public final class MyNumbers {
     public static double requireZero(final double number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static boolean nonZero(final double number) {
@@ -222,7 +222,7 @@ public final class MyNumbers {
     public static double requireNonZero(final double number, final String par) throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static boolean positive(final double number) {
@@ -236,7 +236,7 @@ public final class MyNumbers {
     public static double requirePositive(final double number, final String par) throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(NON_POSITIVE_NUMBER, par, String.valueOf(number));
     }
 
     // int
@@ -252,7 +252,7 @@ public final class MyNumbers {
     public static int requireZero(final int number, final String par) throws IllegalArgumentException {
 	if (zero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static boolean nonZero(final int number) {
@@ -266,7 +266,7 @@ public final class MyNumbers {
     public static int requireNonZero(final int number, final String par) throws IllegalArgumentException {
 	if (nonZero(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(ZERO_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(ZERO_NUMBER, par, String.valueOf(number));
     }
 
     public static boolean positive(final int number) {
@@ -280,7 +280,7 @@ public final class MyNumbers {
     public static int requirePositive(final int number, final String par) throws IllegalArgumentException {
 	if (positive(number))
 	    return number;
-	throw MyExceptions.illegalArgumentException(NON_POSITIVE_NUMBER, par, String.valueOf(number));
+	throw MyExceptions.illegalArgumentPar(NON_POSITIVE_NUMBER, par, String.valueOf(number));
     }
 
     //
@@ -295,14 +295,20 @@ public final class MyNumbers {
 
     public static <N extends Number> void requireEquals(final N n1, final N n2) throws IllegalArgumentException {
 	if (!numbericEquals(n1, n2))
-	    throw MyExceptions.illegalArgumentException(NUMBERS_NOT_EQUALS, "n1 and n2",
+	    throw MyExceptions.illegalArgumentPar(NUMBERS_NOT_EQUALS, "n1 and n2",
 		    "'" + n1 + "' and '" + n2 + "'");
     }
 
     public static <N extends Number> void requireEqualsMsg(final N n1, final N n2, final String message,
 	    Object... args) throws IllegalArgumentException {
+	requireEqualsMsg(IllegalArgumentException::new, n1, n2, message, args);
+    }
+
+    public static <N extends Number, X extends Throwable> void requireEqualsMsg(final Function<String, X> creator,
+	    final N n1, final N n2, final String message,
+	    Object... args) throws X {
 	if (!numbericEquals(n1, n2))
-	    throw MyExceptions.illegalArgumentFormat(message, args);
+	    throw MyExceptions.format(creator, message, args);
     }
 
     // parsers

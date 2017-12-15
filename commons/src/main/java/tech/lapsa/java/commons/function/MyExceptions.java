@@ -17,6 +17,8 @@ public final class MyExceptions {
 
     // general
 
+    // format
+
     public static <X extends Throwable> X format(final Function<String, X> creator,
 	    final String format,
 	    final Object... args) {
@@ -29,6 +31,8 @@ public final class MyExceptions {
 	    final Object... args) {
 	return creator.apply(MyStrings.format(format, args), cause);
     }
+
+    // supplier
 
     public static <X extends Throwable> Supplier<X> supplier(final Function<String, X> creator,
 	    final String format,
@@ -43,16 +47,47 @@ public final class MyExceptions {
 	return () -> format(creator, cause, format, args);
     }
 
+    // par
+
+    public static <X extends Throwable> X par(final Function<String, X> creator,
+	    final String message,
+	    final String par,
+	    final String value) {
+	final String msg = parMessage(message, par, value);
+	return creator.apply(msg);
+    }
+
+    public static <X extends Throwable> X par(final BiFunction<String, Throwable, X> creator,
+	    final Throwable cause,
+	    final String message,
+	    final String par,
+	    final String value) {
+	final String msg = parMessage(message, par, value);
+	return creator.apply(msg, cause);
+    }
+
+    public static <X extends Throwable> X par(final Function<String, X> creator,
+	    final String message,
+	    final String par) {
+	final String msg = parMessage(message, par);
+	return creator.apply(msg);
+    }
+
+    public static <X extends Throwable> X par(final BiFunction<String, Throwable, X> creator,
+	    final Throwable cause,
+	    final String message,
+	    final String par) {
+	final String msg = parMessage(message, par);
+	return creator.apply(msg, cause);
+    }
+
     // specifiers
+
+    // format
 
     public static IllegalArgumentException illegalArgumentFormat(final String format,
 	    final Object... args) {
 	return format(IllegalArgumentException::new, format, args);
-    }
-
-    public static Supplier<IllegalArgumentException> illegalArgumentSupplier(final String format,
-	    final Object... args) {
-	return supplier(IllegalArgumentException::new, format, args);
     }
 
     public static IllegalStateException illegalStateFormat(final String format,
@@ -60,50 +95,37 @@ public final class MyExceptions {
 	return format(IllegalStateException::new, format, args);
     }
 
+    // supplier
+
+    public static Supplier<IllegalArgumentException> illegalArgumentSupplier(final String format,
+	    final Object... args) {
+	return supplier(IllegalArgumentException::new, format, args);
+    }
+
     public static Supplier<IllegalStateException> illegalStateSupplier(final String format,
 	    final Object... args) {
 	return supplier(IllegalStateException::new, format, args);
     }
 
-    // pars
+    // par
 
-    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
+    public static IllegalArgumentException illegalArgumentPar(final String message, final String par,
 	    final String value) {
-	final StringJoiner sj = new StringJoiner(" ");
-	sj.add(message);
-	if (MyStrings.nonEmpty(value))
-	    sj.add("'" + value + "'");
-	if (MyStrings.nonEmpty(par))
-	    sj.add("(" + par + ")");
-	return new IllegalArgumentException(sj.toString());
+	return par(IllegalArgumentException::new, message, par, value);
     }
 
-    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
+    public static IllegalArgumentException illegalArgumentPar(final String message, final String par,
 	    final String value, final Throwable cause) {
-	final StringJoiner sj = new StringJoiner(" ");
-	sj.add(message);
-	if (MyStrings.nonEmpty(value))
-	    sj.add("'" + value + "'");
-	if (MyStrings.nonEmpty(par))
-	    sj.add("(" + par + ")");
-	return new IllegalArgumentException(sj.toString(), cause);
+	return par(IllegalArgumentException::new, cause, message, par, value);
     }
 
-    public static IllegalArgumentException illegalArgumentException(final String message, final String par) {
-	final StringJoiner sj = new StringJoiner(" ");
-	sj.add(message);
-	if (MyStrings.nonEmpty(par))
-	    sj.add("(" + par + ")");
-	return new IllegalArgumentException(sj.toString());
+    public static IllegalArgumentException illegalArgumentPar(final String message, final String par) {
+	return par(IllegalArgumentException::new, message, par);
     }
 
-    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
+    public static IllegalArgumentException illegalArgumentPar(final String message, final String par,
 	    final Throwable cause) {
-	final StringJoiner sj = new StringJoiner(" ");
-	sj.add(message);
-	if (MyStrings.nonEmpty(par))
-	    sj.add("(" + par + ")");
-	return new IllegalArgumentException(sj.toString(), cause);
+	return par(IllegalArgumentException::new, cause, message, par);
     }
 
     // rethrowers
@@ -305,7 +327,29 @@ public final class MyExceptions {
 	};
     }
 
-    // deprecated
+    // PRIVATE
+
+    private static String parMessage(final String message, final String par, final String value) {
+	final StringJoiner sj = new StringJoiner(" ");
+	sj.add(message);
+	if (MyStrings.nonEmpty(value))
+	    sj.add("'" + value + "'");
+	if (MyStrings.nonEmpty(par))
+	    sj.add("(" + par + ")");
+	final String msg = sj.toString();
+	return msg;
+    }
+
+    private static String parMessage(final String message, final String par) {
+	final StringJoiner sj = new StringJoiner(" ");
+	sj.add(message);
+	if (MyStrings.nonEmpty(par))
+	    sj.add("(" + par + ")");
+	final String msg = sj.toString();
+	return msg;
+    }
+
+    // DEPRECATED
 
     @Deprecated
     public static <X extends IllegalArgumentException> X illegalArgumentFormat(final Function<String, X> creator,
@@ -341,5 +385,28 @@ public final class MyExceptions {
     public static <X extends RuntimeException> Supplier<X> runtimeExceptionSupplierFormat(
 	    final Function<String, X> creator, final String format, final Object... args) {
 	return supplier(creator, format, args);
+    }
+
+    @Deprecated
+    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
+	    final String value) {
+	return par(IllegalArgumentException::new, message, par, value);
+    }
+
+    @Deprecated
+    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
+	    final String value, final Throwable cause) {
+	return par(IllegalArgumentException::new, cause, message, par, value);
+    }
+
+    @Deprecated
+    public static IllegalArgumentException illegalArgumentException(final String message, final String par) {
+	return par(IllegalArgumentException::new, message, par);
+    }
+
+    @Deprecated
+    public static IllegalArgumentException illegalArgumentException(final String message, final String par,
+	    final Throwable cause) {
+	return par(IllegalArgumentException::new, cause, message, par);
     }
 }

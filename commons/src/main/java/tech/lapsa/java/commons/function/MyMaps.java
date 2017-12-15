@@ -26,7 +26,7 @@ public final class MyMaps {
 	    throws IllegalArgumentException {
 	if (empty(map)) //
 	    return map;
-	throw MyExceptions.illegalArgumentException(MAP_IS_NOT_EMPTY, par);
+	throw MyExceptions.illegalArgumentPar(MAP_IS_NOT_EMPTY, par);
     }
 
     //
@@ -43,7 +43,7 @@ public final class MyMaps {
 	    throws IllegalArgumentException {
 	if (nonEmpty(map)) //
 	    return map;
-	throw MyExceptions.illegalArgumentException(MAP_IS_EMPTY, par);
+	throw MyExceptions.illegalArgumentPar(MAP_IS_EMPTY, par);
     }
 
     //
