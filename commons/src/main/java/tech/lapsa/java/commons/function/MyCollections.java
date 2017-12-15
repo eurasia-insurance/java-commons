@@ -103,13 +103,13 @@ public final class MyCollections {
 
     //
 
-    public static <T> List<T> orEmptyList(List<T> list) {
+    public static <T> List<T> orEmptyList(final List<T> list) {
 	if (empty(list))
 	    return Collections.emptyList();
 	return list;
     }
 
-    public static <T> List<T> unmodifiableOrEmptyList(List<T> list) {
+    public static <T> List<T> unmodifiableOrEmptyList(final List<T> list) {
 	return Collections.unmodifiableList(orEmptyList(list));
     }
 

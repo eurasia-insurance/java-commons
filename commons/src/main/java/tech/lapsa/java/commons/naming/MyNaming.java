@@ -18,32 +18,32 @@ public final class MyNaming {
     public static Object requireResource(final String mappedName) {
 	Object res = null;
 	try {
-	    InitialContext ctx = new InitialContext();
+	    final InitialContext ctx = new InitialContext();
 	    res = ctx.lookup(mappedName);
-	} catch (NamingException e) {
+	} catch (final NamingException e) {
 	}
 	if (res == null)
 	    throw MyExceptions.illegalArgumentFormat("Argument must point to valid JNDI resource");
 	return res;
     }
 
-    public static <T> Optional<T> optionalResource(final String mappedName, Class<T> clazz) {
+    public static <T> Optional<T> optionalResource(final String mappedName, final Class<T> clazz) {
 	try {
 	    return MyOptionals.of(requireResource(mappedName, clazz));
-	} catch (IllegalArgumentException e) {
+	} catch (final IllegalArgumentException e) {
 	    return Optional.empty();
 	}
     }
 
-    public static <T> T requireResource(final String mappedName, Class<T> clazz) {
+    public static <T> T requireResource(final String mappedName, final Class<T> clazz) {
 	MyStrings.requireNonEmpty(mappedName, "mappedName");
 	MyObjects.requireNonNull(clazz, "clazz");
 
 	Object res = null;
 	try {
-	    InitialContext ctx = new InitialContext();
+	    final InitialContext ctx = new InitialContext();
 	    res = ctx.lookup(mappedName);
-	} catch (NamingException e) {
+	} catch (final NamingException e) {
 	}
 	if (res == null)
 	    throw MyExceptions.illegalArgumentFormat("Argument must point to valid JNDI resource");

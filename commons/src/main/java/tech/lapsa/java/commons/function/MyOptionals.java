@@ -273,12 +273,12 @@ public final class MyOptionals {
     //
 
     @SafeVarargs
-    public static <T> Optional<T> ifUncheckedException(Supplier<T> supplier,
-	    Class<? extends RuntimeException>... expectingExceptions) {
+    public static <T> Optional<T> ifUncheckedException(final Supplier<T> supplier,
+	    final Class<? extends RuntimeException>... expectingExceptions) {
 	try {
 	    final T t = supplier.get();
 	    return of(t);
-	} catch (RuntimeException e) {
+	} catch (final RuntimeException e) {
 	    if (MyArrays.empty(expectingExceptions))
 		return Optional.empty(); // ignores any RuntimeException
 
@@ -291,21 +291,21 @@ public final class MyOptionals {
     }
 
     public static <T> Optional<T> ifAnyException(
-	    CheckedExceptionThrowingSupplier<T, ?> supplier) {
+	    final CheckedExceptionThrowingSupplier<T, ?> supplier) {
 	try {
 	    final T t = supplier.get();
 	    return of(t);
-	} catch (Exception suppressed) {
+	} catch (final Exception suppressed) {
 	    return Optional.empty(); // ignores any RuntimeException
 	}
     }
 
     public static <T, E extends Exception> Optional<T> ifCheckedException(
-	    CheckedExceptionThrowingSupplier<T, E> supplier, Class<E> exceptionClazz) {
+	    final CheckedExceptionThrowingSupplier<T, E> supplier, final Class<E> exceptionClazz) {
 	try {
 	    final T t = supplier.get();
 	    return of(t);
-	} catch (Exception suppressed) {
+	} catch (final Exception suppressed) {
 	    if (MyObjects.isA(suppressed, exceptionClazz))
 		return Optional.empty();
 	    throw new RuntimeException("Unexpected exception has thrown", suppressed);

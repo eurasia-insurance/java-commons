@@ -76,11 +76,11 @@ public final class MyPredicates {
 	boolean test(T value) throws IllegalArgument;
     }
 
-    public static <T> Predicate<T> wrapIllegalArgument(IllegalArgumentPredicate<T> predicate) {
+    public static <T> Predicate<T> wrapIllegalArgument(final IllegalArgumentPredicate<T> predicate) {
 	return x -> {
 	    try {
 		return predicate.test(x);
-	    } catch (IllegalArgument e) {
+	    } catch (final IllegalArgument e) {
 		throw e.getRuntime();
 	    }
 	};
@@ -92,7 +92,7 @@ public final class MyPredicates {
 	return x -> {
 	    try {
 		return predicate.test(x);
-	    } catch (IllegalArgument e) {
+	    } catch (final IllegalArgument e) {
 		throw runtimeCreator.apply(e);
 	    }
 	};

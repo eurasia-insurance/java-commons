@@ -33,7 +33,7 @@ public final class MyNumbers {
 	return requireZero(IllegalArgumentException::new, number, par);
     }
 
-    public static <T extends Number> T requireZeroMsg(final T number, final String message, Object... args)
+    public static <T extends Number> T requireZeroMsg(final T number, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	return requireZeroMsg(IllegalArgumentException::new, number, message, args);
     }
@@ -53,7 +53,7 @@ public final class MyNumbers {
     }
 
     public static <T extends Number, X extends Throwable> T requireZeroMsg(final Function<String, X> creator,
-	    final T number, final String message, Object... args) throws X {
+	    final T number, final String message, final Object... args) throws X {
 	if (zero(number))
 	    return number;
 	throw MyExceptions.format(creator, NON_ZERO_NUMBER, args);
@@ -78,7 +78,7 @@ public final class MyNumbers {
 	return requireNonZero(IllegalArgumentException::new, number, par);
     }
 
-    public static <T extends Number> T requireNonZeroMsg(final T number, final String message, Object... args)
+    public static <T extends Number> T requireNonZeroMsg(final T number, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	return requireNonZeroMsg(IllegalArgumentException::new, number, message, args);
     }
@@ -98,7 +98,7 @@ public final class MyNumbers {
     }
 
     public static <T extends Number, X extends Throwable> T requireNonZeroMsg(final Function<String, X> creator,
-	    final T number, final String message, Object... args) throws X {
+	    final T number, final String message, final Object... args) throws X {
 	if (nonZero(number))
 	    return number;
 	throw MyExceptions.format(creator, message, args);
@@ -123,7 +123,7 @@ public final class MyNumbers {
 	return requirePositive(IllegalArgumentException::new, number, par);
     }
 
-    public static <T extends Number> T requirePositiveMsg(final T number, final String message, Object... args)
+    public static <T extends Number> T requirePositiveMsg(final T number, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	return requirePositiveMsg(IllegalArgumentException::new, number, message, args);
     }
@@ -143,7 +143,7 @@ public final class MyNumbers {
     }
 
     public static <T extends Number, X extends Throwable> T requirePositiveMsg(final Function<String, X> creator,
-	    final T number, final String message, Object... args) throws X {
+	    final T number, final String message, final Object... args) throws X {
 	if (positive(number))
 	    return number;
 	throw MyExceptions.format(creator, message, args);
@@ -300,13 +300,13 @@ public final class MyNumbers {
     }
 
     public static <N extends Number> void requireEqualsMsg(final N n1, final N n2, final String message,
-	    Object... args) throws IllegalArgumentException {
+	    final Object... args) throws IllegalArgumentException {
 	requireEqualsMsg(IllegalArgumentException::new, n1, n2, message, args);
     }
 
     public static <N extends Number, X extends Throwable> void requireEqualsMsg(final Function<String, X> creator,
 	    final N n1, final N n2, final String message,
-	    Object... args) throws X {
+	    final Object... args) throws X {
 	if (!numbericEquals(n1, n2))
 	    throw MyExceptions.format(creator, message, args);
     }

@@ -203,7 +203,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		consumer.accept(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw new RuntimeException(e);
 	    }
 	};
@@ -218,7 +218,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return function.apply(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw new RuntimeException(e);
 	    }
 	};
@@ -229,7 +229,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return function.apply(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw creator.apply(e);
 	    }
 	};
@@ -239,7 +239,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return function.apply(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		return null;
 	    }
 	};
@@ -254,7 +254,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return predicate.test(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw new RuntimeException(e);
 	    }
 	};
@@ -265,7 +265,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return predicate.test(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw creator.apply(e);
 	    }
 	};
@@ -275,7 +275,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return predicate.test(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		return false;
 	    }
 	};
@@ -285,7 +285,7 @@ public final class MyExceptions {
 	return t -> {
 	    try {
 		return predicate.test(t);
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		return true;
 	    }
 	};
@@ -300,7 +300,7 @@ public final class MyExceptions {
 	return () -> {
 	    try {
 		return supplier.get();
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw new RuntimeException(e);
 	    }
 	};
@@ -311,7 +311,7 @@ public final class MyExceptions {
 	return () -> {
 	    try {
 		return supplier.get();
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		throw creator.apply(e);
 	    }
 	};
@@ -321,7 +321,7 @@ public final class MyExceptions {
 	return () -> {
 	    try {
 		return supplier.get();
-	    } catch (Exception e) {
+	    } catch (final Exception e) {
 		return null;
 	    }
 	};

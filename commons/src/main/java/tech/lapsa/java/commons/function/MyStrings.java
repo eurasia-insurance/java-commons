@@ -77,7 +77,7 @@ public final class MyStrings {
 	return requireNonEmpty(IllegalArgumentException::new, string, par);
     }
 
-    public static String requireNonEmptyMsg(final String string, final String message, Object... args)
+    public static String requireNonEmptyMsg(final String string, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	return requireNonEmptyMsg(IllegalArgumentException::new, string, message, args);
     }
@@ -97,7 +97,7 @@ public final class MyStrings {
     }
 
     public static <X extends Throwable> String requireNonEmptyMsg(final Function<String, X> creator,
-	    final String string, final String message, Object... args) throws X {
+	    final String string, final String message, final Object... args) throws X {
 	if (nonEmpty(string))
 	    return string;
 	throw MyExceptions.format(creator, message, args);
@@ -127,7 +127,7 @@ public final class MyStrings {
 
     //
 
-    public static String format(String format, Object... args) {
+    public static String format(final String format, final Object... args) {
 	try {
 	    return String.format(format, args);
 	} catch (IllegalFormatException | NullPointerException e) {
@@ -146,13 +146,13 @@ public final class MyStrings {
 	    throw MyExceptions.illegalArgumentPar(STRINGS_NOT_EQUALS, "s1 and s2", "'" + s1 + "' and '" + s2 + "'");
     }
 
-    public static void requireEqualsMsg(final String s1, final String s2, final String message, Object... args)
+    public static void requireEqualsMsg(final String s1, final String s2, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	requireEqualsMsg(IllegalArgumentException::new, s1, s2, message, args);
     }
 
     public static <X extends Throwable> void requireEqualsMsg(final Function<String, X> creator, final String s1,
-	    final String s2, final String message, Object... args) throws X {
+	    final String s2, final String message, final Object... args) throws X {
 	if (!equals(s1, s2))
 	    throw MyExceptions.format(creator, message, args);
     }
