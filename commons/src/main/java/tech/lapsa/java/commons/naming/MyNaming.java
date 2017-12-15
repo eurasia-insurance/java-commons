@@ -1,6 +1,7 @@
 package tech.lapsa.java.commons.naming;
 
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -50,4 +51,44 @@ public final class MyNaming {
 	return MyObjects.requireAMsg(res, clazz, "Resource has unexpected type '%1$s'", res.getClass());
     }
 
+    private static final String DEFAULT_BEAN_SUFFIX = "Bean";
+
+    public static <T> T lookupEJB(final String applicationName, final String module, final String beanName,
+	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
+	    throws NamingException, ClassCastException {
+	return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
+    }
+
+    public static <T> T lookupEJB(final String applicationName, final String module,
+	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
+	    throws NamingException, ClassCastException {
+	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
+	return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
+    }
+
+    public static <T, X extends Throwable> T lookupEJB(final BiFunction<String, Throwable, X> creator,
+	    final String applicationName, final String module,
+	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
+	    throws X {
+	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
+	try {
+	    return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
+	} catch (ClassCastException | NamingException e) {
+	    throw MyExceptions.format(creator, e, "Can't instantiate ejb for %1$s because of %2$s", typeClazz.getSimpleName(), e.getMessage());
+	}
+    }
+
+    public static <T> T lookupEJB(final String applicationName, final String module, final String beanName,
+	    final String interfaceName, final Class<T> typeClazz) throws NamingException, ClassCastException {
+	final String pathPattern = "java:global/%1$s/%2$s/%3$s!%4$s";
+	final String path = String.format(pathPattern,
+		applicationName, // 1
+		module, // 2
+		beanName, // 3
+		interfaceName // 4
+	);
+	final InitialContext ic = new InitialContext();
+	final Object object = ic.lookup(path);
+	return typeClazz.cast(object);
+    }
 }
