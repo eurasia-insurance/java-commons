@@ -51,41 +51,52 @@ public final class MyNaming {
 	return MyObjects.requireAMsg(res, clazz, "Resource has unexpected type '%1$s'", res.getClass());
     }
 
-    private static final String DEFAULT_BEAN_SUFFIX = "Bean";
-
-    public static <T> T lookupEJB(final String applicationName, final String module, final String beanName,
-	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
-	    throws NamingException, ClassCastException {
-	return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
-    }
-
-    public static <T> T lookupEJB(final String applicationName, final String module,
-	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
-	    throws NamingException, ClassCastException {
-	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
-	return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
-    }
+    // Portable JNDI names for EJB PolicyDriverFacadeBean: [
+    // java:global/insurance-facade-ear/insurance-facade/PolicyDriverFacadeBean!tech.lapsa.insurance.facade.PolicyDriverFacade$PolicyDriverFacadeLocal
+    // java:global/insurance-facade-ear/insurance-facade/PolicyDriverFacadeBean!tech.lapsa.insurance.facade.PolicyDriverFacade$PolicyDriverFacadeRemote
+    // ]]]
 
     public static <T, X extends Throwable> T lookupEJB(final BiFunction<String, Throwable, X> creator,
-	    final String applicationName, final String module,
-	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
-	    throws X {
-	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
+	    final String applicationName,
+	    final String moduleName,
+	    final String beanName,
+	    final Class<T> interfaceClazz) throws X {
+	return lookupEJB(creator, applicationName, moduleName, beanName, interfaceClazz.getName(), interfaceClazz);
+    }
+
+    public static <T> T lookupEJB(final String applicationName,
+	    final String moduleName,
+	    final String beanName,
+	    final Class<T> interfaceClazz) throws NamingException, ClassCastException {
+	return lookupEJB(applicationName, moduleName, beanName, interfaceClazz.getName(), interfaceClazz);
+    }
+
+    // mains
+
+    public static <T, X extends Throwable> T lookupEJB(final BiFunction<String, Throwable, X> creator,
+	    final String applicationName,
+	    final String moduleName,
+	    final String beanName,
+	    final String qualifier,
+	    final Class<T> typeClazz) throws X {
 	try {
-	    return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
-	} catch (ClassCastException | NamingException e) {
-	    throw MyExceptions.format(creator, e, "Can't instantiate ejb for %1$s because of %2$s", typeClazz.getSimpleName(), e.getMessage());
+	    return lookupEJB(applicationName, moduleName, beanName, qualifier, typeClazz);
+	} catch (NamingException | ClassCastException e) {
+	    throw MyExceptions.format(creator, e, "Exception attemping to get ejb-ref for %1$s", typeClazz.getName());
 	}
     }
 
-    public static <T> T lookupEJB(final String applicationName, final String module, final String beanName,
-	    final String interfaceName, final Class<T> typeClazz) throws NamingException, ClassCastException {
+    public static <T> T lookupEJB(final String applicationName,
+	    final String moduleName,
+	    final String beanName,
+	    final String qualifier,
+	    final Class<T> typeClazz) throws NamingException, ClassCastException {
 	final String pathPattern = "java:global/%1$s/%2$s/%3$s!%4$s";
 	final String path = String.format(pathPattern,
 		applicationName, // 1
-		module, // 2
+		moduleName, // 2
 		beanName, // 3
-		interfaceName // 4
+		qualifier // 4
 	);
 	final InitialContext ic = new InitialContext();
 	final Object object = ic.lookup(path);
