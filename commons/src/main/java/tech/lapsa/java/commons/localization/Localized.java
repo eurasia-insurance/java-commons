@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 public interface Localized extends Serializable {
 
-    enum LocalizationVariant {
+    public enum LocalizationVariant {
 	NORMAL, FULL, SHORT
     }
 
