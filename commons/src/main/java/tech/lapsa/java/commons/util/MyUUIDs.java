@@ -15,7 +15,7 @@ public final class MyUUIDs {
 		.map(s -> {
 		    try {
 			return UUID.fromString(uuid);
-		    } catch (Exception e) {
+		    } catch (final Exception e) {
 			return null;
 		    }
 		});

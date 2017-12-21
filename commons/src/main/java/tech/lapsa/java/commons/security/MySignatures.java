@@ -9,6 +9,7 @@ import java.security.SignatureException;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
 
+import tech.lapsa.java.commons.function.MyExceptions;
 import tech.lapsa.java.commons.function.MyObjects;
 import tech.lapsa.java.commons.function.MyOptionals;
 import tech.lapsa.java.commons.function.MyStrings;
@@ -129,11 +130,15 @@ public class MySignatures {
 
 	private final Signature sig;
 
-	private VerifyingSignature(final Signature sig) {
+	private VerifyingSignature(final Signature sig) throws IllegalArgumentException {
 	    this.sig = MyObjects.requireNonNull(sig, "sig");
 	}
 
-	public boolean verify(final byte[] data, final byte[] digest) {
+	public boolean verify(final byte[] data, final byte[] digest) throws IllegalArgumentException {
+	    if (data == null || data.length == 0)
+		throw MyExceptions.illegalArgumentPar("Zero length array or null", "data");
+	    if (digest == null || digest.length == 0)
+		throw MyExceptions.illegalArgumentPar("Zero length array or null", "digest");
 	    try {
 		sig.update(data);
 		return sig.verify(digest);
@@ -156,11 +161,13 @@ public class MySignatures {
 
 	private final Signature sig;
 
-	private SigningSignature(final Signature sig) {
+	private SigningSignature(final Signature sig) throws IllegalArgumentException {
 	    this.sig = MyObjects.requireNonNull(sig, "sig");
 	}
 
-	public byte[] sign(final byte[] data) {
+	public byte[] sign(final byte[] data) throws IllegalArgumentException {
+	    if (data == null || data.length == 0)
+		throw MyExceptions.illegalArgumentPar("Zero length array or null", "data");
 	    try {
 		sig.update(data);
 		return sig.sign();

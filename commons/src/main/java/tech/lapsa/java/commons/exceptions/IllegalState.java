@@ -11,6 +11,11 @@ public class IllegalState extends Exception {
 	runtime = cause;
     }
 
+    public IllegalState(final String message) {
+	super(message);
+	runtime = new IllegalStateException(message);
+    }
+
     public void reThrow() throws IllegalStateException {
 	throw runtime;
     }

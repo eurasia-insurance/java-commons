@@ -8,7 +8,7 @@ public class MyLoggerTest {
 
     @Test
     public void basicTest() {
-	MyLogger l = MyLogger.newBuilder() //
+	final MyLogger l = MyLogger.newBuilder() //
 		.withPackageNameOf(this.getClass()) //
 		.addPrefix("QAZKOM") //
 		.addWithCAPS() //

@@ -31,7 +31,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (empty(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(COLLECTION_IS_NOT_EMPTY, par);
+	throw MyExceptions.illegalArgumentPar(COLLECTION_IS_NOT_EMPTY, par);
     }
 
     //
@@ -48,7 +48,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (nonEmpty(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(COLLECTION_IS_EMPTY, par);
+	throw MyExceptions.illegalArgumentPar(COLLECTION_IS_EMPTY, par);
     }
 
     //
@@ -68,7 +68,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (nonNullElements(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NULL, par);
+	throw MyExceptions.illegalArgumentPar(SOME_ELEMENTS_ARE_NULL, par);
     }
 
     //
@@ -88,7 +88,7 @@ public final class MyCollections {
 	    throws IllegalArgumentException {
 	if (nullElements(collection)) //
 	    return collection;
-	throw MyExceptions.illegalArgumentException(SOME_ELEMENTS_ARE_NOT_NULL, par);
+	throw MyExceptions.illegalArgumentPar(SOME_ELEMENTS_ARE_NOT_NULL, par);
     }
 
     //
@@ -103,13 +103,13 @@ public final class MyCollections {
 
     //
 
-    public static <T> List<T> orEmptyList(List<T> list) {
+    public static <T> List<T> orEmptyList(final List<T> list) {
 	if (empty(list))
 	    return Collections.emptyList();
 	return list;
     }
 
-    public static <T> List<T> unmodifiableOrEmptyList(List<T> list) {
+    public static <T> List<T> unmodifiableOrEmptyList(final List<T> list) {
 	return Collections.unmodifiableList(orEmptyList(list));
     }
 

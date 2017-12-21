@@ -31,7 +31,7 @@ public final class MyResourceBundles {
 		if (rb != null)
 		    LOGGER.SUPER_TRACE.log("Resource bundle found %1$s", rb.keySet());
 		return rb;
-	    } catch (MissingResourceException e) {
+	    } catch (final MissingResourceException e) {
 		LOGGER.SEVERE.log(e);
 		return null;
 	    }

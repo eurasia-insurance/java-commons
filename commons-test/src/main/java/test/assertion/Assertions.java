@@ -7,11 +7,11 @@ public final class Assertions {
     private Assertions() {
     }
 
-    public static void expectException(Statement statement, Class<? extends Throwable> expectingException)
+    public static void expectException(final Statement statement, final Class<? extends Throwable> expectingException)
 	    throws Exception {
 	try {
 	    statement.call();
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    if (expectingException.isAssignableFrom(e.getClass()))
 		return; // OK
 	    throw e;
@@ -19,19 +19,19 @@ public final class Assertions {
 	fail(expectingException.getName() + " exception is expected");
     }
 
-    public static void expectException(Statement statement) {
+    public static void expectException(final Statement statement) {
 	try {
 	    statement.call();
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    return; // OK
 	}
 	fail("Any exception expected");
     }
 
-    public static void unexpectException(Statement statement) {
+    public static void unexpectException(final Statement statement) {
 	try {
 	    statement.call();
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    fail("Unexpected exception thrown " + e.getClass().getName() + ": " + e.getMessage());
 	}
     }

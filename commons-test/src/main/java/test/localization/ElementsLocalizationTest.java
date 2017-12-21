@@ -26,14 +26,14 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
     protected final Locale locale;
     protected final Class<T> clazz;
 
-    protected ElementsLocalizationTest(T[] values, Class<T> clazz, Locale locale) {
+    protected ElementsLocalizationTest(final T[] values, final Class<T> clazz, final Locale locale) {
 	this.values = values;
 	this.clazz = clazz;
 	this.locale = locale;
     }
 
     private ResourceBundle getResourceBundle() {
-	ResourceBundle resourceBundle = ResourceBundle.getBundle(clazz.getCanonicalName(), locale);
+	final ResourceBundle resourceBundle = ResourceBundle.getBundle(clazz.getCanonicalName(), locale);
 	assertThat(MyStrings.format("Resource bundle for '%1$s' is not present", locale), resourceBundle,
 		not(nullValue()));
 	return resourceBundle;
@@ -49,13 +49,13 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
 
     @Test
     public void testEveryValueHasLocalization() {
-	ResourceBundle resourceBundle = getResourceBundle();
-	for (T value : values) {
-	    String key = MyStrings.format("%s.%s", value.getClass().getName(), value.name());
+	final ResourceBundle resourceBundle = getResourceBundle();
+	for (final T value : values) {
+	    final String key = MyStrings.format("%s.%s", value.getClass().getName(), value.name());
 	    try {
-		String name = resourceBundle.getString(key);
+		final String name = resourceBundle.getString(key);
 		assertThat(MyStrings.format("Localization for key '%1$s' is null", key), name, not(nullValue()));
-	    } catch (MissingResourceException e) {
+	    } catch (final MissingResourceException e) {
 		fail(MyStrings.format("Localization string for value '%1$s.%2$s' is missing",
 			value.getClass().getCanonicalName(), value.name(), key));
 	    }
@@ -64,17 +64,17 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
 
     @Test
     public void testNoExtraLocalization() {
-	ResourceBundle resourceBundle = getResourceBundle();
-	Enumeration<String> keys = resourceBundle.getKeys();
+	final ResourceBundle resourceBundle = getResourceBundle();
+	final Enumeration<String> keys = resourceBundle.getKeys();
 	while (keys.hasMoreElements()) {
-	    String key = keys.nextElement();
-	    T value = valueFor(key);
+	    final String key = keys.nextElement();
+	    final T value = valueFor(key);
 	    assertThat(MyStrings.format("Key '%1$s' associated value is missing", key), value, not(nullValue()));
 	}
     }
 
-    private T valueFor(String key) {
-	for (T value : values) {
+    private T valueFor(final String key) {
+	for (final T value : values) {
 	    if (MyStrings.format("%s.%s", value.getClass().getName(), value.name()).equals(key))
 		return value;
 	    if (MyStrings.format("%s.%s.full", value.getClass().getName(), value.name()).equals(key))
@@ -84,7 +84,7 @@ public abstract class ElementsLocalizationTest<T extends LocalizedElement> {
 	}
 	return null;
     }
-    
+
     protected Stream<T> stream() {
 	return Stream.of(values);
     }

@@ -1,9 +1,12 @@
 package tech.lapsa.java.commons.function;
 
 import java.util.function.DoublePredicate;
+import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
+
+import tech.lapsa.java.commons.exceptions.IllegalArgument;
 
 public final class MyPredicates {
 
@@ -64,5 +67,34 @@ public final class MyPredicates {
 
     public static LongPredicate nonZeroLong() {
 	return MyNumbers::nonZero;
+    }
+
+    //
+
+    @FunctionalInterface
+    public static interface IllegalArgumentPredicate<T> {
+	boolean test(T value) throws IllegalArgument;
+    }
+
+    public static <T> Predicate<T> wrapIllegalArgument(final IllegalArgumentPredicate<T> predicate) {
+	return x -> {
+	    try {
+		return predicate.test(x);
+	    } catch (final IllegalArgument e) {
+		throw e.getRuntime();
+	    }
+	};
+    }
+
+    public static <T, X extends RuntimeException> Predicate<T> wrapIllegalArgument(
+	    final IllegalArgumentPredicate<T> predicate,
+	    final Function<IllegalArgument, X> runtimeCreator) {
+	return x -> {
+	    try {
+		return predicate.test(x);
+	    } catch (final IllegalArgument e) {
+		throw runtimeCreator.apply(e);
+	    }
+	};
     }
 }

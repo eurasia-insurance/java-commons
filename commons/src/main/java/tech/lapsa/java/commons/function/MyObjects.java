@@ -26,7 +26,7 @@ public final class MyObjects {
 	return requireNonNull(IllegalArgumentException::new, obj, par);
     }
 
-    public static <T> T requireNonNullMsg(final T obj, final String message, Object... args)
+    public static <T> T requireNonNullMsg(final T obj, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	return requireNonNullMsg(IllegalArgumentException::new, obj, message, args);
     }
@@ -45,7 +45,7 @@ public final class MyObjects {
     }
 
     public static <T, X extends Throwable> T requireNonNullMsg(final Function<String, X> creator, final T obj,
-	    final String message, Object... args) throws X {
+	    final String message, final Object... args) throws X {
 	if (nonNull(obj))
 	    return obj;
 	throw MyExceptions.format(creator, message, args);
@@ -67,7 +67,7 @@ public final class MyObjects {
 	return requireNull(IllegalArgumentException::new, obj, par);
     }
 
-    public static <T> T requireNullMsg(final T obj, final String message, Object... args)
+    public static <T> T requireNullMsg(final T obj, final String message, final Object... args)
 	    throws IllegalArgumentException {
 	return requireNullMsg(IllegalArgumentException::new, obj, message, args);
     }
@@ -86,7 +86,7 @@ public final class MyObjects {
     }
 
     public static <T, X extends Throwable> T requireNullMsg(final Function<String, X> creator, final T obj,
-	    final String message, Object... args) throws X {
+	    final String message, final Object... args) throws X {
 	if (isNull(obj))
 	    return obj;
 	throw MyExceptions.format(creator, message, args);
@@ -117,7 +117,7 @@ public final class MyObjects {
     }
 
     public static final <T> T requireAMsg(final Object obj, final Class<T> clazz, final String message,
-	    Object... args) throws IllegalArgumentException {
+	    final Object... args) throws IllegalArgumentException {
 	return requireAMsg(IllegalArgumentException::new, obj, clazz, message, args);
     }
 
@@ -136,7 +136,7 @@ public final class MyObjects {
     }
 
     public static final <T, X extends Throwable> T requireAMsg(final Function<String, X> creator, final Object obj,
-	    final Class<T> clazz, final String message, Object... args) throws X {
+	    final Class<T> clazz, final String message, final Object... args) throws X {
 	if (isA(obj, clazz))
 	    return clazz.cast(obj);
 	throw MyExceptions.format(creator, message, args);
@@ -160,7 +160,7 @@ public final class MyObjects {
     }
 
     public static final <T> T requireNotAMsg(final T obj, final Class<?> clazz, final String message,
-	    Object... args) throws IllegalArgumentException {
+	    final Object... args) throws IllegalArgumentException {
 	return requireNotAMsg(IllegalArgumentException::new, obj, clazz, message, args);
     }
 
@@ -179,7 +179,7 @@ public final class MyObjects {
     }
 
     public static final <T, X extends Throwable> T requireNotAMsg(final Function<String, X> creator, final T obj,
-	    final Class<?> clazz, final String message, Object... args) throws X {
+	    final Class<?> clazz, final String message, final Object... args) throws X {
 	if (isNotA(obj, clazz))
 	    return obj;
 	throw MyExceptions.format(creator, message, args);
