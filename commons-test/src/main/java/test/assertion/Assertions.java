@@ -7,7 +7,7 @@ public final class Assertions {
     private Assertions() {
     }
 
-    public static void expectException(final Statement statement, final Class<? extends Throwable> expectingException)
+    public static void expectException(final Statement statement, final Class<? extends Exception> expectingException)
 	    throws Exception {
 	try {
 	    statement.call();

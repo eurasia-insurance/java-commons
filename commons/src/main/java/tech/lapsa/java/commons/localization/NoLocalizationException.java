@@ -22,12 +22,12 @@ public class NoLocalizationException extends RuntimeException {
     public NoLocalizationException() {
     }
 
-    public NoLocalizationException(final String message, final Throwable cause, final boolean enableSuppression,
+    public NoLocalizationException(final String message, final Exception cause, final boolean enableSuppression,
 	    final boolean writableStackTrace) {
 	super(message, cause, enableSuppression, writableStackTrace);
     }
 
-    public NoLocalizationException(final String message, final Throwable cause) {
+    public NoLocalizationException(final String message, final Exception cause) {
 	super(message, cause);
     }
 
@@ -35,7 +35,7 @@ public class NoLocalizationException extends RuntimeException {
 	super(message);
     }
 
-    public NoLocalizationException(final Throwable cause) {
+    public NoLocalizationException(final Exception cause) {
 	super(cause);
     }
 }

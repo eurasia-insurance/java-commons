@@ -38,7 +38,7 @@ public final class MyLogger {
 
 	private static final String EXCEPTION_MESSAGE_FORMAT = "Exception has thrown %1$s '%2$s'";
 
-	public MyLogger log(final Throwable thrown) {
+	public MyLogger log(final Exception thrown) {
 	    MyObjects.requireNonNull(thrown, "thrown");
 	    logger.log(level,
 		    handler.apply(String.format(EXCEPTION_MESSAGE_FORMAT, thrown.getClass(), thrown.getMessage())),
@@ -46,14 +46,14 @@ public final class MyLogger {
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(final Throwable thrown, final String message) {
+	public MyLogger log(final Exception thrown, final String message) {
 	    log(thrown);
 	    if (MyStrings.nonEmpty(message))
 		logger.log(level, handler.apply(message));
 	    return MyLogger.this;
 	}
 
-	public MyLogger log(final Throwable thrown, final String format, final Object... args) {
+	public MyLogger log(final Exception thrown, final String format, final Object... args) {
 	    log(thrown);
 	    if (MyStrings.nonEmpty(format))
 		logger.log(level, handler.apply(MyStrings.format(format, args)));

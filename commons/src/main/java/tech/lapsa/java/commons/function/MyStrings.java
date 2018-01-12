@@ -86,17 +86,17 @@ public final class MyStrings {
 
     private static final String EMPTY_STRING = "%1$s is empty";
 
-    public static <X extends Throwable> String requireNonEmpty(final Function<String, X> creator, final String string)
+    public static <X extends Exception> String requireNonEmpty(final Function<String, X> creator, final String string)
 	    throws X {
 	return requireNonEmpty(creator, string, DEFAULT_PAR);
     }
 
-    public static <X extends Throwable> String requireNonEmpty(final Function<String, X> creator, final String string,
+    public static <X extends Exception> String requireNonEmpty(final Function<String, X> creator, final String string,
 	    final String par) throws X {
 	return requireNonEmptyMsg(creator, string, EMPTY_STRING, par);
     }
 
-    public static <X extends Throwable> String requireNonEmptyMsg(final Function<String, X> creator,
+    public static <X extends Exception> String requireNonEmptyMsg(final Function<String, X> creator,
 	    final String string, final String message, final Object... args) throws X {
 	if (nonEmpty(string))
 	    return string;
@@ -151,7 +151,7 @@ public final class MyStrings {
 	requireEqualsMsg(IllegalArgumentException::new, s1, s2, message, args);
     }
 
-    public static <X extends Throwable> void requireEqualsMsg(final Function<String, X> creator, final String s1,
+    public static <X extends Exception> void requireEqualsMsg(final Function<String, X> creator, final String s1,
 	    final String s2, final String message, final Object... args) throws X {
 	if (!equals(s1, s2))
 	    throw MyExceptions.format(creator, message, args);
