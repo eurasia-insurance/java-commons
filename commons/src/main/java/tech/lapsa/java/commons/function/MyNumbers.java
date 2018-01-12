@@ -42,17 +42,17 @@ public final class MyNumbers {
 
     private static final String NON_ZERO_NUMBER = "%1$s is not zero (=%2$s)";
 
-    public static <T extends Number, X extends Throwable> T requireZero(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requireZero(final Function<String, X> creator,
 	    final T number) throws X {
 	return requireZero(creator, number, DEFAULT_PAR);
     }
 
-    public static <T extends Number, X extends Throwable> T requireZero(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requireZero(final Function<String, X> creator,
 	    final T number, final String par) throws X {
 	return requireZeroMsg(creator, number, NON_ZERO_NUMBER, par, String.valueOf(number));
     }
 
-    public static <T extends Number, X extends Throwable> T requireZeroMsg(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requireZeroMsg(final Function<String, X> creator,
 	    final T number, final String message, final Object... args) throws X {
 	if (zero(number))
 	    return number;
@@ -87,17 +87,17 @@ public final class MyNumbers {
 
     private static final String ZERO_NUMBER = "%1$s is zero";
 
-    public static <T extends Number, X extends Throwable> T requireNonZero(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requireNonZero(final Function<String, X> creator,
 	    final T number) throws X {
 	return requireNonZero(creator, number, DEFAULT_PAR);
     }
 
-    public static <T extends Number, X extends Throwable> T requireNonZero(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requireNonZero(final Function<String, X> creator,
 	    final T number, final String par) throws X {
 	return requireNonZeroMsg(creator, number, ZERO_NUMBER, par);
     }
 
-    public static <T extends Number, X extends Throwable> T requireNonZeroMsg(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requireNonZeroMsg(final Function<String, X> creator,
 	    final T number, final String message, final Object... args) throws X {
 	if (nonZero(number))
 	    return number;
@@ -132,17 +132,17 @@ public final class MyNumbers {
 
     private static final String NON_POSITIVE_NUMBER = "%1$s is not positive, zero or null";
 
-    public static <T extends Number, X extends Throwable> T requirePositive(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requirePositive(final Function<String, X> creator,
 	    final T number) throws X {
 	return requirePositive(creator, number, DEFAULT_PAR);
     }
 
-    public static <T extends Number, X extends Throwable> T requirePositive(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requirePositive(final Function<String, X> creator,
 	    final T number, final String par) throws X {
 	return requirePositiveMsg(creator, number, NON_POSITIVE_NUMBER, par);
     }
 
-    public static <T extends Number, X extends Throwable> T requirePositiveMsg(final Function<String, X> creator,
+    public static <T extends Number, X extends Exception> T requirePositiveMsg(final Function<String, X> creator,
 	    final T number, final String message, final Object... args) throws X {
 	if (positive(number))
 	    return number;
@@ -304,7 +304,7 @@ public final class MyNumbers {
 	requireEqualsMsg(IllegalArgumentException::new, n1, n2, message, args);
     }
 
-    public static <N extends Number, X extends Throwable> void requireEqualsMsg(final Function<String, X> creator,
+    public static <N extends Number, X extends Exception> void requireEqualsMsg(final Function<String, X> creator,
 	    final N n1, final N n2, final String message,
 	    final Object... args) throws X {
 	if (!numbericEquals(n1, n2))

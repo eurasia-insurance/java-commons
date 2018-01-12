@@ -56,7 +56,7 @@ public final class MyNaming {
     // java:global/insurance-facade-ear/insurance-facade/PolicyDriverFacadeBean!tech.lapsa.insurance.facade.PolicyDriverFacade$PolicyDriverFacadeRemote
     // ]]]
 
-    public static <T, X extends Throwable> T lookupEJB(final BiFunction<String, Throwable, X> creator,
+    public static <T, X extends Exception> T lookupEJB(final BiFunction<String, Exception, X> creator,
 	    final String applicationName,
 	    final String moduleName,
 	    final String beanName,
@@ -73,7 +73,7 @@ public final class MyNaming {
 
     // mains
 
-    public static <T, X extends Throwable> T lookupEJB(final BiFunction<String, Throwable, X> creator,
+    public static <T, X extends Exception> T lookupEJB(final BiFunction<String, Exception, X> creator,
 	    final String applicationName,
 	    final String moduleName,
 	    final String beanName,

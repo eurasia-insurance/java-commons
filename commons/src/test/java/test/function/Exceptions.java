@@ -7,10 +7,10 @@ final class Exceptions {
     private Exceptions() {
     }
 
-    public static void expectException(final Statement statement, final Class<? extends Throwable> exceptionClazz) {
+    public static void expectException(final Statement statement, final Class<? extends Exception> exceptionClazz) {
 	try {
 	    statement.call();
-	} catch (final Throwable e) {
+	} catch (final Exception e) {
 	    if (exceptionClazz.isAssignableFrom(e.getClass()))
 		return; // OK
 	}
@@ -20,7 +20,7 @@ final class Exceptions {
     public static void expectException(final Statement statement) {
 	try {
 	    statement.call();
-	} catch (final Throwable e) {
+	} catch (final Exception e) {
 	    return; // OK
 	}
 	fail("Any exception expected");
@@ -29,7 +29,7 @@ final class Exceptions {
     public static void unexpectException(final Statement statement) {
 	try {
 	    statement.call();
-	} catch (final Throwable e) {
+	} catch (final Exception e) {
 	    fail("Unexpected exception thrown " + e.getClass().getName() + ": " + e.getMessage());
 	}
     }

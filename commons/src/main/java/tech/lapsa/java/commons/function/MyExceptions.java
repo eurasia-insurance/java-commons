@@ -19,14 +19,14 @@ public final class MyExceptions {
 
     // format
 
-    public static <X extends Throwable> X format(final Function<String, X> creator,
+    public static <X extends Exception> X format(final Function<String, X> creator,
 	    final String format,
 	    final Object... args) {
 	return creator.apply(MyStrings.format(format, args));
     }
 
-    public static <X extends Throwable> X format(final BiFunction<String, Throwable, X> creator,
-	    final Throwable cause,
+    public static <X extends Exception> X format(final BiFunction<String, Exception, X> creator,
+	    final Exception cause,
 	    final String format,
 	    final Object... args) {
 	return creator.apply(MyStrings.format(format, args), cause);
@@ -34,14 +34,14 @@ public final class MyExceptions {
 
     // supplier
 
-    public static <X extends Throwable> Supplier<X> supplier(final Function<String, X> creator,
+    public static <X extends Exception> Supplier<X> supplier(final Function<String, X> creator,
 	    final String format,
 	    final Object... args) {
 	return () -> format(creator, format, args);
     }
 
-    public static <X extends Throwable> Supplier<X> supplier(final BiFunction<String, Throwable, X> creator,
-	    final Throwable cause,
+    public static <X extends Exception> Supplier<X> supplier(final BiFunction<String, Exception, X> creator,
+	    final Exception cause,
 	    final String format,
 	    final Object... args) {
 	return () -> format(creator, cause, format, args);
@@ -49,7 +49,7 @@ public final class MyExceptions {
 
     // par
 
-    public static <X extends Throwable> X par(final Function<String, X> creator,
+    public static <X extends Exception> X par(final Function<String, X> creator,
 	    final String message,
 	    final String par,
 	    final String value) {
@@ -57,8 +57,8 @@ public final class MyExceptions {
 	return creator.apply(msg);
     }
 
-    public static <X extends Throwable> X par(final BiFunction<String, Throwable, X> creator,
-	    final Throwable cause,
+    public static <X extends Exception> X par(final BiFunction<String, Exception, X> creator,
+	    final Exception cause,
 	    final String message,
 	    final String par,
 	    final String value) {
@@ -66,15 +66,15 @@ public final class MyExceptions {
 	return creator.apply(msg, cause);
     }
 
-    public static <X extends Throwable> X par(final Function<String, X> creator,
+    public static <X extends Exception> X par(final Function<String, X> creator,
 	    final String message,
 	    final String par) {
 	final String msg = parMessage(message, par);
 	return creator.apply(msg);
     }
 
-    public static <X extends Throwable> X par(final BiFunction<String, Throwable, X> creator,
-	    final Throwable cause,
+    public static <X extends Exception> X par(final BiFunction<String, Exception, X> creator,
+	    final Exception cause,
 	    final String message,
 	    final String par) {
 	final String msg = parMessage(message, par);
@@ -115,7 +115,7 @@ public final class MyExceptions {
     }
 
     public static IllegalArgumentException illegalArgumentPar(final String message, final String par,
-	    final String value, final Throwable cause) {
+	    final String value, final Exception cause) {
 	return par(IllegalArgumentException::new, cause, message, par, value);
     }
 
@@ -124,7 +124,7 @@ public final class MyExceptions {
     }
 
     public static IllegalArgumentException illegalArgumentPar(final String message, final String par,
-	    final Throwable cause) {
+	    final Exception cause) {
 	return par(IllegalArgumentException::new, cause, message, par);
     }
 
@@ -395,7 +395,7 @@ public final class MyExceptions {
 
     @Deprecated
     public static IllegalArgumentException illegalArgumentException(final String message, final String par,
-	    final String value, final Throwable cause) {
+	    final String value, final Exception cause) {
 	return par(IllegalArgumentException::new, cause, message, par, value);
     }
 
@@ -406,7 +406,7 @@ public final class MyExceptions {
 
     @Deprecated
     public static IllegalArgumentException illegalArgumentException(final String message, final String par,
-	    final Throwable cause) {
+	    final Exception cause) {
 	return par(IllegalArgumentException::new, cause, message, par);
     }
 }
