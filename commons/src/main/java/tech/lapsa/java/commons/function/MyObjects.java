@@ -192,4 +192,12 @@ public final class MyObjects {
 	return clazz::cast;
     }
 
+    public static <T, R> R nullOrGet(T value, final Function<T, R> function) {
+	try {
+	    return value == null ? null : MyObjects.requireNonNull(function, "function").apply(value);
+	} catch (Exception e) {
+	    throw new RuntimeException(e);
+	}
+    }
+
 }
