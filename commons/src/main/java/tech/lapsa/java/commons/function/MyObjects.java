@@ -193,11 +193,7 @@ public final class MyObjects {
     }
 
     public static <T, R> R nullOrGet(T value, final Function<T, R> function) {
-	try {
-	    return value == null ? null : MyObjects.requireNonNull(function, "function").apply(value);
-	} catch (Exception e) {
-	    throw new RuntimeException(e);
-	}
+	return value == null ? null : MyObjects.requireNonNull(function, "function").apply(value);
     }
 
 }
