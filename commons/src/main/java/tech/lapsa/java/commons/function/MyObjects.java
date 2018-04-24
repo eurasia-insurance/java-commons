@@ -193,7 +193,9 @@ public final class MyObjects {
     }
 
     public static <T, R> R nullOrGet(T value, final Function<T, R> function) {
-	return value == null ? null : MyObjects.requireNonNull(function, "function").apply(value);
+	return isNull(value)
+		? null
+		: MyObjects.requireNonNull(function, "function").apply(value);
     }
 
 }
