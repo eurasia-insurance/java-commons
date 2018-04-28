@@ -192,6 +192,16 @@ public final class MyObjects {
 	return clazz::cast;
     }
 
+    public static final <T> Function<Object, T> castOrNull(final Class<T> clazz) {
+	requireNonNull(clazz, "clazz");
+	return x -> MyOptionals.of(x) //
+		.filter(xx -> clazz.isAssignableFrom(xx.getClass())) //
+		.map(clazz::cast) //
+		.orElse(null);
+    }
+
+    //
+
     public static <T, R> R nullOrGet(T value, final Function<T, R> function) {
 	return isNull(value)
 		? null
