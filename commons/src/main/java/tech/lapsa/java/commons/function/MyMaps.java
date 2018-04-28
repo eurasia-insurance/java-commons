@@ -1,6 +1,7 @@
 package tech.lapsa.java.commons.function;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -66,6 +67,15 @@ public final class MyMaps {
 		throw new UnsupportedOperationException();
 	    }
 	};
+    }
+
+    public static <K, V> Map.Entry<K, V> e(final K k, final V v) {
+	return entry(k, v);
+    }
+
+    @SafeVarargs
+    public static <K, V> Map.Entry<K, List<V>> el(final K k, final V... vv) {
+	return entry(k, Stream.of(vv).collect(MyCollectors.unmodifiableList()));
     }
 
     @SafeVarargs
