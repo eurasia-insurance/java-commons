@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.IllegalFormatException;
 import java.util.Locale;
 import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public final class MyStrings {
 
@@ -155,5 +157,37 @@ public final class MyStrings {
 	    final String s2, final String message, final Object... args) throws X {
 	if (!equals(s1, s2))
 	    throw MyExceptions.format(creator, message, args);
+    }
+
+    //
+
+    public static String charToString(int charc) {
+	return charToString((char) charc);
+    }
+
+    public static Character charToCharacter(int charc) {
+	return charToCharacter((char) charc);
+    }
+
+    public static Character charToCharacter(char charc) {
+	return Character.valueOf(charc);
+    }
+
+    public static String charToString(char charc) {
+	return String.valueOf(charc);
+    }
+
+    public static Stream<Character> characterStream(CharSequence string) {
+	return MyOptionals.of(string) //
+		.map(CharSequence::chars) //
+		.orElse(IntStream.empty()) //
+		.mapToObj(MyStrings::charToCharacter);
+    }
+
+    public static Stream<String> stringStream(CharSequence string) {
+	return MyOptionals.of(string) //
+		.map(CharSequence::chars) //
+		.orElse(IntStream.empty()) //
+		.mapToObj(MyStrings::charToString);
     }
 }
