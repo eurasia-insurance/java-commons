@@ -3,6 +3,7 @@ package tech.lapsa.java.commons.function;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 public final class MyMaps {
@@ -151,5 +152,15 @@ public final class MyMaps {
 	return Stream.of(entry(k1, v1), entry(k2, v2), entry(k3, v3), entry(k4, v4), entry(k5, v5), entry(k6, v6),
 		entry(k7, v7), entry(k8, v8), entry(k9, v9), entry(k10, v10)) //
 		.collect(MyCollectors.unmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    //
+
+    public static Properties toProperties(Map<?, ?> map) {
+	return MyOptionals.of(map)
+		.map(Map::entrySet)
+		.orElse(Collections.emptySet())
+		.stream()
+		.collect(MyCollectors.entriesToStringProperties());
     }
 }

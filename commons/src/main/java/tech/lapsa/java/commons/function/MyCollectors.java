@@ -5,8 +5,13 @@ import static java.util.stream.Collectors.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 public final class MyCollectors {
@@ -25,5 +30,41 @@ public final class MyCollectors {
 
     public static <T> Collector<T, ?, Set<T>> unmodifiableSet() {
 	return collectingAndThen(toSet(), Collections::unmodifiableSet);
+    }
+
+    public static Collector<Map.Entry<?, ?>, ?, Properties> entriesToStringProperties() {
+
+	return new Collector<Map.Entry<?, ?>, Properties, Properties>() {
+
+	    @Override
+	    public Supplier<Properties> supplier() {
+		return Properties::new;
+	    }
+
+	    @Override
+	    public BiConsumer<Properties, Entry<?, ?>> accumulator() {
+		return (prop, entry) -> prop.setProperty(entry.getKey().toString(), entry.getValue().toString());
+	    }
+
+	    @Override
+	    public BinaryOperator<Properties> combiner() {
+		return (p1, p2) -> {
+		    final Properties ret = new Properties();
+		    ret.putAll(p1);
+		    ret.putAll(p2);
+		    return ret;
+		};
+	    }
+
+	    @Override
+	    public Function<Properties, Properties> finisher() {
+		return Function.identity();
+	    }
+
+	    @Override
+	    public Set<Characteristics> characteristics() {
+		return MySets.of(Characteristics.UNORDERED, Characteristics.CONCURRENT);
+	    }
+	};
     }
 }
