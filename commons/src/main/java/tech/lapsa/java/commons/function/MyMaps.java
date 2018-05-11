@@ -161,6 +161,6 @@ public final class MyMaps {
 		.map(Map::entrySet)
 		.orElse(Collections.emptySet())
 		.stream()
-		.collect(MyCollectors.entriesToStringProperties());
+		.collect(MyCollectors.entriesToProperties());
     }
 }

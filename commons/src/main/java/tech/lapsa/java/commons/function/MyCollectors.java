@@ -32,39 +32,40 @@ public final class MyCollectors {
 	return collectingAndThen(toSet(), Collections::unmodifiableSet);
     }
 
-    public static Collector<Map.Entry<?, ?>, ?, Properties> entriesToStringProperties() {
+    private static final Collector<Map.Entry<?, ?>, ?, Properties> ENTRIES_TO_PROPERTIES_COLLECTOR = new Collector<Map.Entry<?, ?>, Properties, Properties>() {
 
-	return new Collector<Map.Entry<?, ?>, Properties, Properties>() {
+	@Override
+	public Supplier<Properties> supplier() {
+	    return Properties::new;
+	}
 
-	    @Override
-	    public Supplier<Properties> supplier() {
-		return Properties::new;
-	    }
+	@Override
+	public BiConsumer<Properties, Entry<?, ?>> accumulator() {
+	    return (prop, entry) -> prop.setProperty(entry.getKey().toString(), entry.getValue().toString());
+	}
 
-	    @Override
-	    public BiConsumer<Properties, Entry<?, ?>> accumulator() {
-		return (prop, entry) -> prop.setProperty(entry.getKey().toString(), entry.getValue().toString());
-	    }
+	@Override
+	public BinaryOperator<Properties> combiner() {
+	    return (p1, p2) -> {
+		final Properties ret = new Properties();
+		ret.putAll(p1);
+		ret.putAll(p2);
+		return ret;
+	    };
+	}
 
-	    @Override
-	    public BinaryOperator<Properties> combiner() {
-		return (p1, p2) -> {
-		    final Properties ret = new Properties();
-		    ret.putAll(p1);
-		    ret.putAll(p2);
-		    return ret;
-		};
-	    }
+	@Override
+	public Function<Properties, Properties> finisher() {
+	    return Function.identity();
+	}
 
-	    @Override
-	    public Function<Properties, Properties> finisher() {
-		return Function.identity();
-	    }
+	@Override
+	public Set<Characteristics> characteristics() {
+	    return MySets.of(Characteristics.UNORDERED, Characteristics.CONCURRENT);
+	}
+    };
 
-	    @Override
-	    public Set<Characteristics> characteristics() {
-		return MySets.of(Characteristics.UNORDERED, Characteristics.CONCURRENT);
-	    }
-	};
+    public static Collector<Map.Entry<?, ?>, ?, Properties> entriesToProperties() {
+	return ENTRIES_TO_PROPERTIES_COLLECTOR;
     }
 }
