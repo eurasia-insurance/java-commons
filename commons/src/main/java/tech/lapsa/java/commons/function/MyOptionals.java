@@ -165,13 +165,13 @@ public final class MyOptionals {
 
     //
 
+    public static <T extends Number> Optional<T> ofZero(final T optional) {
+	return Optional.ofNullable(optional);
+    }
+
     public static <T extends Number> Optional<T> of(final T optional) {
 	return Optional.ofNullable(optional) //
 		.filter(MyNumbers::nonZero);
-    }
-
-    public static <T extends Number> Optional<T> ofZero(final T optional) {
-	return Optional.ofNullable(optional);
     }
 
     public static <T extends Number> Optional<T> ofPositive(final T optional) {
@@ -316,5 +316,4 @@ public final class MyOptionals {
 	    throw new RuntimeException("Unexpected exception has thrown", suppressed);
 	}
     }
-
 }
