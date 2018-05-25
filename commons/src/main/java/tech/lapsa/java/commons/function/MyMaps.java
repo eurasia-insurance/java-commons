@@ -139,6 +139,7 @@ public final class MyMaps {
     public static <K, V> Map<K, V> of(final K k1, final V v1,
 	    final K k2, final V v2) {
 	return MyMaps.<K, V> builder()
+		.add(k1, v1)
 		.add(k2, v2)
 		.build();
     }
