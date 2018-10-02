@@ -25,6 +25,10 @@ public final class MyLogger {
 	private MyLevel(final Level level) {
 	    this.level = level;
 	}
+	
+	public boolean isLoggable() {
+	    return logger.isLoggable(level);
+	}
 
 	public MyLogger log(final String message) {
 	    logger.log(level, handler.apply(message));
