@@ -25,6 +25,10 @@ public final class MyLogger {
 	private MyLevel(final Level level) {
 	    this.level = level;
 	}
+	
+	public boolean isLoggable() {
+	    return logger.isLoggable(level);
+	}
 
 	public MyLogger log(final String message) {
 	    logger.log(level, handler.apply(message));
@@ -74,11 +78,12 @@ public final class MyLogger {
 
     public final MyLevel FINEST = new MyLevel(Level.FINEST);
     public final MyLevel SUPER_TRACE = FINEST;
+    public final MyLevel VERBOSE = FINEST;
 
     public final MyLevel SEVERE = new MyLevel(Level.SEVERE);
+    public final MyLevel ERROR = SEVERE;
 
     public final MyLevel WARNING = new MyLevel(Level.WARNING);
-
     public final MyLevel WARN = WARNING;
 
     public Logger logger() {
