@@ -36,8 +36,8 @@
 	</dependencyManagement>
 
 	<scm>
-		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/java/commons.git</connection>
-		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/java/commons.git</developerConnection>
+		<connection>scm:git:https://github.com/eurasia-insurance/java-commons.git</connection>
+		<developerConnection>scm:git:https://github.com/eurasia-insurance/java-commons.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
