@@ -9,7 +9,7 @@
 
 	<groupId>tech.lapsa.java</groupId>
 	<artifactId>java-commons-root</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>CURRENT-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Java SE Lib : Commons : Root POM</name>
