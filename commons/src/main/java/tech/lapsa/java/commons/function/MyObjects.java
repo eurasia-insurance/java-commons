@@ -2,6 +2,7 @@ package tech.lapsa.java.commons.function;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public final class MyObjects {
 
@@ -202,10 +203,15 @@ public final class MyObjects {
 
     //
 
-    public static <T, R> R nullOrGet(T value, final Function<T, R> function) {
+    public static <T, R> R nullOrGet(final T value, final Function<T, R> function) {
 	return isNull(value)
 		? null
 		: MyObjects.requireNonNull(function, "function").apply(value);
     }
 
+    public static <T> T getIfNull(final T value, final Supplier<T> function) {
+	return isNull(value)
+		? MyObjects.requireNonNull(function, "function").get()
+		: value;
+    }
 }

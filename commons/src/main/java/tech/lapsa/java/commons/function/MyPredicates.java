@@ -19,6 +19,10 @@ public final class MyPredicates {
 	return x -> MyObjects.isA(x, clazz);
     }
 
+    public static final <T> Predicate<T> isNotA(Class<?> clazz) {
+	return x -> MyObjects.isNotA(x, clazz);
+    }
+
     // String
 
     public static final Predicate<String> emptyString() {
