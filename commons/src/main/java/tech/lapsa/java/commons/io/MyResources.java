@@ -24,9 +24,4 @@ public final class MyResources {
     public static InputStream getAsStream(final Class<?> thisClazz, final String resource) {
 	return optAsStream(thisClazz, resource).orElse(null);
     }
-
-    @Deprecated
-    public static Optional<InputStream> optionalAsStream(final Class<?> thisClazz, final String resource) {
-	return optAsStream(thisClazz, resource);
-    }
 }
