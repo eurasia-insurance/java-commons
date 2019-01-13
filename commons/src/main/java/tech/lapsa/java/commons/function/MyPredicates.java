@@ -101,4 +101,8 @@ public final class MyPredicates {
 	    }
 	};
     }
+
+    public static <T> Predicate<T> negate(Predicate<T> predicate) {
+	return MyObjects.requireNonNull(predicate, "predicate").negate();
+    }
 }
